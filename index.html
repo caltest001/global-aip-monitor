@@ -1,762 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Global AIP Monitor</title>
-
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f5f7fa;
-      margin: 0;
-      padding: 35px;
-      color: #222;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    h1 {
-      margin: 0 0 5px 0;
-    }
-
-    h2 {
-      margin-top: 0;
-    }
-
-    h3 {
-      margin-bottom: 10px;
-    }
-
-    .subtitle {
-      color: #666;
-      margin-bottom: 30px;
-    }
-
-    .card {
-      background: white;
-      padding: 25px;
-      margin-bottom: 25px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    th {
-      background: #f1f3f5;
-      text-align: left;
-      font-size: 14px;
-      color: #555;
-    }
-
-    th,
-    td {
-      padding: 12px;
-      border-bottom: 1px solid #ddd;
-      vertical-align: top;
-    }
-
-    tr:hover {
-      background: #fafafa;
-    }
-
-    .type {
-      font-weight: bold;
-      white-space: nowrap;
-    }
-
-    .new {
-      display: inline-block;
-      background: #ffe5e5;
-      color: #c62828;
-      padding: 4px 7px;
-      margin-right: 7px;
-      border-radius: 5px;
-      font-size: 11px;
-      font-weight: bold;
-    }
-
-    .current {
-      display: inline-block;
-      background: #e8f5e9;
-      color: #16794b;
-      padding: 4px 7px;
-      border-radius: 5px;
-      font-size: 11px;
-      font-weight: bold;
-    }
-
-    .next {
-      display: inline-block;
-      background: #e8eef8;
-      color: #315a9a;
-      padding: 4px 7px;
-      border-radius: 5px;
-      font-size: 11px;
-      font-weight: bold;
-    }
-
-    a {
-      text-decoration: none;
-      font-weight: bold;
-      color: #1769aa;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .loading {
-      color: #888;
-    }
-
-    .footer {
-      margin-top: 20px;
-      color: #888;
-      font-size: 12px;
-      text-align: center;
-    }
-
-    @media (max-width: 800px) {
-      body {
-        padding: 15px;
-      }
-
-      .card {
-        overflow-x: auto;
-      }
-
-      table {
-        min-width: 750px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global AIP Monitor</title>
+<style>
+:root{--navy:#17365d;--blue:#1769aa;--bg:#f4f7fb;--card:#fff;--line:#e2e8f0;--muted:#6b7280;--red:#c62828;--redbg:#ffe8e8;--green:#16794b;--greenbg:#e8f5e9;--gray:#f1f5f9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#1f2937;font-family:Arial,Helvetica,sans-serif}.container{max-width:1500px;margin:auto;padding:30px}
+.header{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:24px}h1{margin:0;color:var(--navy);font-size:30px}.subtitle,.last{color:var(--muted);font-size:13px}.subtitle{margin-top:6px}.last{text-align:right;padding-top:8px}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}.summary-card,.section,.monitor{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.summary-card{padding:18px 20px}.label{color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.4px}.value{margin-top:7px;font-size:28px;font-weight:700;color:var(--red)}.value.ok{color:var(--green)}
+.section{overflow:hidden;margin-bottom:20px}.section-head{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.section-title{margin:0;color:var(--navy);font-size:18px}.badge{background:var(--redbg);color:var(--red);border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700}.badge.zero{background:var(--greenbg);color:var(--green)}
+.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;table-layout:fixed}th{background:#f8fafc;color:#64748b;text-align:left;font-size:12px;padding:11px 14px;border-bottom:1px solid var(--line)}td{padding:13px 14px;border-bottom:1px solid #edf1f5;vertical-align:top;font-size:14px}tr:last-child td{border-bottom:0}tr:hover td{background:#fbfdff}
+.country{width:110px}.number{width:130px}.date{width:130px}.status{width:120px}.document{width:85px}.action{width:145px}.doc-title{font-weight:600;line-height:1.4;color:#25364d}
+.new{display:inline-block;background:var(--redbg);color:var(--red);border-radius:5px;padding:3px 6px;margin-right:7px;font-size:10px;font-weight:800}.pending{color:var(--red);font-weight:700}.done{color:var(--green);font-weight:700}.done-row td{background:#fafafa;color:#7b8490}.done-row .doc-title{color:#667085}
+button{border:0;border-radius:7px;padding:7px 10px;font-size:12px;font-weight:700;cursor:pointer}.done-btn{background:var(--greenbg);color:var(--green)}.undo-btn{background:var(--gray);color:#4b5563}button:disabled{opacity:.55;cursor:wait}
+a{color:var(--blue);font-weight:700;text-decoration:none}a:hover{text-decoration:underline}.empty,.error,.loading{text-align:center;padding:24px!important}.empty{color:var(--green);font-weight:600}.error{color:var(--red)}.loading{color:#888}
+.monitor{padding:16px 20px;margin-top:22px;display:flex;justify-content:space-between;color:#475569;font-size:13px}.monitor-ok{color:var(--green);font-weight:700}
+@media(max-width:900px){.container{padding:16px}.header{flex-direction:column}.last{text-align:left}.summary{grid-template-columns:repeat(2,1fr)}table{min-width:1100px}}
+</style>
 </head>
-
 <body>
-
 <div class="container">
+<div class="header"><div><h1>Global AIP Monitor</h1><div class="subtitle">Aeronautical Information Publication Monitoring</div></div><div class="last" id="last-update">Loading data...</div></div>
 
-  <h1>Global AIP Monitor</h1>
-
-  <div class="subtitle">
-    Aeronautical Information Publication Monitoring
-  </div>
-
-
-  <!-- ======================================================
-       TAIWAN
-       ====================================================== -->
-
-  <div class="card">
-
-    <h2>🇹🇼 Taiwan / Taipei FIR</h2>
-
-    <h3>AIP Amendments</h3>
-
-    <table>
-
-      <thead>
-        <tr>
-          <th>Status</th>
-          <th>Amendment</th>
-          <th>Publication</th>
-          <th>Effective</th>
-        </tr>
-      </thead>
-
-      <tbody id="amdt-table">
-
-        <tr>
-          <td colspan="4" class="loading">
-            Loading...
-          </td>
-        </tr>
-
-      </tbody>
-
-    </table>
-
-  </div>
-
-
-  <!-- ======================================================
-       SUP
-       ====================================================== -->
-
-  <div class="card">
-
-    <h2>AIP SUP</h2>
-
-    <table>
-
-      <thead>
-        <tr>
-          <th>No.</th>
-          <th>Title</th>
-          <th>Published</th>
-          <th>Effective From</th>
-          <th>Effective Until</th>
-          <th>Document</th>
-        </tr>
-      </thead>
-
-      <tbody id="sup-table">
-
-        <tr>
-          <td colspan="6" class="loading">
-            Loading...
-          </td>
-        </tr>
-
-      </tbody>
-
-    </table>
-
-  </div>
-
-
-  <!-- ======================================================
-       AIC
-       ====================================================== -->
-
-  <div class="card">
-
-    <h2>AIC</h2>
-
-    <table>
-
-      <thead>
-        <tr>
-          <th>No.</th>
-          <th>Title</th>
-          <th>Published</th>
-          <th>Effective From</th>
-          <th>Document</th>
-        </tr>
-      </thead>
-
-      <tbody id="aic-table">
-
-        <tr>
-          <td colspan="5" class="loading">
-            Loading...
-          </td>
-        </tr>
-
-      </tbody>
-
-    </table>
-
-  </div>
-
-
-  <div class="footer" id="last-update">
-    Loading data...
-  </div>
-
+<div class="summary">
+<div class="summary-card"><div class="label">AIRAC AIP AMDT — PENDING</div><div class="value" id="amdt-count">—</div></div>
+<div class="summary-card"><div class="label">AIP SUP — PENDING</div><div class="value" id="sup-count">—</div></div>
+<div class="summary-card"><div class="label">AIC — PENDING</div><div class="value" id="aic-count">—</div></div>
+<div class="summary-card"><div class="label">COUNTRIES CHECKED</div><div class="value ok">1 / 50</div></div>
 </div>
 
+<section class="section"><div class="section-head"><h2 class="section-title">AIRAC AIP AMDT</h2><span class="badge" id="amdt-badge">Loading...</span></div><div class="table-wrap"><table><thead><tr><th class="country">Country</th><th class="number">Amendment</th><th>Title</th><th class="date">Published</th><th class="date">Effective</th><th class="status">Status</th><th class="action">Action</th></tr></thead><tbody id="amdt-table"><tr><td colspan="7" class="loading">Loading...</td></tr></tbody></table></div></section>
+
+<section class="section"><div class="section-head"><h2 class="section-title">AIP SUP</h2><span class="badge" id="sup-badge">Loading...</span></div><div class="table-wrap"><table><thead><tr><th class="country">Country</th><th class="number">No.</th><th>Title</th><th class="date">Published</th><th class="date">Effective</th><th class="status">Status</th><th class="document">Document</th><th class="action">Action</th></tr></thead><tbody id="sup-table"><tr><td colspan="8" class="loading">Loading...</td></tr></tbody></table></div></section>
+
+<section class="section"><div class="section-head"><h2 class="section-title">AIC</h2><span class="badge" id="aic-badge">Loading...</span></div><div class="table-wrap"><table><thead><tr><th class="country">Country</th><th class="number">No.</th><th>Title</th><th class="date">Published</th><th class="date">Effective</th><th class="status">Status</th><th class="document">Document</th><th class="action">Action</th></tr></thead><tbody id="aic-table"><tr><td colspan="8" class="loading">Loading...</td></tr></tbody></table></div></section>
+
+<div class="monitor"><div><strong>Monitoring Status</strong> &nbsp; Taiwan / Taipei FIR</div><div class="monitor-ok">● 1 / 50 countries connected</div></div>
+</div>
 
 <script>
+const API="https://aip-monitor-api.pei2273.workers.dev";
+let processed=new Set(), aip=null, docs=null;
 
-/* ==========================================================
-   DATE FUNCTIONS
-   ========================================================== */
+function parseDate(s){if(!s)return null;const m={JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11};const p=s.trim().toUpperCase().split(/\s+/);if(p.length!==3)return null;const d=Number(p[0]),mo=m[p[1]],y=Number(p[2]);return Number.isNaN(d)||mo===undefined||Number.isNaN(y)?null:new Date(y,mo,d)}
+function isNew(pub,eff){const p=parseDate(pub),e=parseDate(eff);if(!p||!e)return false;const t=new Date();t.setHours(0,0,0,0);p.setHours(0,0,0,0);e.setHours(0,0,0,0);return t>=p&&t<e}
+function norm(v){return String(v||"").trim().toUpperCase().replace(/\s+/g,"-").replace(/[^A-Z0-9_-]/g,"-").replace(/-+/g,"-")}
+function id(type,no){return `TW-${norm(type)}-${norm(no)}`}
+function obj(type,no,title){return{document_id:id(type,no),country:"Taiwan",document_type:type,document_number:no||"",title:title||""}}
+function setCount(type,n){const v=document.getElementById(type+"-count"),b=document.getElementById(type+"-badge");v.textContent=n;v.classList.toggle("ok",n===0);b.textContent=n?`PENDING ${n}`:"ALL PROCESSED";b.classList.toggle("zero",n===0)}
+function status(done){return done?'<span class="done">✓ Processed</span>':'<span class="pending">● Pending</span>'}
+function link(u){return u?`<a href="${u}" target="_blank" rel="noopener noreferrer">Open</a>`:"—"}
+function action(d,done){const x=encodeURIComponent(JSON.stringify(d));return done?`<button class="undo-btn" data-doc="${x}" onclick="undo(this)">↩ Pending</button>`:`<button class="done-btn" data-doc="${x}" onclick="finish(this)">✓ Mark processed</button>`}
 
-function parseAipDate(dateString) {
+async function loadProcessed(){const r=await fetch(API+"/processed?v="+Date.now());if(!r.ok)throw new Error("Cloudflare status load failed");const j=await r.json();processed=new Set((j.documents||[]).map(x=>x.document_id))}
+async function finish(btn){btn.disabled=true;const d=JSON.parse(decodeURIComponent(btn.dataset.doc));try{const r=await fetch(API+"/processed",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(d)});if(!r.ok)throw new Error();processed.add(d.document_id);render()}catch(e){alert("Unable to mark as processed.");btn.disabled=false}}
+async function undo(btn){btn.disabled=true;const d=JSON.parse(decodeURIComponent(btn.dataset.doc));try{const r=await fetch(API+"/processed/"+encodeURIComponent(d.document_id),{method:"DELETE"});if(!r.ok)throw new Error();processed.delete(d.document_id);render()}catch(e){alert("Unable to restore pending status.");btn.disabled=false}}
 
-  if (!dateString) {
-    return null;
-  }
-
-  const months = {
-    JAN: 0,
-    FEB: 1,
-    MAR: 2,
-    APR: 3,
-    MAY: 4,
-    JUN: 5,
-    JUL: 6,
-    AUG: 7,
-    SEP: 8,
-    OCT: 9,
-    NOV: 10,
-    DEC: 11
-  };
-
-  const parts = dateString
-    .trim()
-    .toUpperCase()
-    .split(/\s+/);
-
-  if (parts.length !== 3) {
-    return null;
-  }
-
-  const day = Number(parts[0]);
-  const month = months[parts[1]];
-  const year = Number(parts[2]);
-
-  if (
-    Number.isNaN(day) ||
-    month === undefined ||
-    Number.isNaN(year)
-  ) {
-    return null;
-  }
-
-  return new Date(
-    year,
-    month,
-    day
-  );
+function renderAmdt(){
+ const t=document.getElementById("amdt-table"),n=aip?.next;
+ if(!n||!isNew(n.publication_date,n.effective_date)){t.innerHTML='<tr><td colspan="7" class="empty">No new AIRAC AIP AMDT.</td></tr>';setCount("amdt",0);return}
+ const d=obj("AMDT",n.amendment,n.amendment||"AIRAC AIP Amendment"),done=processed.has(d.document_id);
+ t.innerHTML=`<tr class="${done?"done-row":""}"><td>${done?"":'<span class="new">NEW</span>'}Taiwan</td><td><strong>${n.amendment||"—"}</strong></td><td class="doc-title">${n.amendment||"AIRAC AIP Amendment"}</td><td>${n.publication_date||"—"}</td><td>${n.effective_date||"—"}</td><td>${status(done)}</td><td>${action(d,done)}</td></tr>`;
+ setCount("amdt",done?0:1)
 }
-
-
-/* ==========================================================
-   NEW RULE
-
-   Normal:
-   Publication Date → day before Effective Date = NEW
-   Effective Date → NEW removed
-
-   ========================================================== */
-
-function isNewDocument(
-  publicationDate,
-  effectiveDate
-) {
-
-  const published =
-    parseAipDate(publicationDate);
-
-  const effective =
-    parseAipDate(effectiveDate);
-
-  if (!published || !effective) {
-    return false;
-  }
-
-  const today = new Date();
-
-  today.setHours(0, 0, 0, 0);
-  published.setHours(0, 0, 0, 0);
-  effective.setHours(0, 0, 0, 0);
-  // Publication Date 起顯示 NEW
-  // Effective Date 當天取消 NEW
-
-  return (
-    today >= published &&
-    today < effective
-  );
-
+function renderDocs(type){
+ const table=document.getElementById(type==="SUP"?"sup-table":"aic-table"),key=type==="SUP"?"sup":"aic";
+ const list=(docs?.documents||[]).filter(x=>x.type===type&&isNew(x.publication_date,x.effective_from));
+ if(!list.length){table.innerHTML=`<tr><td colspan="8" class="empty">No new ${type} documents.</td></tr>`;setCount(key,0);return}
+ let pending=0;
+ table.innerHTML=list.map(x=>{const d=obj(type,x.number,x.title),done=processed.has(d.document_id);if(!done)pending++;return `<tr class="${done?"done-row":""}"><td>${done?"":'<span class="new">NEW</span>'}Taiwan</td><td><strong>${x.number||"—"}</strong></td><td class="doc-title">${x.title||"—"}</td><td>${x.publication_date||"—"}</td><td>${x.effective_from||"—"}</td><td>${status(done)}</td><td>${link(x.url)}</td><td>${action(d,done)}</td></tr>`}).join("");
+ setCount(key,pending)
 }
+function render(){if(aip)renderAmdt();if(docs){renderDocs("SUP");renderDocs("AIC")}}
 
-
-
-/* ==========================================================
-   NEW BADGE
-   ========================================================== */
-
-function newBadge(
-  publicationDate,
-  effectiveDate
-) {
-
-  if (
-    isNewDocument(
-      publicationDate,
-      effectiveDate
-    )
-  ) {
-
-    return `
-      <span class="new">
-        NEW
-      </span>
-    `;
-
-  }
-
-  return "";
-
+async function start(){
+ try{
+  const [,ar,dr]=await Promise.all([loadProcessed(),fetch("taiwan_aip.json?v="+Date.now()),fetch("taiwan_documents.json?v="+Date.now())]);
+  if(!ar.ok||!dr.ok)throw new Error("Data load failed");
+  aip=await ar.json();docs=await dr.json();
+  if(aip.checked_at)document.getElementById("last-update").textContent="Last checked: "+new Date(aip.checked_at).toLocaleString();
+  render();
+ }catch(e){
+  console.error(e);
+  document.getElementById("amdt-table").innerHTML='<tr><td colspan="7" class="error">Unable to load dashboard data.</td></tr>';
+  document.getElementById("sup-table").innerHTML='<tr><td colspan="8" class="error">Unable to load dashboard data.</td></tr>';
+  document.getElementById("aic-table").innerHTML='<tr><td colspan="8" class="error">Unable to load dashboard data.</td></tr>';
+  document.getElementById("last-update").textContent="Unable to load dashboard data.";
+ }
 }
-
-
-/* ==========================================================
-   LOAD AIP AMENDMENTS
-   ========================================================== */
-
-fetch("taiwan_aip.json?v=" + Date.now())
-  
-  .then(response => {
-
-    if (!response.ok) {
-      throw new Error(
-        "Unable to load taiwan_aip.json"
-      );
-    }
-
-    return response.json();
-
-  })
-
-  .then(data => {
-
-    const table =
-      document.getElementById(
-        "amdt-table"
-      );
-
-
-    const current = data.current;
-    const next = data.next;
-
-
-    table.innerHTML = `
-
-      <tr>
-
-        <td>
-          <span class="current">
-            CURRENT
-          </span>
-        </td>
-
-        <td>
-          ${current?.amendment || "—"}
-        </td>
-
-        <td>
-          ${current?.publication_date || "—"}
-        </td>
-
-        <td>
-          ${current?.effective_date || "—"}
-        </td>
-
-      </tr>
-
-
-      <tr>
-
-        <td>
-
-          ${newBadge(
-            next?.publication_date,
-            next?.effective_date
-          )}
-
-          <span class="next">
-            NEXT
-          </span>
-
-        </td>
-
-        <td>
-          ${next?.amendment || "—"}
-        </td>
-
-        <td>
-          ${next?.publication_date || "—"}
-        </td>
-
-        <td>
-          ${next?.effective_date || "—"}
-        </td>
-
-      </tr>
-
-    `;
-
-
-    if (data.checked_at) {
-
-      const checked =
-        new Date(data.checked_at);
-
-      document.getElementById(
-        "last-update"
-      ).textContent =
-        "Last checked: " +
-        checked.toLocaleString();
-
-    }
-
-  })
-
-  .catch(error => {
-
-    console.error(error);
-
-    document.getElementById(
-      "amdt-table"
-    ).innerHTML = `
-
-      <tr>
-        <td colspan="4">
-          Unable to load AIP amendment data.
-        </td>
-      </tr>
-
-    `;
-
-  });
-
-
-/* ==========================================================
-   LOAD SUP + AIC
-   ========================================================== */
-
-fetch("taiwan_documents.json?v=" + Date.now())
-  .then(response => {
-
-    if (!response.ok) {
-      throw new Error(
-        "Unable to load taiwan_documents.json"
-      );
-    }
-
-    return response.json();
-
-  })
-
-  .then(data => {
-
-    const supTable =
-      document.getElementById(
-        "sup-table"
-      );
-
-    const aicTable =
-      document.getElementById(
-        "aic-table"
-      );
-
-
-    supTable.innerHTML = "";
-    aicTable.innerHTML = "";
-
-
-    const documents =
-      data.documents || [];
-
-
-    const supDocuments =
-      documents.filter(
-        doc => doc.type === "SUP"
-      );
-
-
-    const aicDocuments =
-      documents.filter(
-        doc => doc.type === "AIC"
-      );
-
-
-    /* SUP */
-
-    if (supDocuments.length === 0) {
-
-      supTable.innerHTML = `
-
-        <tr>
-          <td colspan="6">
-            No SUP documents found.
-          </td>
-        </tr>
-
-      `;
-
-    }
-
-    else {
-
-      supDocuments.forEach(doc => {
-
-        supTable.innerHTML += `
-
-          <tr>
-
-            <td class="type">
-
-              ${newBadge(
-                doc.publication_date,
-                doc.effective_from
-              )}
-
-              ${doc.number || "—"}
-
-            </td>
-
-
-            <td>
-              ${doc.title || "—"}
-            </td>
-
-
-            <td>
-              ${doc.publication_date || "—"}
-            </td>
-
-
-            <td>
-              ${doc.effective_from || "—"}
-            </td>
-
-
-            <td>
-              ${doc.effective_until || "—"}
-            </td>
-
-
-            <td>
-
-              ${
-                doc.url
-                ?
-                `<a
-                  href="${doc.url}"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  Open
-                </a>`
-                :
-                "—"
-              }
-
-            </td>
-
-          </tr>
-
-        `;
-
-      });
-
-    }
-
-
-    /* AIC */
-
-    if (aicDocuments.length === 0) {
-
-      aicTable.innerHTML = `
-
-        <tr>
-          <td colspan="5">
-            No AIC documents found.
-          </td>
-        </tr>
-
-      `;
-
-    }
-
-    else {
-
-      aicDocuments.forEach(doc => {
-
-        aicTable.innerHTML += `
-
-          <tr>
-
-            <td class="type">
-
-              ${newBadge(
-                doc.publication_date,
-                doc.effective_from
-              )}
-
-              ${doc.number || "—"}
-
-            </td>
-
-
-            <td>
-              ${doc.title || "—"}
-            </td>
-
-
-            <td>
-              ${doc.publication_date || "—"}
-            </td>
-
-
-            <td>
-              ${doc.effective_from || "—"}
-            </td>
-
-
-            <td>
-
-              ${
-                doc.url
-                ?
-                `<a
-                  href="${doc.url}"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  Open
-                </a>`
-                :
-                "—"
-              }
-
-            </td>
-
-          </tr>
-
-        `;
-
-      });
-
-    }
-
-  })
-
-  .catch(error => {
-
-    console.error(error);
-
-
-    document.getElementById(
-      "sup-table"
-    ).innerHTML = `
-
-      <tr>
-        <td colspan="6">
-          Unable to load SUP data.
-        </td>
-      </tr>
-
-    `;
-
-
-    document.getElementById(
-      "aic-table"
-    ).innerHTML = `
-
-      <tr>
-        <td colspan="5">
-          Unable to load AIC data.
-        </td>
-      </tr>
-
-    `;
-
-  });
-
+start();
 </script>
-
 </body>
 </html>
