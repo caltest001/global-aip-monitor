@@ -355,28 +355,16 @@ function isNewDocument(
   published.setHours(0, 0, 0, 0);
   effective.setHours(0, 0, 0, 0);
 
+  // NEW 規則：
+  // Publication Date 起顯示 NEW
+  // Effective Date 當天取消 NEW
 
-  const cutoff =
-    new Date(effective);
-
-  cutoff.setDate(
-    cutoff.getDate() - 20
+  return (
+    today >= published &&
+    today < effective
   );
 
-
-  /*
-   Normal situation:
-   Published earlier than E-20
-  */
-
-  if (published <= cutoff) {
-
-    return (
-      today >= published &&
-      today <= cutoff
-    );
-
-  }
+}
 
 
   /*
