@@ -107,79 +107,87 @@ if is_new:
 else:
     print("🟢 No new AIP update")
 
-
 # ============================================================
-# Taiwan SUP Monitor
+# Taiwan SUP + AIC Monitor
 # ============================================================
 
 from urllib.parse import urljoin
 
-# Current eAIP package
 PACKAGE_URL = (
     "https://ais.caa.gov.tw/eaip/"
     "AIRAC%20AIP%20AMDT%2004-26_2026_10_01/"
 )
 
-# Possible SUP index locations
-SUP_INDEX_URLS = [
-    urljoin(PACKAGE_URL, "eSUP/"),
-    urljoin(PACKAGE_URL, "eSUP/index.html"),
-    urljoin(PACKAGE_URL, "eSUP/index-en-GB.html"),
-]
+SUP_MENU_URL = urljoin(PACKAGE_URL, "eSUP/menu.html")
+AIC_MENU_URL = urljoin(PACKAGE_URL, "eAIC/menu.html")
 
-sup_links = set()
 
-for index_url in SUP_INDEX_URLS:
+def get_document_links(menu_url, doc_type):
+    links = {}
 
     try:
         r = requests.get(
-            index_url,
+            menu_url,
             headers=headers,
             timeout=30
         )
+        r.raise_for_status()
 
-        if r.status_code != 200:
-            continue
-
-        sup_soup = BeautifulSoup(
+        menu_soup = BeautifulSoup(
             r.text,
             "html.parser"
         )
 
-        for link in sup_soup.find_all("a", href=True):
+        for link in menu_soup.find_all("a", href=True):
+
+            label = link.get_text(
+                " ",
+                strip=True
+            )
+
+            if not re.fullmatch(
+                r"\d{1,2}/\d{2}",
+                label
+            ):
+                continue
 
             href = link["href"]
 
-            if "SUP-en-GB.html" in href:
+            # English document only
+            if doc_type == "SUP":
+                if "SUP-en-GB.html" not in href:
+                    continue
 
-                full_url = urljoin(
-                    index_url,
-                    href
-                )
+            elif doc_type == "AIC":
+                if "en-GB.html" not in href:
+                    continue
 
-                sup_links.add(full_url)
+            full_url = urljoin(
+                menu_url,
+                href
+            )
+
+            # Avoid Chinese/English duplicate entries
+            links[label] = full_url
 
     except Exception as e:
-
         print(
-            "SUP index error:",
-            index_url,
+            f"{doc_type} menu error:",
             e
         )
 
+    return links
 
-# ------------------------------------------------------------
-# Parse each SUP
-# ------------------------------------------------------------
 
-sup_documents = []
-
-for sup_url in sorted(sup_links):
+def parse_document(
+    number,
+    url,
+    doc_type
+):
 
     try:
-
         r = requests.get(
-            sup_url,
+            url,
             headers=headers,
             timeout=30
         )
@@ -196,33 +204,64 @@ for sup_url in sorted(sup_links):
             strip=True
         )
 
-        # SUP number
-        number_match = re.search(
-            r"AIP\s+SUP\s+(\d{1,2}/\d{2})",
-            doc_text,
-            re.IGNORECASE
-        )
+        # -------------------------
+        # Publication Date
+        # -------------------------
 
-        # Publication date
         pub_match = re.search(
             r"Published\s+on\s+"
-            r"(\d{1,2}\s+[A-Z]{3}\s+\d{4})",
+            r"(\d{1,2}\s+[A-Z]{3,4}\s+\d{4})",
             doc_text,
             re.IGNORECASE
         )
 
-        # Effective dates
+        publication_date = (
+            pub_match.group(1).upper()
+            if pub_match
+            else None
+        )
+
+        # -------------------------
+        # Effective From
+        # -------------------------
+
         effective_match = re.search(
             r"Effective\s+from\s+"
-            r"(\d{1,2}\s+[A-Z]{3}\s+\d{4})"
-            r"(?:\s+to\s+"
-            r"(\d{1,2}\s+[A-Z]{3}\s+\d{4}))?",
+            r"(\d{1,2}\s+[A-Z]{3,4}\s+\d{4})",
             doc_text,
             re.IGNORECASE
         )
 
+        effective_from = (
+            effective_match.group(1).upper()
+            if effective_match
+            else None
+        )
+
+        # -------------------------
+        # Effective Until
+        # -------------------------
+
+        until_match = re.search(
+            r"Effective\s+from\s+"
+            r"\d{1,2}\s+[A-Z]{3,4}\s+\d{4}"
+            r"\s+to\s+"
+            r"(\d{1,2}\s+[A-Z]{3,4}\s+\d{4})",
+            doc_text,
+            re.IGNORECASE
+        )
+
+        effective_until = (
+            until_match.group(1).upper()
+            if until_match
+            else None
+        )
+
+        # -------------------------
         # Title
-        title = "—"
+        # -------------------------
+
+        title = None
 
         headings = doc_soup.find_all(
             ["h1", "h2", "h3"]
@@ -235,70 +274,161 @@ for sup_url in sorted(sup_links):
                 strip=True
             )
 
+            upper = candidate.upper()
+
             if (
                 candidate
-                and "AIP SUP" not in candidate.upper()
+                and "AIP SUP" not in upper
+                and upper != "AIC"
                 and len(candidate) > 5
             ):
                 title = candidate
                 break
 
-        if number_match:
+        # AIC checklist sometimes has no heading
+        if not title and doc_type == "AIC":
 
-            sup_documents.append({
-                "type": "SUP",
-                "number": number_match.group(1),
+            if "CHECKLIST OF AERONAUTICAL INFORMATION CIRCULARS" in doc_text.upper():
+                title = (
+                    "CHECKLIST OF AERONAUTICAL "
+                    "INFORMATION CIRCULARS"
+                )
 
-                "title": title,
+        if not title:
+            title = "—"
 
-                "publication_date":
-                    pub_match.group(1)
-                    if pub_match
-                    else None,
-
-                "effective_from":
-                    effective_match.group(1)
-                    if effective_match
-                    else None,
-
-                "effective_until":
-                    effective_match.group(2)
-                    if (
-                        effective_match
-                        and effective_match.group(2)
-                    )
-                    else None,
-
-                "url": sup_url
-            })
+        return {
+            "type": doc_type,
+            "number": number,
+            "title": title,
+            "publication_date": publication_date,
+            "effective_from": effective_from,
+            "effective_until": effective_until,
+            "url": url
+        }
 
     except Exception as e:
 
         print(
-            "SUP document error:",
-            sup_url,
+            f"{doc_type} document error:",
+            number,
+            url,
             e
         )
 
+        return None
 
-# Sort newest first
-def sup_sort(item):
+
+# ============================================================
+# Get SUP
+# ============================================================
+
+sup_links = get_document_links(
+    SUP_MENU_URL,
+    "SUP"
+)
+
+sup_documents = []
+
+for number, url in sup_links.items():
+
+    document = parse_document(
+        number,
+        url,
+        "SUP"
+    )
+
+    if document:
+        sup_documents.append(document)
+
+
+# ============================================================
+# Get AIC
+# ============================================================
+
+aic_links = get_document_links(
+    AIC_MENU_URL,
+    "AIC"
+)
+
+aic_documents = []
+
+for number, url in aic_links.items():
+
+    document = parse_document(
+        number,
+        url,
+        "AIC"
+    )
+
+    if document:
+        aic_documents.append(document)
+
+
+# ============================================================
+# Sort newest number first
+# ============================================================
+
+def document_sort(item):
 
     try:
-        n, y = item["number"].split("/")
-        return int(y), int(n)
+        number, year = item["number"].split("/")
 
-    except:
-        return 0, 0
+        return (
+            int(year),
+            int(number)
+        )
+
+    except Exception:
+        return (0, 0)
 
 
 sup_documents.sort(
-    key=sup_sort,
+    key=document_sort,
+    reverse=True
+)
+
+aic_documents.sort(
+    key=document_sort,
     reverse=True
 )
 
 
-# Save
+# ============================================================
+# Save combined documents
+# ============================================================
+
+all_documents = (
+    sup_documents +
+    aic_documents
+)
+
+documents_data = {
+    "state": "Taiwan",
+    "icao": "RC",
+    "source": URL,
+    "checked_at":
+        datetime.now(
+            timezone.utc
+        ).isoformat(),
+    "documents": all_documents
+}
+
+with open(
+    "taiwan_documents.json",
+    "w",
+    encoding="utf-8"
+) as f:
+
+    json.dump(
+        documents_data,
+        f,
+        ensure_ascii=False,
+        indent=2
+    )
+
+
+# Keep SUP-only file if needed
 with open(
     "taiwan_sup.json",
     "w",
@@ -309,16 +439,12 @@ with open(
         {
             "state": "Taiwan",
             "icao": "RC",
-
             "checked_at":
                 datetime.now(
                     timezone.utc
                 ).isoformat(),
-
-            "documents":
-                sup_documents
+            "documents": sup_documents
         },
-
         f,
         ensure_ascii=False,
         indent=2
@@ -329,16 +455,24 @@ print(
     f"Found {len(sup_documents)} SUP documents."
 )
 
-for item in sup_documents:
+print(
+    f"Found {len(aic_documents)} AIC documents."
+)
+
+print(
+    f"Saved {len(all_documents)} documents "
+    "to taiwan_documents.json"
+)
+
+for item in all_documents:
 
     print(
+        item["type"],
         item["number"],
         "|",
         item["publication_date"],
         "|",
         item["effective_from"],
-        "|",
-        item["effective_until"],
         "|",
         item["title"]
     )
