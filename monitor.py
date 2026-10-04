@@ -3,17 +3,23 @@ from bs4 import BeautifulSoup
 import json
 import re
 from datetime import datetime, timezone
-from urllib.parse import urljoin
+from urllib.parse import quote, urljoin
 
 
 # ============================================================
 # Basic Settings
 # ============================================================
 
-URL = "https://ais.caa.gov.tw/eaip/"
+BASE_URL = "https://ais.caa.gov.tw/eaip/"
 
 HEADERS = {
-    "User-Agent": "Mozilla/5.0"
+    "User-Agent": (
+        "Mozilla/5.0 "
+        "(Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 "
+        "(KHTML, like Gecko) "
+        "Chrome/120.0 Safari/537.36"
+    )
 }
 
 
@@ -78,7 +84,7 @@ def parse_issue(section):
 # ============================================================
 
 response = requests.get(
-    URL,
+    BASE_URL,
     headers=HEADERS,
     timeout=30
 )
@@ -97,7 +103,7 @@ text = soup.get_text(
 
 
 # ============================================================
-# AIP AMDT Monitor
+# AIP AMDT
 # ============================================================
 
 current_section = extract_section(
@@ -112,6 +118,7 @@ next_section = extract_section(
     "Expired Issues"
 )
 
+
 current_issue = parse_issue(
     current_section
 )
@@ -121,10 +128,21 @@ next_issue = parse_issue(
 )
 
 
+if not current_issue:
+
+    raise RuntimeError(
+        "Could not parse current Taiwan AIP issue."
+    )
+
+
+# ============================================================
+# Save Taiwan AIP Status
+# ============================================================
+
 aip_data = {
     "state": "Taiwan",
     "icao": "RC",
-    "source": URL,
+    "source": BASE_URL,
 
     "checked_at":
         datetime.now(
@@ -165,7 +183,7 @@ print(
 
 
 # ============================================================
-# AIP AMDT History
+# AIP History
 # ============================================================
 
 HISTORY_FILE = "aip_history.json"
@@ -199,7 +217,7 @@ previous_issue = (
 latest_issue = (
     next_issue["amendment"]
     if next_issue
-    else None
+    else current_issue["amendment"]
 )
 
 
@@ -251,11 +269,13 @@ if is_new:
     )
 
     print(
-        f"Previous: {previous_issue}"
+        "Previous:",
+        previous_issue
     )
 
     print(
-        f"New: {latest_issue}"
+        "New:",
+        latest_issue
     )
 
 else:
@@ -266,113 +286,199 @@ else:
 
 
 # ============================================================
-# Automatic eAIP Package Discovery
+# Build Package URL from AIP Issue
+#
+# Example:
+#
+# AIRAC AIP AMDT 04/26
+# Effective: 01 Oct 2026
+#
+# becomes:
+#
+# AIRAC AIP AMDT 04-26_2026_10_01/
 #
 # IMPORTANT:
 #
-# SUP and AIC are independent publications.
+# These package folders are only technical storage locations.
 #
-# AIRAC package folders are used only as technical
-# storage locations on the Taiwan CAA website.
-#
-# We automatically discover package folders from
-# links on the CAA eAIP homepage.
-#
-# SUP and AIC will independently select the menu
-# with the newest "Published as of" date.
+# SUP and AIC remain independent publications.
 # ============================================================
 
-def discover_package_urls(home_soup):
+def build_package_url(issue):
 
-    packages = []
+    if not issue:
+        return None
 
 
-    for link in home_soup.find_all(
-        "a",
-        href=True
+    amendment = issue.get(
+        "amendment"
+    )
+
+    effective_date = issue.get(
+        "effective_date"
+    )
+
+
+    if (
+        not amendment
+        or
+        not effective_date
     ):
 
-        href = link.get(
-            "href",
-            ""
+        return None
+
+
+    number_match = re.search(
+        r"(\d{2})/(\d{2})",
+        amendment
+    )
+
+
+    if not number_match:
+        return None
+
+
+    issue_number = (
+        number_match.group(1)
+    )
+
+    issue_year = (
+        number_match.group(2)
+    )
+
+
+    try:
+
+        effective = datetime.strptime(
+            effective_date,
+            "%d %b %Y"
         )
 
-        if not href:
-            continue
+    except ValueError:
+
+        return None
 
 
-        full_url = urljoin(
-            URL,
-            href
+    # Determine whether this is AIRAC or non-AIRAC
+    if amendment.startswith(
+        "AIRAC AIP AMDT"
+    ):
+
+        prefix = (
+            "AIRAC AIP AMDT"
+        )
+
+    else:
+
+        prefix = (
+            "AIP AMDT"
         )
 
 
-        # ----------------------------------------------------
-        # Match actual Taiwan eAIP package folders.
-        #
-        # Examples:
-        #
-        # AIRAC%20AIP%20AMDT%2004-26_2026_10_01/
-        #
-        # AIRAC AIP AMDT 04-26_2026_10_01/
-        #
-        # The link may continue with index.html or another
-        # file. We keep only the package directory.
-        # ----------------------------------------------------
-
-        match = re.search(
-            r"("
-            r"https?://[^?#]*?/"
-            r"(?:AIRAC(?:%20| )AIP(?:%20| )AMDT"
-            r"|AIP(?:%20| )AMDT)"
-            r"(?:%20| )"
-            r"\d{2}-\d{2}"
-            r"_\d{4}_\d{2}_\d{2}/"
-            r")",
-            full_url,
-            re.IGNORECASE
-        )
+    folder_name = (
+        f"{prefix} "
+        f"{issue_number}-{issue_year}"
+        f"_{effective:%Y_%m_%d}"
+    )
 
 
-        if not match:
-            continue
+    encoded_folder = quote(
+        folder_name,
+        safe="-_"
+    )
 
 
-        package_url = (
-            match.group(1)
-        )
+    return (
+        BASE_URL
+        + encoded_folder
+        + "/"
+    )
 
 
-        if (
-            package_url
-            not in packages
-        ):
+# ============================================================
+# Package Candidates
+# ============================================================
 
-            packages.append(
-                package_url
-            )
+PACKAGE_CANDIDATES = []
 
 
-    return packages
+# ------------------------------------------------------------
+# Current AIP package
+# ------------------------------------------------------------
 
-
-PACKAGE_CANDIDATES = (
-    discover_package_urls(
-        soup
+current_package = (
+    build_package_url(
+        current_issue
     )
 )
 
 
-print(
-    f"Discovered "
-    f"{len(PACKAGE_CANDIDATES)} "
-    f"eAIP packages."
+if current_package:
+
+    PACKAGE_CANDIDATES.append(
+        current_package
+    )
+
+
+# ------------------------------------------------------------
+# Next AIP package
+# ------------------------------------------------------------
+
+next_package = (
+    build_package_url(
+        next_issue
+    )
 )
 
 
-for package_url in (
-    PACKAGE_CANDIDATES
+if (
+    next_package
+    and
+    next_package
+    not in PACKAGE_CANDIDATES
 ):
+
+    PACKAGE_CANDIDATES.append(
+        next_package
+    )
+
+
+# ------------------------------------------------------------
+# Known recent fallback packages
+#
+# These are NOT used to determine SUP/AIC publication dates.
+#
+# They are only additional technical locations to check.
+# ------------------------------------------------------------
+
+FALLBACK_PACKAGES = [
+    (
+        "https://ais.caa.gov.tw/eaip/"
+        "AIRAC%20AIP%20AMDT%2003-26_2026_08_06/"
+    )
+]
+
+
+for package_url in FALLBACK_PACKAGES:
+
+    if (
+        package_url
+        not in PACKAGE_CANDIDATES
+    ):
+
+        PACKAGE_CANDIDATES.append(
+            package_url
+        )
+
+
+print(
+    f"Generated "
+    f"{len(PACKAGE_CANDIDATES)} "
+    f"package candidates."
+)
+
+
+for package_url in PACKAGE_CANDIDATES:
 
     print(
         "Package candidate:",
@@ -380,17 +486,8 @@ for package_url in (
     )
 
 
-if not PACKAGE_CANDIDATES:
-
-    raise RuntimeError(
-        "No eAIP package URLs "
-        "were discovered from "
-        "the Taiwan CAA homepage."
-    )
-
-
 # ============================================================
-# Read "Published as of" from SUP / AIC Menu
+# Read Menu "Published as of"
 # ============================================================
 
 def get_menu_date(menu_url):
@@ -402,6 +499,16 @@ def get_menu_date(menu_url):
             headers=HEADERS,
             timeout=30
         )
+
+        if r.status_code == 404:
+
+            print(
+                "Menu not found:",
+                menu_url
+            )
+
+            return None
+
 
         r.raise_for_status()
 
@@ -427,13 +534,24 @@ def get_menu_date(menu_url):
 
 
         if not match:
+
+            print(
+                "No Published as of date:",
+                menu_url
+            )
+
             return None
 
 
-        return datetime.strptime(
-            match.group(1).upper(),
-            "%d %b %Y"
+        published_date = (
+            datetime.strptime(
+                match.group(1).upper(),
+                "%d %b %Y"
+            )
         )
+
+
+        return published_date
 
 
     except Exception as e:
@@ -448,13 +566,17 @@ def get_menu_date(menu_url):
 
 
 # ============================================================
-# Select Latest SUP / AIC Menu
+# Find Latest SUP / AIC Menu
 #
-# SUP and AIC are selected independently.
+# IMPORTANT:
 #
-# AIRAC number is NOT used to decide which menu wins.
+# SUP and AIC are compared independently.
 #
-# Only the menu's own "Published as of" date is compared.
+# We DO NOT select based on AIRAC issue number.
+#
+# We select based only on each menu's own:
+#
+# Published as of DD MMM YYYY
 # ============================================================
 
 def find_latest_menu(
@@ -481,23 +603,25 @@ def find_latest_menu(
         )
 
 
-        if published_date:
-
-            candidates.append(
-                (
-                    published_date,
-                    menu_url
-                )
-            )
+        if not published_date:
+            continue
 
 
-            print(
-                f"{doc_type} candidate:",
-                published_date.strftime(
-                    "%d %b %Y"
-                ).upper(),
+        candidates.append(
+            (
+                published_date,
                 menu_url
             )
+        )
+
+
+        print(
+            f"{doc_type} candidate:",
+            published_date.strftime(
+                "%d %b %Y"
+            ).upper(),
+            menu_url
+        )
 
 
     if not candidates:
@@ -506,13 +630,17 @@ def find_latest_menu(
 
 
     candidates.sort(
-        key=lambda item: item[0],
+        key=lambda x: x[0],
         reverse=True
     )
 
 
-    latest_date, latest_url = (
-        candidates[0]
+    latest_date = (
+        candidates[0][0]
+    )
+
+    latest_url = (
+        candidates[0][1]
     )
 
 
@@ -529,7 +657,7 @@ def find_latest_menu(
 
 
 # ============================================================
-# SUP and AIC Source Selection
+# Select SUP and AIC Sources Independently
 # ============================================================
 
 SUP_MENU_URL = find_latest_menu(
@@ -633,14 +761,13 @@ def get_document_links(
 
 
             number = (
-                number_match
-                .group(1)
+                number_match.group(1)
             )
 
 
-            # ------------------------------------------------
-            # SUP English Document
-            # ------------------------------------------------
+            # =================================================
+            # SUP English page
+            # =================================================
 
             if doc_type == "SUP":
 
@@ -648,12 +775,13 @@ def get_document_links(
                     "sup-en-gb.html"
                     not in href.lower()
                 ):
+
                     continue
 
 
-            # ------------------------------------------------
-            # AIC English Document
-            # ------------------------------------------------
+            # =================================================
+            # AIC English page
+            # =================================================
 
             elif doc_type == "AIC":
 
@@ -661,10 +789,12 @@ def get_document_links(
                     "en-gb.html"
                     not in href.lower()
                 ):
+
                     continue
 
 
             else:
+
                 continue
 
 
@@ -674,7 +804,6 @@ def get_document_links(
             )
 
 
-            # Deduplicate by document number
             documents[number] = (
                 full_url
             )
@@ -694,7 +823,7 @@ def get_document_links(
 
 
 # ============================================================
-# Parse Individual SUP / AIC Document
+# Parse Individual SUP / AIC
 # ============================================================
 
 def parse_document(
@@ -789,6 +918,7 @@ def parse_document(
                 "AIP SUP"
                 in candidate_upper
             ):
+
                 continue
 
 
@@ -796,10 +926,12 @@ def parse_document(
                 candidate_upper
                 == "AIC"
             ):
+
                 continue
 
 
             if len(candidate) <= 5:
+
                 continue
 
 
@@ -882,7 +1014,7 @@ def parse_document(
 
 
 # ============================================================
-# Get SUP Links
+# Load SUP Links
 # ============================================================
 
 sup_links = get_document_links(
@@ -900,7 +1032,7 @@ if sup_links is None:
 
 
 # ============================================================
-# Get AIC Links
+# Load AIC Links
 # ============================================================
 
 aic_links = get_document_links(
@@ -918,7 +1050,7 @@ if aic_links is None:
 
 
 # ============================================================
-# Collect SUP Documents
+# Parse SUP Documents
 # ============================================================
 
 sup_documents = []
@@ -944,7 +1076,7 @@ for (
 
 
 # ============================================================
-# Collect AIC Documents
+# Parse AIC Documents
 # ============================================================
 
 aic_documents = []
@@ -1029,10 +1161,7 @@ print(
 # ============================================================
 # Safety Check
 #
-# Taiwan currently has both SUP and AIC documents.
-#
-# If either collection unexpectedly becomes empty,
-# existing valid JSON files are preserved.
+# Never overwrite valid data with an empty scrape.
 # ============================================================
 
 if not sup_documents:
@@ -1052,7 +1181,7 @@ if not aic_documents:
 
 
 # ============================================================
-# Save Combined SUP + AIC File
+# Combined SUP + AIC JSON
 # ============================================================
 
 all_documents = (
@@ -1104,7 +1233,9 @@ with open(
 
 
 # ============================================================
-# Keep taiwan_sup.json for Frontend Compatibility
+# SUP JSON
+#
+# Keep this file for frontend compatibility.
 # ============================================================
 
 sup_data = {
@@ -1142,6 +1273,10 @@ with open(
     )
 
 
+# ============================================================
+# Final Summary
+# ============================================================
+
 print(
     f"Saved "
     f"{len(all_documents)} "
@@ -1150,36 +1285,54 @@ print(
 )
 
 
-# ============================================================
-# Print SUP Summary
-# ============================================================
+print(
+    "----------------------------------------"
+)
+
+print(
+    "SUP SUMMARY"
+)
+
+print(
+    "----------------------------------------"
+)
+
 
 for item in sup_documents:
 
     print(
         "SUP",
         item["number"],
-        "|",
+        "| Published:",
         item["publication_date"],
-        "|",
+        "| Effective:",
         item["effective_from"],
         "|",
         item["title"]
     )
 
 
-# ============================================================
-# Print AIC Summary
-# ============================================================
+print(
+    "----------------------------------------"
+)
+
+print(
+    "AIC SUMMARY"
+)
+
+print(
+    "----------------------------------------"
+)
+
 
 for item in aic_documents:
 
     print(
         "AIC",
         item["number"],
-        "|",
+        "| Published:",
         item["publication_date"],
-        "|",
+        "| Effective:",
         item["effective_from"],
         "|",
         item["title"]
