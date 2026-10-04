@@ -169,13 +169,50 @@ async function undo(btn){
   }
 }
 
+function parseAipDate(value){
+  if(!value || value==="—") return null;
+  const raw=String(value).trim();
+
+  const iso=new Date(raw);
+  if(!Number.isNaN(iso.getTime())) return iso;
+
+  const m=raw.match(/^(\d{1,2})\s+([A-Za-z]{3})\s+(\d{4})$/);
+  if(!m) return null;
+
+  const months={JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11};
+  const month=months[m[2].toUpperCase()];
+  if(month===undefined) return null;
+
+  return new Date(Number(m[3]),month,Number(m[1]),12,0,0,0);
+}
+
+function effectiveDate(item){
+  return item.effective_from || item.effective_date || null;
+}
+
+function keepOnDashboard(item){
+  const effective=parseAipDate(effectiveDate(item));
+
+  // 日期無法判讀時寧可保留，避免重要文件被誤隱藏。
+  if(!effective) return true;
+
+  const removeAfter=new Date(effective);
+  removeAfter.setDate(removeAfter.getDate()+7);
+  removeAfter.setHours(23,59,59,999);
+
+  return new Date()<=removeAfter;
+}
+
 function renderType(type){
   const key=type==="AMDT"?"amdt":type==="SUP"?"sup":"aic";
   const table=document.getElementById(key+"-table");
-  const list=alerts.filter(x=>String(x.document_type||"").toUpperCase()===type);
+  const list=alerts.filter(x=>
+    String(x.document_type||"").toUpperCase()===type &&
+    keepOnDashboard(x)
+  );
 
   if(!list.length){
-    table.innerHTML=`<tr><td colspan="8" class="empty">No pending ${type==="AMDT"?"AIRAC AIP AMDT":type} alerts.</td></tr>`;
+    table.innerHTML=`<tr><td colspan="8" class="empty">No ${type==="AMDT"?"AIRAC AIP AMDT":type} items within the dashboard window.</td></tr>`;
     setCount(key,0);
     return;
   }
@@ -186,7 +223,7 @@ function renderType(type){
     const done=processed.has(x.document_id);
     if(!done)pending++;
 
-    const effective=x.effective_from||"—";
+    const effective=effectiveDate(x)||"—";
     const number=x.document_number||"—";
     const title=x.title||"—";
 
