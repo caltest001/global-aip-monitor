@@ -1195,7 +1195,6 @@ for item in aic_documents:
         "|",
         item["title"]
     )
-```
 
 # ============================================================
 # Permanent Taiwan History
