@@ -1,169 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Global AIP Monitor</title>
+<title>Global AIP Monitor</title>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      margin: 0;
-      padding: 40px;
-    }
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+  margin: 0;
+  padding: 35px;
+}
 
-    .container {
-      max-width: 1000px;
-      margin: auto;
-    }
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
 
-    h1 {
-      margin-bottom: 5px;
-    }
+h1 {
+  margin-bottom: 5px;
+}
 
-    .subtitle {
-      color: #666;
-      margin-bottom: 30px;
-    }
+.subtitle {
+  color: #666;
+  margin-bottom: 30px;
+}
 
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 25px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
+.card {
+  background: white;
+  padding: 25px;
+  margin-bottom: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
 
-    .country {
-      font-size: 24px;
-      font-weight: bold;
-    }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
 
-    .status {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 6px 12px;
-      border-radius: 20px;
-      background: #e8f5e9;
-      color: #16794b;
-      font-weight: bold;
-    }
+th {
+  background: #f1f3f5;
+  text-align: left;
+}
 
-    table {
-      width: 100%;
-      margin-top: 20px;
-      border-collapse: collapse;
-    }
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
 
-    th, td {
-      text-align: left;
-      padding: 12px;
-      border-bottom: 1px solid #ddd;
-    }
+.type {
+  font-weight: bold;
+}
 
-    th {
-      color: #666;
-    }
+a {
+  text-decoration: none;
+  font-weight: bold;
+}
 
-    .updated {
-      margin-top: 20px;
-      color: #777;
-      font-size: 13px;
-    }
-  </style>
+.new {
+  background: #ffe5e5;
+  color: #c62828;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
-  <h1>Global AIP Monitor</h1>
-  <div class="subtitle">
-    Aeronautical Information Publication Monitoring
-  </div>
+<h1>Global AIP Monitor</h1>
 
-  <div class="card">
+<div class="subtitle">
+Aeronautical Information Publication Monitoring
+</div>
 
-    <div class="country">
-      🇹🇼 Taiwan (RC)
-    </div>
+<div class="card">
 
-    <div class="status">
-      CURRENT
-    </div>
+<h2>🇹🇼 Taiwan / Taipei FIR</h2>
 
-    <table>
+<h3>AIP Amendments</h3>
 
-      <tr>
-        <th></th>
-        <th>Amendment</th>
-        <th>Publication</th>
-        <th>Effective</th>
-      </tr>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Amendment</th>
+<th>Publication</th>
+<th>Effective</th>
+</tr>
+</thead>
 
-      <tr>
-        <td>Current</td>
-        <td id="current-amdt">Loading...</td>
-        <td id="current-pub">Loading...</td>
-        <td id="current-eff">Loading...</td>
-      </tr>
-
-      <tr>
-        <td>Next</td>
-        <td id="next-amdt">Loading...</td>
-        <td id="next-pub">Loading...</td>
-        <td id="next-eff">Loading...</td>
-      </tr>
-
-    </table>
-
-    <div class="updated" id="updated">
-      Loading...
-    </div>
-
-  </div>
+<tbody id="amdt-table"></tbody>
+</table>
 
 </div>
 
+
+<div class="card">
+
+<h2>AIP SUP</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Title</th>
+<th>Published</th>
+<th>Effective From</th>
+<th>Until</th>
+<th>Document</th>
+</tr>
+</thead>
+
+<tbody id="sup-table"></tbody>
+</table>
+
+</div>
+
+
+<div class="card">
+
+<h2>AIC</h2>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Title</th>
+<th>Published</th>
+<th>Effective From</th>
+<th>Document</th>
+</tr>
+</thead>
+
+<tbody id="aic-table"></tbody>
+</table>
+
+</div>
+
+</div>
+
+
 <script>
 
+/* AMDT */
+
 fetch("taiwan_aip.json")
-  .then(response => response.json())
-  .then(data => {
+.then(r => r.json())
+.then(data => {
 
-    document.getElementById("current-amdt").textContent =
-      data.current.amendment;
+const table =
+document.getElementById("amdt-table");
 
-    document.getElementById("current-pub").textContent =
-      data.current.publication_date;
+table.innerHTML = `
+<tr>
+<td>Current</td>
+<td>${data.current.amendment}</td>
+<td>${data.current.publication_date}</td>
+<td>${data.current.effective_date}</td>
+</tr>
 
-    document.getElementById("current-eff").textContent =
-      data.current.effective_date;
+<tr>
+<td>Next</td>
+<td>${data.next.amendment}</td>
+<td>${data.next.publication_date}</td>
+<td>${data.next.effective_date}</td>
+</tr>
+`;
 
-    document.getElementById("next-amdt").textContent =
-      data.next.amendment;
+});
 
-    document.getElementById("next-pub").textContent =
-      data.next.publication_date;
 
-    document.getElementById("next-eff").textContent =
-      data.next.effective_date;
+/* SUP + AIC */
 
-    const checked = new Date(data.checked_at);
+fetch("taiwan_documents.json")
+.then(r => r.json())
+.then(data => {
 
-    document.getElementById("updated").textContent =
-      "Last checked: " + checked.toLocaleString();
+const supTable =
+document.getElementById("sup-table");
 
-  })
-  .catch(error => {
+const aicTable =
+document.getElementById("aic-table");
 
-    document.getElementById("updated").textContent =
-      "Unable to load AIP data.";
 
-    console.error(error);
+data.documents.forEach(doc => {
 
-  });
+if(doc.type === "SUP") {
+
+supTable.innerHTML += `
+<tr>
+
+<td class="type">
+${doc.number}
+</td>
+
+<td>
+${doc.title}
+</td>
+
+<td>
+${doc.publication_date || "—"}
+</td>
+
+<td>
+${doc.effective_from || "—"}
+</td>
+
+<td>
+${doc.effective_until || "—"}
+</td>
+
+<td>
+<a href="${doc.url}"
+target="_blank">
+Open
+</a>
+</td>
+
+</tr>
+`;
+
+}
+
+
+if(doc.type === "AIC") {
+
+aicTable.innerHTML += `
+<tr>
+
+<td class="type">
+${doc.number}
+</td>
+
+<td>
+${doc.title}
+</td>
+
+<td>
+${doc.publication_date || "—"}
+</td>
+
+<td>
+${doc.effective_from || "—"}
+</td>
+
+<td>
+<a href="${doc.url}"
+target="_blank">
+Open
+</a>
+</td>
+
+</tr>
+`;
+
+}
+
+});
+
+});
 
 </script>
 
