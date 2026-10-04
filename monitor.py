@@ -106,3 +106,152 @@ if is_new:
     print(f"New: {latest_issue}")
 else:
     print("🟢 No new AIP update")
+
+
+# ============================================================
+# Taiwan AIP SUP Monitor
+# ============================================================
+
+from urllib.parse import urljoin
+
+BASE_URL = "https://ais.caa.gov.tw/eaip/"
+
+def parse_sup_document(url):
+    try:
+        r = requests.get(url, headers=headers, timeout=30)
+        r.raise_for_status()
+
+        doc_soup = BeautifulSoup(r.text, "html.parser")
+        doc_text = doc_soup.get_text(" ", strip=True)
+
+        # SUP number
+        number_match = re.search(
+            r"(?:AIRAC\s+)?AIP\s+SUP\s+(\d{1,2}/\d{2})",
+            doc_text,
+            re.IGNORECASE
+        )
+
+        # Publication date
+        pub_match = re.search(
+            r"Published\s+on\s+(\d{1,2}\s+[A-Z]{3}\s+\d{4})",
+            doc_text,
+            re.IGNORECASE
+        )
+
+        # Effective date
+        effective_match = re.search(
+            r"Effective\s+from\s+(\d{1,2}\s+[A-Z]{3}\s+\d{4})"
+            r"(?:\s+to\s+(\d{1,2}\s+[A-Z]{3}\s+\d{4}))?",
+            doc_text,
+            re.IGNORECASE
+        )
+
+        # Try to get title from headings
+        title = None
+
+        for tag in doc_soup.find_all(["h1", "h2", "h3"]):
+            candidate = tag.get_text(" ", strip=True)
+
+            if (
+                candidate
+                and "AIP SUP" not in candidate.upper()
+                and len(candidate) > 5
+            ):
+                title = candidate
+                break
+
+        if not number_match:
+            return None
+
+        return {
+            "type": "SUP",
+            "number": number_match.group(1),
+            "title": title or "—",
+            "publication_date": pub_match.group(1) if pub_match else None,
+            "effective_from": effective_match.group(1) if effective_match else None,
+            "effective_until": (
+                effective_match.group(2)
+                if effective_match and effective_match.group(2)
+                else None
+            ),
+            "url": url
+        }
+
+    except Exception as e:
+        print(f"SUP document error: {url}")
+        print(e)
+        return None
+
+
+# ------------------------------------------------------------
+# Find SUP links from current eAIP page
+# ------------------------------------------------------------
+
+sup_links = set()
+
+for link in soup.find_all("a", href=True):
+
+    href = link["href"]
+
+    if "SUP-en-GB.html" in href:
+        sup_links.add(urljoin(URL, href))
+
+
+sup_documents = []
+
+for sup_url in sorted(sup_links):
+
+    result = parse_sup_document(sup_url)
+
+    if result:
+        sup_documents.append(result)
+
+
+# Sort newest SUP number first
+def sup_sort_key(item):
+
+    try:
+        number, year = item["number"].split("/")
+        return int(year), int(number)
+
+    except:
+        return 0, 0
+
+
+sup_documents.sort(
+    key=sup_sort_key,
+    reverse=True
+)
+
+
+# Save SUP data
+with open(
+    "taiwan_sup.json",
+    "w",
+    encoding="utf-8"
+) as f:
+
+    json.dump(
+        {
+            "state": "Taiwan",
+            "icao": "RC",
+            "checked_at": datetime.now(timezone.utc).isoformat(),
+            "documents": sup_documents
+        },
+        f,
+        ensure_ascii=False,
+        indent=2
+    )
+
+
+print(f"Found {len(sup_documents)} SUP documents.")
+
+for item in sup_documents:
+
+    print(
+        item["number"],
+        item["publication_date"],
+        item["effective_from"],
+        item["effective_until"],
+        item["title"]
+    )
