@@ -37,6 +37,7 @@ jobs:
           git add taiwan_sup.json
           git add taiwan_documents.json
           git add aip_history.json
+          git add taiwan_history.json
 
           git diff --cached --quiet || git commit -m "Update Taiwan AIP data"
           git push
