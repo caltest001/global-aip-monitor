@@ -227,7 +227,13 @@ table.innerHTML = `
 </tr>
 
 <tr>
-<td>Next</td>
+<td>
+${newBadge(
+  data.next.publication_date,
+  data.next.effective_date
+)}
+Next
+</td>
 <td>${data.next.amendment}</td>
 <td>${data.next.publication_date}</td>
 <td>${data.next.effective_date}</td>
