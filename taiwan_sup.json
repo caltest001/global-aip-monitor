@@ -1,6 +1,367 @@
 {
   "state": "Taiwan",
   "icao": "RC",
-  "checked_at": "2026-10-04T07:54:39.943552+00:00",
-  "documents": []
+  "checked_at": "2026-10-04T08:04:29.082999+00:00",
+  "documents": [
+    {
+      "type": "SUP",
+      "number": "25/26",
+      "title": "CRANES IN THE VICINITY OF TAIPEI/SONGSHAN AIRPORT",
+      "publication_date": "22 SEP 2026",
+      "effective_from": "31 OCT 2026",
+      "effective_until": "10 JAN 2028",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/25-26_2026_10_31/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "24/26",
+      "title": "CRANES IN THE VICINITY OF TAIPEI/SONGSHAN AIRPORT",
+      "publication_date": "17 SEP 2026",
+      "effective_from": "21 OCT 2026",
+      "effective_until": "30 JUL 2027",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/24-26_2026_10_21/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "23/26",
+      "title": "ALTERNATE ROUTES AND MEASURES FOR AIRSPACE BLOCKED DUE TO FLIGHT TESTING (OCT to DEC 2026)",
+      "publication_date": "15 SEP 2026",
+      "effective_from": "01 OCT 2026",
+      "effective_until": "31 DEC 2026",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/23-26_2026_10_01/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "21/26",
+      "title": "A CRANE AT TAIPEI/TAIWAN TAOYUAN INTERNATIONAL AIRPORT",
+      "publication_date": "25 AUG 2026",
+      "effective_from": "30 AUG 2026",
+      "effective_until": "01 JUL 2027",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/21-26_2026_08_30/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "20/26",
+      "title": "RUNWAY CONSTRUCTION WORK AT HUALIEN AIRPORT (PHASE 1)",
+      "publication_date": "20 AUG 2026",
+      "effective_from": "01 OCT 2026",
+      "effective_until": null,
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/20-26_2026_10_01/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "19/26",
+      "title": "GROUND MANEUVERING RESTRICTIONS FOR AERODROME REFERENCE CODE F AIRCRAFT AT TAIPEI/TAIWAN TAOYUAN INTERNATIONAL AIRPORT",
+      "publication_date": "03 AUG 2026",
+      "effective_from": "03 AUG 2026",
+      "effective_until": "31 DEC 2027",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/19-26_2026_08_03/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "18/26",
+      "title": "CRANES AT TAIPEI/TAIWAN TAOYUAN INTERNATIONAL AIRPORT",
+      "publication_date": "30 JUL 2026",
+      "effective_from": "15 AUG 2026",
+      "effective_until": "01 JUL 2027",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/18-26_2026_08_15/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "17/26",
+      "title": "CRANES IN THE VICINITY OF TAIPEI/SONGSHAN AIRPORT",
+      "publication_date": "30 JUL 2026",
+      "effective_from": "11 SEP 2026",
+      "effective_until": "30 JUN 2028",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/17-26_2026_09_11/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "16/26",
+      "title": "CONSTRUCTION WORK AT KAOHSIUNG INTL AIRPORT",
+      "publication_date": "17 JUL 2026",
+      "effective_from": "17 JUL 2026",
+      "effective_until": null,
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/16-26_2026_07_17/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "14/26",
+      "title": "TOWER CRANES IN THE VICINITY OF TAINAN AIRPORT",
+      "publication_date": "09 JUN 2026",
+      "effective_from": "30 JUN 2026",
+      "effective_until": "21 DEC 2026",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/14-26_2026_06_30/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "13/26",
+      "title": "CRANES IN THE VICINITY OF TAIPEI/SONGSHAN AIRPORT",
+      "publication_date": "03 JUN 2026",
+      "effective_from": "08 JUL 2026",
+      "effective_until": "10 APR 2029",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/13-26_2026_07_08/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "12/26",
+      "title": "CRANES IN THE VICINITY OF TAIPEI/SONGSHAN AIRPORT",
+      "publication_date": "29 MAY 2026",
+      "effective_from": "31 JUL 2026",
+      "effective_until": "26 MAY 2027",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/12-26_2026_07_31/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "11/26",
+      "title": "CRANES IN THE VICINITY OF TAIPEI/TAIWAN TAOYUAN INTERNATIONAL AIRPORT",
+      "publication_date": "27 MAY 2026",
+      "effective_from": "01 JUL 2026",
+      "effective_until": "29 SEP 2027",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/11-26_2026_07_01/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "10/26",
+      "title": "CRANES IN THE VICINITY OF TAIPEI/SONGSHAN AIRPORT",
+      "publication_date": "25 MAY 2026",
+      "effective_from": "01 AUG 2026",
+      "effective_until": "30 OCT 2028",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/10-26_2026_08_01/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "09/26",
+      "title": "CRANES IN THE VICINITY OF TAIPEI/SONGSHAN AIRPORT",
+      "publication_date": "06 MAY 2026",
+      "effective_from": "19 JUN 2026",
+      "effective_until": "31 DEC 2030",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/09-26_2026_06_19/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "08/26",
+      "title": "CRANES IN THE VICINITY OF TAIPEI/SONGSHAN AIRPORT",
+      "publication_date": "28 APR 2026",
+      "effective_from": "25 MAY 2026",
+      "effective_until": "11 SEP 2028",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/08-26_2026_05_25/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "06/26",
+      "title": "AIR TRAFFIC FLOW MANAGEMENT (ATFM)",
+      "publication_date": "09 MAR 2026",
+      "effective_from": "16 MAR 2026",
+      "effective_until": null,
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/06-26_2026_03_16/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "05/26",
+      "title": "CRANES IN THE VICINITY OF TAIPEI/SONGSHAN AIRPORT",
+      "publication_date": "25 FEB 2026",
+      "effective_from": "19 MAR 2026",
+      "effective_until": "19 APR 2027",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/05-26_2026_03_19/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "04/26",
+      "title": "FIREWORKS TAKE PLACE AT TAOYUAN INTERNATIONAL BASEBALL STADIUM",
+      "publication_date": "12 FEB 2026",
+      "effective_from": "11 APR 2026",
+      "effective_until": "08 NOV 2026",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/04-26_2026_04_11/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "02/26",
+      "title": "CRANES IN THE VICINITY OF TAIPEI/SONGSHAN AIRPORT",
+      "publication_date": "09 FEB 2026",
+      "effective_from": "01 MAR 2026",
+      "effective_until": "31 DEC 2027",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/02-26_2026_03_01/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "32/25",
+      "title": "CRANES IN THE VICINITY OF TAIPEI/SONGSHAN AIRPORT",
+      "publication_date": "02 DEC 2025",
+      "effective_from": "31 DEC 2025",
+      "effective_until": "31 DEC 2027",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/32-25_2025_12_31/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "28/25",
+      "title": "CRANES IN THE VICINITY OF TAIPEI/SONGSHAN AIRPORT",
+      "publication_date": "23 OCT 2025",
+      "effective_from": "21 NOV 2025",
+      "effective_until": "16 JUN 2027",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/28-25_2025_11_21/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "25/25",
+      "title": "CRANES IN THE VICINITY OF TAIPEI/SONGSHAN AIRPORT",
+      "publication_date": "02 OCT 2025",
+      "effective_from": "31 OCT 2025",
+      "effective_until": "25 MAR 2030",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/25-25_2025_10_31/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "19/25",
+      "title": "CRANES IN THE VICINITY OF TAIPEI / SONGSHAN AIRPORT",
+      "publication_date": "10 JUL 2025",
+      "effective_from": "15 AUG 2025",
+      "effective_until": "15 NOV 2026",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/19-25_2025_08_15/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "10/25",
+      "title": "CRANES IN THE VICINITY OF TAIPEI / SONGSHAN AIRPORT",
+      "publication_date": "22 APR 2025",
+      "effective_from": "01 JUN 2025",
+      "effective_until": "31 DEC 2026",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/10-25_2025_06_01/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "09/25",
+      "title": "CRANES IN THE VICINITY OF TAIPEI / SONGSHAN AIRPORT",
+      "publication_date": "22 APR 2025",
+      "effective_from": "20 MAY 2025",
+      "effective_until": "28 FEB 2026",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/09-25_2025_05_20/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "08/25",
+      "title": "RCKU IAP RNP RWY18 AND RNP RWY36 NOT AVAILABLE",
+      "publication_date": "03 APR 2025",
+      "effective_from": "15 MAY 2025",
+      "effective_until": null,
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/08-25_2025_05_15/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "07/25",
+      "title": "CRANES IN THE VICINITY OF TAIPEI / SONGSHAN AIRPORT",
+      "publication_date": "21 MAR 2025",
+      "effective_from": "16 APR 2025",
+      "effective_until": "10 MAR 2027",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/07-25_2025_04_16/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "05/25",
+      "title": "RCNN IAP RNP RWY36R NOT AVAILABLE",
+      "publication_date": "12 MAR 2025",
+      "effective_from": "12 MAR 2025",
+      "effective_until": null,
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/05-25_2025_03_12/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "03/25",
+      "title": "CRANES IN THE VICINITY OF TAIPEI / SONGSHAN AIRPORT",
+      "publication_date": "12 FEB 2025",
+      "effective_from": "01 MAR 2025",
+      "effective_until": "31 MAR 2027",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/03-25_2025_03_01/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "02/25",
+      "title": "RCSS IAP VOR RWY10 NOT AVAILABLE",
+      "publication_date": "23 JAN 2025",
+      "effective_from": "31 JAN 2025",
+      "effective_until": null,
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/02-25_2025_01_31/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "01/25",
+      "title": "TAIPEI VETERANS GENERAL HOSPITAL HELIPORT NOT AVAILABLE",
+      "publication_date": "16 JAN 2025",
+      "effective_from": "16 JAN 2025",
+      "effective_until": null,
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/01-25_2025_01_16/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "13/24",
+      "title": "TOWER CRANES IN THE VICINITY OF TAIPEI/ SONGSHAN AIRPORT",
+      "publication_date": "02 APR 2024",
+      "effective_from": "30 APR 2024",
+      "effective_until": "31 MAY 2027",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/13-24_2024_04_30/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "10/24",
+      "title": "TOWER CRANES IN THE VICINITY OF TAIPEI/SONGSHAN AIRPORT",
+      "publication_date": "13 MAR 2024",
+      "effective_from": "11 APR 2024",
+      "effective_until": "31 DEC 2026",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/10-24_2024_04_11/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "06/24",
+      "title": "UNSERVICEABILITY OF LUDAO VOR GID",
+      "publication_date": "20 FEB 2024",
+      "effective_from": "20 FEB 2024",
+      "effective_until": "28 FEB 2025",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/06-24_2024_02_20/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "02/24",
+      "title": "RCBS IAP RNP RWY06 SUSPENDED",
+      "publication_date": "12 JAN 2024",
+      "effective_from": "12 JAN 2024",
+      "effective_until": "30 JUN 2025",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/02-24_2024_01_12/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "27/22",
+      "title": "TOWER CRANES IN THE VICINITY OF TAIPEI/TAIWAN TAOYUAN INTERNATIONAL AIRPORT",
+      "publication_date": "16 DEC 2022",
+      "effective_from": "31 DEC 2022",
+      "effective_until": "13 MAY 2024",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/27-22_2022_12_31/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "25/22",
+      "title": "TOWER CRANES AT TAIPEI/TAIWAN TAOYUAN INTERNATIONAL AIRPORT",
+      "publication_date": "09 DEC 2022",
+      "effective_from": "01 JAN 2023",
+      "effective_until": "31 AUG 2024",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/25-22_2023_01_01/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "20/22",
+      "title": "RCQC IAP RNP RWY20 LNAV/VNAV MINIMA SUSPENDED",
+      "publication_date": "06 OCT 2022",
+      "effective_from": "06 OCT 2022",
+      "effective_until": "07 AUG 2024",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/20-22_2022_10_06/SUP-en-GB.html#SUP"
+    },
+    {
+      "type": "SUP",
+      "number": "19/22",
+      "title": "RCQC IAP RNP RWY02 LNAV MINIMA SUSPENDED",
+      "publication_date": "06 OCT 2022",
+      "effective_from": "06 OCT 2022",
+      "effective_until": "07 AUG 2024",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/19-22_2022_10_06/SUP-en-GB.html#SUP"
+    }
+  ]
 }
