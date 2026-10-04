@@ -229,6 +229,19 @@
       text-decoration: underline;
     }
 
+    .archive-link {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: #eaf4fb;
+      color: #0f659f;
+    }
+
+    .archive-link:hover {
+      background: #dceef9;
+      text-decoration: none;
+    }
+
     .empty {
       padding: 30px;
       text-align: center;
@@ -393,7 +406,8 @@
             <th>Title</th>
             <th>Published</th>
             <th>Effective</th>
-            <th>Source</th>
+            <th>Archive</th>
+            <th>Official Source</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -444,7 +458,8 @@
             <th>Published</th>
             <th>Effective From</th>
             <th>Effective Until</th>
-            <th>Source</th>
+            <th>Archive</th>
+            <th>Official Source</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -495,7 +510,8 @@
             <th>Published</th>
             <th>Effective From</th>
             <th>Effective Until</th>
-            <th>Source</th>
+            <th>Archive</th>
+            <th>Official Source</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -588,7 +604,26 @@ function sourceLink(url) {
       target="_blank"
       rel="noopener noreferrer"
     >
-      Open ↗
+      Official ↗
+    </a>
+  `;
+}
+
+
+function archiveLink(url) {
+
+  if (!url) {
+    return "—";
+  }
+
+  return `
+    <a
+      class="document-link archive-link"
+      href="${escapeHtml(url)}"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      View Archive
     </a>
   `;
 }
@@ -635,7 +670,7 @@ function renderAmendments(filter = "") {
 
     body.innerHTML = `
       <tr>
-        <td colspan="6" class="empty">
+        <td colspan="7" class="empty">
           No matching amendments.
         </td>
       </tr>
@@ -674,6 +709,12 @@ function renderAmendments(filter = "") {
         <td class="date">
           ${escapeHtml(
             safe(item.effective_date)
+          )}
+        </td>
+
+        <td>
+          ${archiveLink(
+            item.archive_url
           )}
         </td>
 
@@ -732,7 +773,7 @@ function renderDocuments(
 
     body.innerHTML = `
       <tr>
-        <td colspan="7" class="empty">
+        <td colspan="8" class="empty">
           No matching records.
         </td>
       </tr>
@@ -774,6 +815,12 @@ function renderDocuments(
         <td class="date">
           ${escapeHtml(
             safe(item.effective_until)
+          )}
+        </td>
+
+        <td>
+          ${archiveLink(
+            item.archive_url
           )}
         </td>
 
