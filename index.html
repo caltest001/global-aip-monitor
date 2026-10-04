@@ -82,10 +82,12 @@ a{color:var(--blue);font-weight:700;text-decoration:none}a:hover{text-decoration
 <script>
 const API="https://aip-monitor-api.pei2273.workers.dev";
 const ALERTS_URL="alerts.json";
+const HISTORY_DATA_URL="taiwan_history.json";
 const TAIWAN_HISTORY="countries/taiwan.html";
 
 let processed=new Set();
 let alerts=[];
+let historyData={amendments:[],sup:[],aic:[]};
 
 function esc(v){
   return String(v??"")
@@ -170,46 +172,53 @@ async function undo(btn){
 }
 
 function parseAipDate(value){
-  if(!value || value==="—") return null;
+  if(!value || value==="—")return null;
   const raw=String(value).trim();
-
-  const iso=new Date(raw);
-  if(!Number.isNaN(iso.getTime())) return iso;
-
+  const d=new Date(raw);
+  if(!Number.isNaN(d.getTime()))return d;
   const m=raw.match(/^(\d{1,2})\s+([A-Za-z]{3})\s+(\d{4})$/);
-  if(!m) return null;
-
+  if(!m)return null;
   const months={JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11};
-  const month=months[m[2].toUpperCase()];
-  if(month===undefined) return null;
-
-  return new Date(Number(m[3]),month,Number(m[1]),12,0,0,0);
+  const mon=months[m[2].toUpperCase()];
+  if(mon===undefined)return null;
+  return new Date(+m[3],mon,+m[1],12);
 }
 
-function effectiveDate(item){
-  return item.effective_from || item.effective_date || null;
+function effectiveDate(x){
+  return x.effective_from||x.effective_date||null;
 }
 
-function keepOnDashboard(item){
-  const effective=parseAipDate(effectiveDate(item));
+function keepOnDashboard(x){
+  const d=parseAipDate(effectiveDate(x));
+  if(!d)return true;
+  const limit=new Date(d);
+  limit.setDate(limit.getDate()+7);
+  limit.setHours(23,59,59,999);
+  return new Date()<=limit;
+}
 
-  // 日期無法判讀時寧可保留，避免重要文件被誤隱藏。
-  if(!effective) return true;
+function normalizeHistory(type,x){
+  const num=String(x.document_number||x.amendment||x.number||"").trim();
+  return {
+    ...x,
+    document_id:num?`TW-${type}-${num.replace(/\//g,"-")}`:"",
+    country:"Taiwan",
+    document_type:type,
+    document_number:num,
+    effective_from:effectiveDate(x),
+    source_url:x.source_url||x.url||""
+  };
+}
 
-  const removeAfter=new Date(effective);
-  removeAfter.setDate(removeAfter.getDate()+7);
-  removeAfter.setHours(23,59,59,999);
-
-  return new Date()<=removeAfter;
+function dashboardItems(type){
+  const source=type==="AMDT"?historyData.amendments:type==="SUP"?historyData.sup:historyData.aic;
+  return (source||[]).map(x=>normalizeHistory(type,x)).filter(x=>x.document_id&&keepOnDashboard(x));
 }
 
 function renderType(type){
   const key=type==="AMDT"?"amdt":type==="SUP"?"sup":"aic";
   const table=document.getElementById(key+"-table");
-  const list=alerts.filter(x=>
-    String(x.document_type||"").toUpperCase()===type &&
-    keepOnDashboard(x)
-  );
+  const list=dashboardItems(type);
 
   if(!list.length){
     table.innerHTML=`<tr><td colspan="8" class="empty">No ${type==="AMDT"?"AIRAC AIP AMDT":type} items within the dashboard window.</td></tr>`;
@@ -250,22 +259,30 @@ function render(){
 
 async function start(){
   try{
-    const [,ar]=await Promise.all([
+    const [,hr,ar]=await Promise.all([
       loadProcessed(),
+      fetch(HISTORY_DATA_URL+"?v="+Date.now(),{cache:"no-store"}),
       fetch(ALERTS_URL+"?v="+Date.now(),{cache:"no-store"})
     ]);
 
-    if(!ar.ok)throw new Error("alerts.json load failed");
+    if(!hr.ok)throw new Error("taiwan_history.json load failed");
 
-    const data=await ar.json();
-    alerts=Array.isArray(data.alerts)?data.alerts:[];
+    const h=await hr.json();
+    historyData={
+      amendments:Array.isArray(h.amendments)?h.amendments:[],
+      sup:Array.isArray(h.sup)?h.sup:[],
+      aic:Array.isArray(h.aic)?h.aic:[]
+    };
 
-    if(data.last_checked){
-      document.getElementById("last-update").textContent=
-        "Last checked: "+new Date(data.last_checked).toLocaleString();
-    }else{
-      document.getElementById("last-update").textContent="Monitoring active";
+    let alertData={};
+    if(ar.ok){
+      alertData=await ar.json();
+      alerts=Array.isArray(alertData.alerts)?alertData.alerts:[];
     }
+
+    const checked=h.last_checked||alertData.last_checked;
+    document.getElementById("last-update").textContent=
+      checked?"Last checked: "+new Date(checked).toLocaleString():"Monitoring active";
 
     render();
   }catch(e){
