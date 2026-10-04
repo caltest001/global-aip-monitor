@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Taiwan AIP History | Global AIP Monitor</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+      background: #f4f6f9;
+      color: #172033;
+    }
+
+    header {
+      background: #102a43;
+      color: white;
+      padding: 28px 32px;
+    }
+
+    .header-inner {
+      max-width: 1500px;
+      margin: auto;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: #b9d9f4;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .back:hover {
+      text-decoration: underline;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+
+    .subtitle {
+      margin-top: 7px;
+      color: #d9e7f3;
+      font-size: 15px;
+    }
+
+    main {
+      max-width: 1500px;
+      margin: auto;
+      padding: 28px 24px 60px;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(4, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .status-card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      border: 1px solid #e1e7ef;
+      box-shadow:
+        0 2px 7px rgba(0,0,0,.04);
+    }
+
+    .status-label {
+      color: #66788a;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .status-value {
+      margin-top: 8px;
+      font-size: 28px;
+      font-weight: 700;
+      color: #102a43;
+    }
+
+    .status-detail {
+      margin-top: 5px;
+      font-size: 13px;
+      color: #8492a6;
+    }
+
+    .section {
+      background: white;
+      border: 1px solid #e1e7ef;
+      border-radius: 10px;
+      margin-bottom: 26px;
+      overflow: hidden;
+      box-shadow:
+        0 2px 7px rgba(0,0,0,.04);
+    }
+
+    .section-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid #e7ebf0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #102a43;
+    }
+
+    .section-count {
+      font-size: 13px;
+      color: #6b7c8f;
+      margin-top: 3px;
+    }
+
+    .search {
+      width: 320px;
+      max-width: 100%;
+      padding: 9px 12px;
+      border: 1px solid #ccd5df;
+      border-radius: 6px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .search:focus {
+      border-color: #2684c7;
+      box-shadow:
+        0 0 0 2px rgba(38,132,199,.1);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 950px;
+    }
+
+    th {
+      background: #f8fafc;
+      padding: 12px 14px;
+      text-align: left;
+      font-size: 12px;
+      color: #607284;
+      border-bottom: 1px solid #e2e8f0;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 13px 14px;
+      border-bottom: 1px solid #edf1f5;
+      font-size: 14px;
+      vertical-align: top;
+    }
+
+    tbody tr:hover {
+      background: #f8fbfd;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .number {
+      font-weight: 700;
+      color: #173f5f;
+      white-space: nowrap;
+    }
+
+    .title {
+      min-width: 340px;
+      line-height: 1.45;
+    }
+
+    .date {
+      white-space: nowrap;
+    }
+
+    .status-active {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 12px;
+      background: #e8f6ed;
+      color: #287a43;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .status-removed {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 12px;
+      background: #eef1f4;
+      color: #6b7280;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .document-link {
+      color: #1675b9;
+      text-decoration: none;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .document-link:hover {
+      text-decoration: underline;
+    }
+
+    .empty {
+      padding: 30px;
+      text-align: center;
+      color: #77889a;
+    }
+
+    .updated {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #7b8998;
+    }
+
+    @media (max-width: 900px) {
+      .status-grid {
+        grid-template-columns:
+          repeat(2, minmax(150px, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      header {
+        padding: 24px 20px;
+      }
+
+      main {
+        padding: 20px 12px 50px;
+      }
+
+      .status-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 27px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <a class="back" href="../">
+      ← Global AIP Monitor
+    </a>
+
+    <h1>Taiwan</h1>
+
+    <div class="subtitle">
+      Taipei FIR · Aeronautical Information Publication History
+    </div>
+
+  </div>
+</header>
+
+
+<main>
+
+  <div class="status-grid">
+
+    <div class="status-card">
+      <div class="status-label">
+        AIRAC AIP AMDT
+      </div>
+      <div
+        class="status-value"
+        id="amdtCount"
+      >
+        —
+      </div>
+      <div class="status-detail">
+        Stored amendments
+      </div>
+    </div>
+
+
+    <div class="status-card">
+      <div class="status-label">
+        AIP SUP
+      </div>
+      <div
+        class="status-value"
+        id="supCount"
+      >
+        —
+      </div>
+      <div class="status-detail">
+        Stored supplements
+      </div>
+    </div>
+
+
+    <div class="status-card">
+      <div class="status-label">
+        AIC
+      </div>
+      <div
+        class="status-value"
+        id="aicCount"
+      >
+        —
+      </div>
+      <div class="status-detail">
+        Stored circulars
+      </div>
+    </div>
+
+
+    <div class="status-card">
+      <div class="status-label">
+        Latest AMDT
+      </div>
+      <div
+        class="status-value"
+        id="latestAmdt"
+      >
+        —
+      </div>
+      <div class="status-detail">
+        Latest stored amendment
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- AIRAC -->
+
+  <section class="section">
+
+    <div class="section-header">
+
+      <div>
+        <div class="section-title">
+          AIRAC AIP AMDT History
+        </div>
+
+        <div
+          class="section-count"
+          id="amdtSectionCount"
+        ></div>
+      </div>
+
+      <input
+        id="amdtSearch"
+        class="search"
+        type="search"
+        placeholder="Search amendment..."
+      >
+
+    </div>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Amendment</th>
+            <th>Title</th>
+            <th>Published</th>
+            <th>Effective</th>
+            <th>Source</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody id="amdtBody"></tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <!-- SUP -->
+
+  <section class="section">
+
+    <div class="section-header">
+
+      <div>
+        <div class="section-title">
+          AIP SUP History
+        </div>
+
+        <div
+          class="section-count"
+          id="supSectionCount"
+        ></div>
+      </div>
+
+      <input
+        id="supSearch"
+        class="search"
+        type="search"
+        placeholder="Search SUP number, title or date..."
+      >
+
+    </div>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Title</th>
+            <th>Published</th>
+            <th>Effective From</th>
+            <th>Effective Until</th>
+            <th>Source</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody id="supBody"></tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <!-- AIC -->
+
+  <section class="section">
+
+    <div class="section-header">
+
+      <div>
+        <div class="section-title">
+          AIC History
+        </div>
+
+        <div
+          class="section-count"
+          id="aicSectionCount"
+        ></div>
+      </div>
+
+      <input
+        id="aicSearch"
+        class="search"
+        type="search"
+        placeholder="Search AIC number, title or date..."
+      >
+
+    </div>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Title</th>
+            <th>Published</th>
+            <th>Effective From</th>
+            <th>Effective Until</th>
+            <th>Source</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody id="aicBody"></tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <div
+    class="updated"
+    id="updated"
+  ></div>
+
+</main>
+
+
+<script>
+
+const HISTORY_URL =
+  "../taiwan_history.json";
+
+
+let historyData = {
+  amendments: [],
+  sup: [],
+  aic: []
+};
+
+
+function safe(value) {
+
+  if (
+    value === null ||
+    value === undefined ||
+    value === ""
+  ) {
+    return "—";
+  }
+
+  return value;
+}
+
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+
+function statusBadge(status) {
+
+  if (status === "ACTIVE") {
+
+    return `
+      <span class="status-active">
+        ACTIVE
+      </span>
+    `;
+
+  }
+
+  return `
+    <span class="status-removed">
+      ${escapeHtml(status || "HISTORY")}
+    </span>
+  `;
+}
+
+
+function sourceLink(url) {
+
+  if (!url) {
+    return "—";
+  }
+
+  return `
+    <a
+      class="document-link"
+      href="${escapeHtml(url)}"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Open ↗
+    </a>
+  `;
+}
+
+
+function searchableText(item) {
+
+  return Object.values(item)
+    .filter(value =>
+      value !== null &&
+      value !== undefined
+    )
+    .join(" ")
+    .toLowerCase();
+}
+
+
+function renderAmendments(filter = "") {
+
+  const query =
+    filter.trim().toLowerCase();
+
+  const rows =
+    historyData.amendments.filter(
+      item =>
+        searchableText(item)
+          .includes(query)
+    );
+
+
+  document.getElementById(
+    "amdtSectionCount"
+  ).textContent =
+    `${rows.length} of ${historyData.amendments.length} records`;
+
+
+  const body =
+    document.getElementById(
+      "amdtBody"
+    );
+
+
+  if (!rows.length) {
+
+    body.innerHTML = `
+      <tr>
+        <td colspan="6" class="empty">
+          No matching amendments.
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+
+  body.innerHTML =
+    rows.map(item => `
+
+      <tr>
+
+        <td class="number">
+          ${escapeHtml(
+            safe(
+              item.amendment ||
+              item.number
+            )
+          )}
+        </td>
+
+        <td class="title">
+          ${escapeHtml(
+            safe(item.title)
+          )}
+        </td>
+
+        <td class="date">
+          ${escapeHtml(
+            safe(item.publication_date)
+          )}
+        </td>
+
+        <td class="date">
+          ${escapeHtml(
+            safe(item.effective_date)
+          )}
+        </td>
+
+        <td>
+          ${sourceLink(
+            item.source_url
+          )}
+        </td>
+
+        <td>
+          ${statusBadge(
+            item.source_status
+          )}
+        </td>
+
+      </tr>
+
+    `).join("");
+
+}
+
+
+function renderDocuments(
+  type,
+  filter = ""
+) {
+
+  const query =
+    filter.trim().toLowerCase();
+
+  const data =
+    historyData[type] || [];
+
+
+  const rows =
+    data.filter(
+      item =>
+        searchableText(item)
+          .includes(query)
+    );
+
+
+  document.getElementById(
+    `${type}SectionCount`
+  ).textContent =
+    `${rows.length} of ${data.length} records`;
+
+
+  const body =
+    document.getElementById(
+      `${type}Body`
+    );
+
+
+  if (!rows.length) {
+
+    body.innerHTML = `
+      <tr>
+        <td colspan="7" class="empty">
+          No matching records.
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+
+  body.innerHTML =
+    rows.map(item => `
+
+      <tr>
+
+        <td class="number">
+          ${escapeHtml(
+            safe(item.number)
+          )}
+        </td>
+
+        <td class="title">
+          ${escapeHtml(
+            safe(item.title)
+          )}
+        </td>
+
+        <td class="date">
+          ${escapeHtml(
+            safe(item.publication_date)
+          )}
+        </td>
+
+        <td class="date">
+          ${escapeHtml(
+            safe(item.effective_from)
+          )}
+        </td>
+
+        <td class="date">
+          ${escapeHtml(
+            safe(item.effective_until)
+          )}
+        </td>
+
+        <td>
+          ${sourceLink(
+            item.source_url
+          )}
+        </td>
+
+        <td>
+          ${statusBadge(
+            item.source_status
+          )}
+        </td>
+
+      </tr>
+
+    `).join("");
+
+}
+
+
+function formatChecked(value) {
+
+  if (!value) {
+    return "—";
+  }
+
+  const date =
+    new Date(value);
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+    return value;
+  }
+
+  return date.toLocaleString(
+    undefined,
+    {
+      dateStyle: "medium",
+      timeStyle: "short"
+    }
+  );
+}
+
+
+async function loadHistory() {
+
+  try {
+
+    const response =
+      await fetch(
+        HISTORY_URL +
+        "?t=" +
+        Date.now()
+      );
+
+
+    if (!response.ok) {
+      throw new Error(
+        `HTTP ${response.status}`
+      );
+    }
+
+
+    const data =
+      await response.json();
+
+
+    historyData.amendments =
+      Array.isArray(data.amendments)
+        ? data.amendments
+        : [];
+
+
+    historyData.sup =
+      Array.isArray(data.sup)
+        ? data.sup
+        : [];
+
+
+    historyData.aic =
+      Array.isArray(data.aic)
+        ? data.aic
+        : [];
+
+
+    document.getElementById(
+      "amdtCount"
+    ).textContent =
+      historyData.amendments.length;
+
+
+    document.getElementById(
+      "supCount"
+    ).textContent =
+      historyData.sup.length;
+
+
+    document.getElementById(
+      "aicCount"
+    ).textContent =
+      historyData.aic.length;
+
+
+    document.getElementById(
+      "latestAmdt"
+    ).textContent =
+      historyData.amendments[0]
+        ?.number || "—";
+
+
+    document.getElementById(
+      "updated"
+    ).textContent =
+      "History last checked: " +
+      formatChecked(
+        data.last_checked
+      );
+
+
+    renderAmendments();
+
+    renderDocuments(
+      "sup"
+    );
+
+    renderDocuments(
+      "aic"
+    );
+
+  }
+
+  catch (error) {
+
+    console.error(error);
+
+
+    document.getElementById(
+      "updated"
+    ).textContent =
+      "Unable to load Taiwan history data.";
+
+  }
+
+}
+
+
+document.getElementById(
+  "amdtSearch"
+).addEventListener(
+  "input",
+  event => {
+    renderAmendments(
+      event.target.value
+    );
+  }
+);
+
+
+document.getElementById(
+  "supSearch"
+).addEventListener(
+  "input",
+  event => {
+    renderDocuments(
+      "sup",
+      event.target.value
+    );
+  }
+);
+
+
+document.getElementById(
+  "aicSearch"
+).addEventListener(
+  "input",
+  event => {
+    renderDocuments(
+      "aic",
+      event.target.value
+    );
+  }
+);
+
+
+loadHistory();
+
+</script>
+
+</body>
+</html>
