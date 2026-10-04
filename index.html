@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Global AIP Monitor</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .country {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .status {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: #e8f5e9;
+      color: #16794b;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      color: #666;
+    }
+
+    .updated {
+      margin-top: 20px;
+      color: #777;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Global AIP Monitor</h1>
+  <div class="subtitle">
+    Aeronautical Information Publication Monitoring
+  </div>
+
+  <div class="card">
+
+    <div class="country">
+      🇹🇼 Taiwan (RC)
+    </div>
+
+    <div class="status">
+      CURRENT
+    </div>
+
+    <table>
+
+      <tr>
+        <th></th>
+        <th>Amendment</th>
+        <th>Publication</th>
+        <th>Effective</th>
+      </tr>
+
+      <tr>
+        <td>Current</td>
+        <td id="current-amdt">Loading...</td>
+        <td id="current-pub">Loading...</td>
+        <td id="current-eff">Loading...</td>
+      </tr>
+
+      <tr>
+        <td>Next</td>
+        <td id="next-amdt">Loading...</td>
+        <td id="next-pub">Loading...</td>
+        <td id="next-eff">Loading...</td>
+      </tr>
+
+    </table>
+
+    <div class="updated" id="updated">
+      Loading...
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+fetch("taiwan_aip.json")
+  .then(response => response.json())
+  .then(data => {
+
+    document.getElementById("current-amdt").textContent =
+      data.current.amendment;
+
+    document.getElementById("current-pub").textContent =
+      data.current.publication_date;
+
+    document.getElementById("current-eff").textContent =
+      data.current.effective_date;
+
+    document.getElementById("next-amdt").textContent =
+      data.next.amendment;
+
+    document.getElementById("next-pub").textContent =
+      data.next.publication_date;
+
+    document.getElementById("next-eff").textContent =
+      data.next.effective_date;
+
+    const checked = new Date(data.checked_at);
+
+    document.getElementById("updated").textContent =
+      "Last checked: " + checked.toLocaleString();
+
+  })
+  .catch(error => {
+
+    document.getElementById("updated").textContent =
+      "Unable to load AIP data.";
+
+    console.error(error);
+
+  });
+
+</script>
+
+</body>
+</html>
