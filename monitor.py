@@ -70,3 +70,39 @@ with open("taiwan_aip.json", "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
 
 print(json.dumps(data, ensure_ascii=False, indent=2))
+
+# ----------------------------
+# Detect new AIP amendment
+# ----------------------------
+
+HISTORY_FILE = "aip_history.json"
+
+try:
+    with open(HISTORY_FILE, "r", encoding="utf-8") as f:
+        history = json.load(f)
+except FileNotFoundError:
+    history = {}
+
+previous_issue = history.get("Taiwan", {}).get("last_seen")
+latest_issue = next_issue["amendment"] if next_issue else None
+
+is_new = False
+
+if latest_issue and previous_issue and latest_issue != previous_issue:
+    is_new = True
+
+if latest_issue:
+    history["Taiwan"] = {
+        "last_seen": latest_issue,
+        "last_checked": datetime.now(timezone.utc).isoformat()
+    }
+
+with open(HISTORY_FILE, "w", encoding="utf-8") as f:
+    json.dump(history, f, ensure_ascii=False, indent=2)
+
+if is_new:
+    print("🔴 NEW AIP UPDATE")
+    print(f"Previous: {previous_issue}")
+    print(f"New: {latest_issue}")
+else:
+    print("🟢 No new AIP update")
