@@ -1220,7 +1220,7 @@ ARCHIVE_ROOT = os.path.join("archive", "taiwan")
 # IMPORTANT:
 # True = rebuild all existing SUP/AIC HTML archives on this run.
 # After one successful GitHub Actions run, change this back to False.
-REBUILD_HTML_ARCHIVE = True
+REBUILD_HTML_ARCHIVE = False
 
 
 def archive_year(number):
