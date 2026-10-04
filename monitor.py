@@ -35,7 +35,9 @@ def extract_section(text, start, end):
 
 def parse_issue(section):
 
-    date_pattern = r"(\d{2} [A-Z][a-z]{2} \d{4})"
+    date_pattern = (
+        r"(\d{2} [A-Z][a-z]{2} \d{4})"
+    )
 
     issue_pattern = (
         r"(AIRAC AIP AMDT|AIP AMDT)"
@@ -206,8 +208,10 @@ is_new = False
 
 if (
     latest_issue
-    and previous_issue
-    and latest_issue != previous_issue
+    and
+    previous_issue
+    and
+    latest_issue != previous_issue
 ):
 
     is_new = True
@@ -268,14 +272,14 @@ else:
 #
 # SUP and AIC are independent publications.
 #
-# AIRAC package folders are only technical locations
-# used by the Taiwan CAA website.
+# AIRAC package folders are used only as technical
+# storage locations on the Taiwan CAA website.
 #
-# We discover the package folders automatically from
-# the CAA homepage.
+# We automatically discover package folders from
+# links on the CAA eAIP homepage.
 #
-# SUP and AIC will independently select the menu with
-# the newest "Published as of" date.
+# SUP and AIC will independently select the menu
+# with the newest "Published as of" date.
 # ============================================================
 
 def discover_package_urls(home_soup):
@@ -293,18 +297,7 @@ def discover_package_urls(home_soup):
             ""
         )
 
-
-        href_upper = href.upper()
-
-
-        # Accept encoded or unencoded package links
-        if (
-            "AIP%20AMDT%20"
-            not in href_upper
-            and
-            "AIP AMDT "
-            not in href_upper
-        ):
+        if not href:
             continue
 
 
@@ -315,41 +308,40 @@ def discover_package_urls(home_soup):
 
 
         # ----------------------------------------------------
-        # Keep package folder only
+        # Match actual Taiwan eAIP package folders.
+        #
+        # Examples:
+        #
+        # AIRAC%20AIP%20AMDT%2004-26_2026_10_01/
+        #
+        # AIRAC AIP AMDT 04-26_2026_10_01/
+        #
+        # The link may continue with index.html or another
+        # file. We keep only the package directory.
         # ----------------------------------------------------
 
-        index_position = (
-            full_url
-            .lower()
-            .find("/index.html")
+        match = re.search(
+            r"("
+            r"https?://[^?#]*?/"
+            r"(?:AIRAC(?:%20| )AIP(?:%20| )AMDT"
+            r"|AIP(?:%20| )AMDT)"
+            r"(?:%20| )"
+            r"\d{2}-\d{2}"
+            r"_\d{4}_\d{2}_\d{2}/"
+            r")",
+            full_url,
+            re.IGNORECASE
         )
 
 
-        if index_position != -1:
-
-            package_url = (
-                full_url[
-                    :index_position + 1
-                ]
-            )
-
-        elif full_url.endswith("/"):
-
-            package_url = (
-                full_url
-            )
-
-        else:
-
-            package_url = urljoin(
-                full_url,
-                "./"
-            )
+        if not match:
+            continue
 
 
-        # ----------------------------------------------------
-        # Deduplicate
-        # ----------------------------------------------------
+        package_url = (
+            match.group(1)
+        )
+
 
         if (
             package_url
@@ -460,7 +452,8 @@ def get_menu_date(menu_url):
 #
 # SUP and AIC are selected independently.
 #
-# AIRAC number is NOT used to determine which menu wins.
+# AIRAC number is NOT used to decide which menu wins.
+#
 # Only the menu's own "Published as of" date is compared.
 # ============================================================
 
@@ -625,6 +618,10 @@ def get_document_links(
             )
 
 
+            if not href:
+                continue
+
+
             number_match = re.search(
                 r"\b(\d{1,2}/\d{2})\b",
                 label
@@ -665,6 +662,10 @@ def get_document_links(
                     not in href.lower()
                 ):
                     continue
+
+
+            else:
+                continue
 
 
             full_url = urljoin(
@@ -1031,7 +1032,7 @@ print(
 # Taiwan currently has both SUP and AIC documents.
 #
 # If either collection unexpectedly becomes empty,
-# do NOT overwrite the existing valid JSON.
+# existing valid JSON files are preserved.
 # ============================================================
 
 if not sup_documents:
