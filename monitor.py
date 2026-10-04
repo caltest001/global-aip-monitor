@@ -113,13 +113,62 @@ else:
 
 from urllib.parse import urljoin
 
-PACKAGE_URL = (
-    "https://ais.caa.gov.tw/eaip/"
-    "AIRAC%20AIP%20AMDT%2004-26_2026_10_01/"
+# ------------------------------------------------------------
+# Automatically detect current eAIP package URL
+# ------------------------------------------------------------
+
+PACKAGE_URL = None
+
+if current_issue and current_issue.get("effective_date"):
+
+    current_effective_date = current_issue["effective_date"]
+
+    for link in soup.find_all("a", href=True):
+
+        label = link.get_text(
+            " ",
+            strip=True
+        )
+
+        # The CAA homepage puts the package link
+        # on the Effective Date
+        if label.lower() == current_effective_date.lower():
+
+            package_index_url = urljoin(
+                URL,
+                link["href"]
+            )
+
+            PACKAGE_URL = urljoin(
+                package_index_url,
+                "./"
+            )
+
+            break
+
+
+if not PACKAGE_URL:
+    raise RuntimeError(
+        "Could not automatically detect "
+        "the current Taiwan eAIP package URL."
+    )
+
+
+print(
+    "Current eAIP package:",
+    PACKAGE_URL
 )
 
-SUP_MENU_URL = urljoin(PACKAGE_URL, "eSUP/menu.html")
-AIC_MENU_URL = urljoin(PACKAGE_URL, "eAIC/menu.html")
+
+SUP_MENU_URL = urljoin(
+    PACKAGE_URL,
+    "eSUP/menu.html"
+)
+
+AIC_MENU_URL = urljoin(
+    PACKAGE_URL,
+    "eAIC/menu.html"
+)
 
 
 def get_document_links(menu_url, doc_type):
