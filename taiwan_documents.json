@@ -1,8 +1,11 @@
 {
   "state": "Taiwan",
   "icao": "RC",
-  "source": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/",
-  "checked_at": "2026-10-04T08:19:47.273736+00:00",
+  "source": {
+    "sup": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/menu.html",
+    "aic": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eAIC/menu.html"
+  },
+  "checked_at": "2026-10-04T08:27:30.197958+00:00",
   "documents": [
     {
       "type": "SUP",
