@@ -1203,31 +1203,25 @@ for item in aic_documents:
 # Permanent Taiwan Document Archive
 #
 # AMDT:
-#   Save the official AMDT.pdf.
+#   Save the official PDF.
 #
 # SUP / AIC:
-#   Save a self-contained HTML snapshot.
-#   CSS stylesheets and images are embedded into the HTML so
-#   the archived page remains readable if the CAA removes it.
+#   Save only the publication content in a clean, self-contained
+#   HTML page. No dependency on the authority's CSS, scripts,
+#   navigation, or image assets.
 #
-# Existing archive files are normally never overwritten.
-# Set REBUILD_HTML_ARCHIVE = True temporarily to rebuild old
-# SUP/AIC snapshots after archive logic changes.
+# REBUILD_HTML_ARCHIVE = True is intentional for the next run:
+# it rebuilds old SUP/AIC snapshots in the simplified format.
+# After one successful run, change it back to False.
 # ============================================================
 
 ARCHIVE_ROOT = os.path.join("archive", "taiwan")
-
-# IMPORTANT:
-# True = rebuild all existing SUP/AIC HTML archives on this run.
-# After one successful GitHub Actions run, change this back to False.
-REBUILD_HTML_ARCHIVE = False
+REBUILD_HTML_ARCHIVE = True
 
 
 def archive_year(number):
     match = re.search(r"/(\d{2})$", str(number or "").strip())
-    if not match:
-        return "unknown"
-    return "20" + match.group(1)
+    return "20" + match.group(1) if match else "unknown"
 
 
 def archive_safe_number(number):
@@ -1239,190 +1233,184 @@ def github_pages_archive_url(relative_path):
 
 
 def save_binary_archive(source_url, relative_path):
-    full_path = relative_path
-
-    if os.path.exists(full_path):
-        print("Archive already exists:", full_path)
+    if os.path.exists(relative_path):
+        print("Archive already exists:", relative_path)
         return True
 
     try:
         r = requests.get(source_url, headers=HEADERS, timeout=60)
         r.raise_for_status()
+        os.makedirs(os.path.dirname(relative_path), exist_ok=True)
 
-        os.makedirs(os.path.dirname(full_path), exist_ok=True)
-
-        with open(full_path, "wb") as f:
+        with open(relative_path, "wb") as f:
             f.write(r.content)
 
-        print("Archived binary:", full_path)
+        print("Archived binary:", relative_path)
         return True
-
     except Exception as e:
         print("Archive binary error:", source_url, e)
         return False
 
 
-def fetch_text_resource(url):
-    r = requests.get(url, headers=HEADERS, timeout=30)
-    r.raise_for_status()
-    return r.text
+def clean_publication_content(doc_soup):
+    # Remove elements that are not part of the publication body.
+    for tag in doc_soup.find_all([
+        "script", "style", "noscript", "nav", "header", "footer",
+        "iframe", "object", "embed", "form", "button"
+    ]):
+        tag.decompose()
 
+    # Remove images: user only needs the textual/table content.
+    for tag in doc_soup.find_all(["img", "svg", "picture", "video", "audio"]):
+        tag.decompose()
 
-def data_url_for_resource(url):
-    r = requests.get(url, headers=HEADERS, timeout=30)
-    r.raise_for_status()
+    # Remove external styling and event attributes while preserving
+    # semantic HTML such as headings, paragraphs, lists and tables.
+    for tag in doc_soup.find_all(True):
+        for attr in list(tag.attrs):
+            if (
+                attr.lower() == "style" or
+                attr.lower() == "class" or
+                attr.lower() == "id" or
+                attr.lower().startswith("on")
+            ):
+                del tag.attrs[attr]
 
-    content_type = (
-        r.headers.get("Content-Type", "")
-        .split(";", 1)[0]
-        .strip()
-    )
+        if tag.name == "a" and tag.get("href"):
+            href = tag.get("href")
+            if href.startswith(("javascript:", "#")):
+                tag.unwrap()
 
-    if not content_type:
-        guessed_type, _ = mimetypes.guess_type(url)
-        content_type = guessed_type or "application/octet-stream"
+    body = doc_soup.body or doc_soup
 
-    encoded = base64.b64encode(r.content).decode("ascii")
-    return f"data:{content_type};base64,{encoded}"
+    # Copy body children into a new fragment so the archive does not
+    # inherit the authority website's page shell.
+    fragment = BeautifulSoup("<div></div>", "html.parser")
+    holder = fragment.div
 
+    for child in list(body.contents):
+        holder.append(child.extract())
 
-def inline_css_urls(css_text, css_url):
-    def replace_url(match):
-        raw = match.group(1).strip().strip('"').strip("'")
-
-        if not raw or raw.startswith(("data:", "#")):
-            return match.group(0)
-
-        resource_url = urljoin(css_url, raw)
-
-        try:
-            return f'url("{data_url_for_resource(resource_url)}")'
-        except Exception as e:
-            print("Archive CSS asset warning:", resource_url, e)
-            return f'url("{resource_url}")'
-
-    return re.sub(
-        r"url\(\s*([^)]+?)\s*\)",
-        replace_url,
-        css_text,
-        flags=re.IGNORECASE
-    )
-
-
-def embed_stylesheets(doc_soup, source_url):
-    for link in list(doc_soup.find_all("link", href=True)):
-        rel = [str(x).lower() for x in (link.get("rel") or [])]
-
-        if "stylesheet" not in rel:
-            continue
-
-        css_url = urljoin(source_url, link.get("href"))
-
-        try:
-            css_text = fetch_text_resource(css_url)
-            css_text = inline_css_urls(css_text, css_url)
-
-            style = doc_soup.new_tag("style")
-            style["data-archived-from"] = css_url
-            style.string = css_text
-            link.replace_with(style)
-
-        except Exception as e:
-            print("Archive stylesheet warning:", css_url, e)
-            link["href"] = css_url
-
-
-def embed_images(doc_soup, source_url):
-    for image in doc_soup.find_all("img", src=True):
-        image_src = image.get("src")
-
-        if not image_src or image_src.startswith("data:"):
-            continue
-
-        image_url = urljoin(source_url, image_src)
-
-        try:
-            image["src"] = data_url_for_resource(image_url)
-
-            if image.has_attr("srcset"):
-                del image["srcset"]
-
-        except Exception as e:
-            print("Archive image warning:", image_url, e)
-
-
-def make_archive_banner(doc_soup, source_url, label):
-    banner = doc_soup.new_tag(
-        "div",
-        attrs={
-            "style": (
-                "box-sizing:border-box;width:100%;padding:10px 16px;"
-                "background:#102a43;color:#fff;font:14px Arial,sans-serif;"
-                "position:relative;z-index:99999;"
-            )
-        }
-    )
-
-    banner.append(f"Archived copy: {label} | Official source: ")
-
-    source_link = doc_soup.new_tag("a", href=source_url)
-    source_link["style"] = "color:#d9ecff;"
-    source_link.string = source_url
-    banner.append(source_link)
-
-    return banner
+    return holder
 
 
 def save_html_snapshot(source_url, relative_path, label):
-    full_path = relative_path
-
-    if os.path.exists(full_path) and not REBUILD_HTML_ARCHIVE:
-        print("Archive already exists:", full_path)
+    if os.path.exists(relative_path) and not REBUILD_HTML_ARCHIVE:
+        print("Archive already exists:", relative_path)
         return True
 
     try:
         r = requests.get(source_url, headers=HEADERS, timeout=60)
         r.raise_for_status()
 
-        # Preserve the official document structure as much as possible.
-        doc_soup = BeautifulSoup(r.content, "html.parser")
+        original = BeautifulSoup(r.content, "html.parser")
+        content = clean_publication_content(original)
 
-        # Stylesheets must be embedded before other URL rewriting.
-        embed_stylesheets(doc_soup, source_url)
-        embed_images(doc_soup, source_url)
+        archived_at = datetime.now(timezone.utc).isoformat()
 
-        # Make links absolute.  This preserves references to other
-        # official publications without depending on the current page base.
-        for link in doc_soup.find_all("a", href=True):
-            href = link.get("href")
+        page = BeautifulSoup(
+            """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<style>
+body{
+  margin:0;
+  background:#f4f6f9;
+  color:#172033;
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.55;
+}
+main{
+  max-width:1100px;
+  margin:32px auto;
+  background:#fff;
+  border:1px solid #dfe5ec;
+  border-radius:10px;
+  padding:28px 34px 40px;
+}
+.archive-head{
+  border-bottom:2px solid #17365d;
+  padding-bottom:18px;
+  margin-bottom:24px;
+}
+.archive-head h1{
+  margin:0 0 8px;
+  color:#17365d;
+  font-size:25px;
+}
+.meta{
+  color:#64748b;
+  font-size:13px;
+  margin-top:5px;
+}
+.content{
+  overflow-x:auto;
+}
+.content table{
+  border-collapse:collapse;
+  max-width:100%;
+}
+.content th,.content td{
+  border:1px solid #aeb8c4;
+  padding:6px 8px;
+  vertical-align:top;
+}
+.content h1,.content h2,.content h3,.content h4{
+  color:#17365d;
+}
+.content pre{
+  white-space:pre-wrap;
+}
+.content a{
+  color:#1769aa;
+}
+@media(max-width:700px){
+  main{margin:0;border:0;border-radius:0;padding:20px 16px}
+}
+</style>
+</head>
+<body>
+<main>
+  <div class="archive-head">
+    <h1></h1>
+    <div class="meta archived-at"></div>
+    <div class="meta official"></div>
+  </div>
+  <div class="content"></div>
+</main>
+</body>
+</html>""",
+            "html.parser"
+        )
 
-            if href and not href.startswith(
-                ("#", "mailto:", "tel:", "javascript:", "data:")
-            ):
-                link["href"] = urljoin(source_url, href)
+        page.title.string = f"{label} | Global AIP Monitor Archive"
+        page.select_one(".archive-head h1").string = label
+        page.select_one(".archived-at").string = f"Archived: {archived_at}"
 
-        # Scripts are not required for the static publication itself and
-        # can cause archived pages to call back to the live website.
-        for tag in doc_soup.find_all(["script", "noscript"]):
-            tag.decompose()
+        official = page.select_one(".official")
+        official.append("Official source: ")
+        a = page.new_tag("a", href=source_url)
+        a["target"] = "_blank"
+        a["rel"] = "noopener noreferrer"
+        a.string = source_url
+        official.append(a)
 
-        banner = make_archive_banner(doc_soup, source_url, label)
+        target = page.select_one(".content")
+        for child in list(content.contents):
+            target.append(child.extract())
 
-        if doc_soup.body:
-            doc_soup.body.insert(0, banner)
-        else:
-            doc_soup.insert(0, banner)
+        os.makedirs(os.path.dirname(relative_path), exist_ok=True)
+        with open(relative_path, "w", encoding="utf-8") as f:
+            f.write(str(page))
 
-        os.makedirs(os.path.dirname(full_path), exist_ok=True)
-
-        with open(full_path, "w", encoding="utf-8") as f:
-            f.write(str(doc_soup))
-
-        if REBUILD_HTML_ARCHIVE:
-            print("Rebuilt HTML snapshot:", full_path)
-        else:
-            print("Archived HTML snapshot:", full_path)
-
+        print(
+            "Rebuilt content archive:" if REBUILD_HTML_ARCHIVE
+            else "Archived content:",
+            relative_path
+        )
         return True
 
     except Exception as e:
@@ -1432,7 +1420,6 @@ def save_html_snapshot(source_url, relative_path, label):
 
 def archive_amendment(issue):
     number = amendment_number(issue)
-
     if not number:
         return None
 
@@ -1441,17 +1428,13 @@ def archive_amendment(issue):
         return None
 
     source_url = urljoin(package_url, "documents/PDF/AMDT.pdf")
-
     relative_path = os.path.join(
-        ARCHIVE_ROOT,
-        "amdt",
-        archive_year(number),
+        ARCHIVE_ROOT, "amdt", archive_year(number),
         archive_safe_number(number) + ".pdf"
     )
 
     if save_binary_archive(source_url, relative_path):
         return github_pages_archive_url(relative_path)
-
     return None
 
 
@@ -1463,19 +1446,12 @@ def archive_html_publication(item, doc_type):
         return None
 
     relative_path = os.path.join(
-        ARCHIVE_ROOT,
-        doc_type.lower(),
-        archive_year(number),
+        ARCHIVE_ROOT, doc_type.lower(), archive_year(number),
         archive_safe_number(number) + ".html"
     )
 
-    if save_html_snapshot(
-        source_url,
-        relative_path,
-        f"{doc_type} {number}"
-    ):
+    if save_html_snapshot(source_url, relative_path, f"{doc_type} {number}"):
         return github_pages_archive_url(relative_path)
-
     return None
 
 
