@@ -397,8 +397,8 @@ function newBadge(
    LOAD AIP AMENDMENTS
    ========================================================== */
 
-fetch("taiwan_aip.json")
-
+fetch("taiwan_aip.json?v=" + Date.now())
+  
   .then(response => {
 
     if (!response.ok) {
@@ -518,8 +518,7 @@ fetch("taiwan_aip.json")
    LOAD SUP + AIC
    ========================================================== */
 
-fetch("taiwan_documents.json")
-
+fetch("taiwan_documents.json?v=" + Date.now())
   .then(response => {
 
     if (!response.ok) {
