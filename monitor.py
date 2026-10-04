@@ -1316,12 +1316,10 @@ def update_history_collection(
                 key
             )
 
-    # Never delete history. If it is no longer visible in the
-    # official source snapshot, retain it and mark it REMOVED.
-    for key, saved in by_key.items():
-        if key not in active_keys:
-            saved["source_status"] = "REMOVED"
-
+    # Never delete history.
+    # Absence from the current snapshot is NOT sufficient evidence
+    # that an official document has been withdrawn or removed.
+    # Retain historical items unchanged unless they are seen again.
     return list(by_key.values())
 
 
@@ -1509,3 +1507,287 @@ print(
     "AIC"
 )
 
+
+# ============================================================
+# Persistent Action Alerts
+#
+# Purpose:
+# - taiwan_history.json = permanent archive
+# - alerts.json = documents first discovered AFTER the baseline
+# - Cloudflare D1 = processed/done state (handled by dashboard)
+#
+# IMPORTANT:
+# Existing history is the baseline. It must never be turned into
+# a backlog of alerts when this feature is first enabled.
+# ============================================================
+
+ALERTS_FILE = "alerts.json"
+ALERTS_BASELINE_FILE = ".alerts_baseline_ready"
+
+
+def load_alerts():
+    try:
+        with open(
+            ALERTS_FILE,
+            "r",
+            encoding="utf-8"
+        ) as f:
+            data = json.load(f)
+
+        if not isinstance(data, dict):
+            raise ValueError("Alerts root must be an object.")
+
+    except (
+        FileNotFoundError,
+        json.JSONDecodeError,
+        ValueError
+    ):
+        data = {
+            "country": "Taiwan",
+            "alerts": []
+        }
+
+    data.setdefault("country", "Taiwan")
+    data.setdefault("alerts", [])
+
+    if not isinstance(data["alerts"], list):
+        data["alerts"] = []
+
+    return data
+
+
+def alert_id(doc_type, number):
+    safe_number = re.sub(
+        r"[^A-Z0-9_-]+",
+        "-",
+        str(number or "").strip().upper().replace("/", "-")
+    )
+    safe_number = re.sub(r"-+", "-", safe_number).strip("-")
+
+    return f"TW-{doc_type}-{safe_number}"
+
+
+def make_alert(
+    doc_type,
+    number,
+    title,
+    publication_date=None,
+    effective_from=None,
+    effective_until=None,
+    source_url=None
+):
+    return {
+        "document_id": alert_id(doc_type, number),
+        "country": "Taiwan",
+        "fir": "Taipei FIR",
+        "document_type": doc_type,
+        "document_number": number,
+        "title": title or "—",
+        "publication_date": publication_date,
+        "effective_from": effective_from,
+        "effective_until": effective_until,
+        "source_url": source_url,
+        "first_seen": history_now
+    }
+
+
+alerts_data = load_alerts()
+
+existing_alert_ids = {
+    item.get("document_id")
+    for item in alerts_data.get("alerts", [])
+    if item.get("document_id")
+}
+
+
+# First deployment is baseline-only.
+#
+# If alerts.json is empty and the baseline marker does not exist,
+# the current official/history data is treated as already known.
+# No alert is created. The marker is then written so later runs
+# can create alerts only for genuinely new history records.
+try:
+    with open(
+        ALERTS_BASELINE_FILE,
+        "r",
+        encoding="utf-8"
+    ):
+        baseline_ready = True
+
+except FileNotFoundError:
+    baseline_ready = False
+
+
+if not baseline_ready:
+
+    with open(
+        ALERTS_BASELINE_FILE,
+        "w",
+        encoding="utf-8"
+    ) as f:
+        f.write(
+            "Taiwan alerts baseline established at "
+            + history_now
+            + "\\n"
+        )
+
+    print(
+        "Alerts baseline established. "
+        "Existing Taiwan history was NOT added as pending alerts."
+    )
+
+else:
+
+    # --------------------------------------------------------
+    # AIRAC / AIP AMDT alerts
+    # --------------------------------------------------------
+
+    for item in current_amendments:
+
+        number = item.get("number")
+        if not number:
+            continue
+
+        document_id = alert_id("AMDT", number)
+
+        # Alert only if this record was first discovered in THIS run.
+        history_item = next(
+            (
+                x for x in taiwan_history["amendments"]
+                if x.get("number") == number
+            ),
+            None
+        )
+
+        if (
+            history_item
+            and history_item.get("first_seen") == history_now
+            and document_id not in existing_alert_ids
+        ):
+            alert = make_alert(
+                "AMDT",
+                number,
+                item.get("title"),
+                item.get("publication_date"),
+                item.get("effective_date"),
+                None,
+                item.get("source_url")
+            )
+
+            alerts_data["alerts"].append(alert)
+            existing_alert_ids.add(document_id)
+
+            print(
+                "🔴 NEW ACTION ALERT:",
+                document_id
+            )
+
+
+    # --------------------------------------------------------
+    # SUP alerts
+    # --------------------------------------------------------
+
+    for item in current_sup_history:
+
+        number = item.get("number")
+        if not number:
+            continue
+
+        document_id = alert_id("SUP", number)
+
+        history_item = next(
+            (
+                x for x in taiwan_history["sup"]
+                if x.get("number") == number
+            ),
+            None
+        )
+
+        if (
+            history_item
+            and history_item.get("first_seen") == history_now
+            and document_id not in existing_alert_ids
+        ):
+            alert = make_alert(
+                "SUP",
+                number,
+                item.get("title"),
+                item.get("publication_date"),
+                item.get("effective_from"),
+                item.get("effective_until"),
+                item.get("source_url")
+            )
+
+            alerts_data["alerts"].append(alert)
+            existing_alert_ids.add(document_id)
+
+            print(
+                "🔴 NEW ACTION ALERT:",
+                document_id
+            )
+
+
+    # --------------------------------------------------------
+    # AIC alerts
+    # --------------------------------------------------------
+
+    for item in current_aic_history:
+
+        number = item.get("number")
+        if not number:
+            continue
+
+        document_id = alert_id("AIC", number)
+
+        history_item = next(
+            (
+                x for x in taiwan_history["aic"]
+                if x.get("number") == number
+            ),
+            None
+        )
+
+        if (
+            history_item
+            and history_item.get("first_seen") == history_now
+            and document_id not in existing_alert_ids
+        ):
+            alert = make_alert(
+                "AIC",
+                number,
+                item.get("title"),
+                item.get("publication_date"),
+                item.get("effective_from"),
+                item.get("effective_until"),
+                item.get("source_url")
+            )
+
+            alerts_data["alerts"].append(alert)
+            existing_alert_ids.add(document_id)
+
+            print(
+                "🔴 NEW ACTION ALERT:",
+                document_id
+            )
+
+
+alerts_data["last_checked"] = history_now
+
+
+with open(
+    ALERTS_FILE,
+    "w",
+    encoding="utf-8"
+) as f:
+    json.dump(
+        alerts_data,
+        f,
+        ensure_ascii=False,
+        indent=2
+    )
+
+
+print(
+    "Saved action alerts:",
+    len(alerts_data["alerts"])
+)
