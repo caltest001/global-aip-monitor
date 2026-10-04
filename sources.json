@@ -1,0 +1,12 @@
+{
+  "Taiwan": {
+    "icao": "RC",
+    "homepage": "https://ais.caa.gov.tw/eaip/",
+    "packages": [
+      "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/",
+      "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2003-26_2026_08_06/",
+      "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2002-26_2026_05_14/",
+      "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2001-26_2026_03_19/"
+    ]
+  }
+}
