@@ -28,7 +28,7 @@ jobs:
       - name: Run AIP monitor
         run: python monitor.py
 
-      - name: Save AIP data
+      - name: Save AIP data and archive
         run: |
           git config user.name "AIP Monitor Bot"
           git config user.email "aip-monitor@users.noreply.github.com"
@@ -40,6 +40,7 @@ jobs:
           git add taiwan_history.json
           git add alerts.json
           git add .alerts_baseline_ready
+          git add archive/
 
-          git diff --cached --quiet || git commit -m "Update Taiwan AIP data"
+          git diff --cached --quiet || git commit -m "Update Taiwan AIP data and archive"
           git push
