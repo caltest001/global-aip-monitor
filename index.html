@@ -353,16 +353,7 @@ function isNewDocument(
   published.setHours(0, 0, 0, 0);
   effective.setHours(0, 0, 0, 0);
 
-  // NEW 規則：
-  // Publication Date 起顯示 NEW
-  // Effective Date 當天取消 NEW
 
-  return (
-    today >= published &&
-    today < effective
-  );
-
-}
 
 
 /* ==========================================================
