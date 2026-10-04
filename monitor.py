@@ -2,6 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import re
+import os
+import base64
+import mimetypes
 from datetime import datetime, timezone
 from urllib.parse import quote, urljoin
 
@@ -1197,13 +1200,335 @@ for item in aic_documents:
     )
 
 # ============================================================
+# Permanent Taiwan Document Archive
+#
+# AMDT:
+#   Save the official AMDT.pdf.
+#
+# SUP / AIC:
+#   Save a self-contained HTML snapshot.
+#   Images are embedded as data: URLs so the archived page
+#   remains readable even if the CAA later removes the source.
+#
+# Existing archive files are never overwritten.
+# ============================================================
+
+ARCHIVE_ROOT = os.path.join("archive", "taiwan")
+
+
+def archive_year(number):
+    match = re.search(r"/(\d{2})$", str(number or "").strip())
+    if not match:
+        return "unknown"
+    return "20" + match.group(1)
+
+
+def archive_safe_number(number):
+    return str(number or "unknown").strip().replace("/", "-")
+
+
+def github_pages_archive_url(relative_path):
+    # Stored as a repository-relative path.  The Taiwan history page
+    # is under /countries/, therefore ../ points back to repo root.
+    return "../" + relative_path.replace(os.sep, "/")
+
+
+def save_binary_archive(source_url, relative_path):
+    full_path = os.path.join(relative_path)
+
+    if os.path.exists(full_path):
+        print("Archive already exists:", full_path)
+        return True
+
+    try:
+        r = requests.get(
+            source_url,
+            headers=HEADERS,
+            timeout=60
+        )
+        r.raise_for_status()
+
+        os.makedirs(
+            os.path.dirname(full_path),
+            exist_ok=True
+        )
+
+        with open(full_path, "wb") as f:
+            f.write(r.content)
+
+        print("Archived binary:", full_path)
+        return True
+
+    except Exception as e:
+        print(
+            "Archive binary error:",
+            source_url,
+            e
+        )
+        return False
+
+
+def embed_html_images(doc_soup, source_url):
+    for image in doc_soup.find_all("img", src=True):
+        image_src = image.get("src")
+
+        if not image_src:
+            continue
+
+        if image_src.startswith("data:"):
+            continue
+
+        image_url = urljoin(source_url, image_src)
+
+        try:
+            r = requests.get(
+                image_url,
+                headers=HEADERS,
+                timeout=30
+            )
+            r.raise_for_status()
+
+            content_type = (
+                r.headers.get("Content-Type", "")
+                .split(";", 1)[0]
+                .strip()
+            )
+
+            if not content_type.startswith("image/"):
+                guessed_type, _ = mimetypes.guess_type(image_url)
+                content_type = guessed_type or "application/octet-stream"
+
+            encoded = base64.b64encode(
+                r.content
+            ).decode("ascii")
+
+            image["src"] = (
+                f"data:{content_type};base64,{encoded}"
+            )
+
+            # Avoid browser trying to fetch a second remote image.
+            if image.has_attr("srcset"):
+                del image["srcset"]
+
+        except Exception as e:
+            print(
+                "Archive image warning:",
+                image_url,
+                e
+            )
+
+    return doc_soup
+
+
+def make_snapshot_style():
+    return """
+    <style>
+      body {
+        margin: 0;
+        background: #f4f6f8;
+        color: #172033;
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.55;
+      }
+      .archive-banner {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 12px 18px;
+        background: #0b2d4d;
+        color: white;
+        font-size: 14px;
+      }
+      .archive-banner a {
+        color: #d9ecff;
+      }
+      body > *:not(.archive-banner) {
+        max-width: 1100px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      table {
+        max-width: 100%;
+        border-collapse: collapse;
+      }
+      td, th {
+        vertical-align: top;
+      }
+    </style>
+    """
+
+
+def save_html_snapshot(source_url, relative_path, label):
+    full_path = os.path.join(relative_path)
+
+    if os.path.exists(full_path):
+        print("Archive already exists:", full_path)
+        return True
+
+    try:
+        r = requests.get(
+            source_url,
+            headers=HEADERS,
+            timeout=60
+        )
+        r.raise_for_status()
+
+        doc_soup = BeautifulSoup(
+            r.text,
+            "html.parser"
+        )
+
+        # Remove active content.  The publication content itself remains.
+        for tag in doc_soup.find_all(
+            ["script", "noscript"]
+        ):
+            tag.decompose()
+
+        # Make ordinary hyperlinks absolute so references still point
+        # to their original destinations.
+        for link in doc_soup.find_all("a", href=True):
+            href = link.get("href")
+            if href and not href.startswith(
+                ("#", "mailto:", "tel:", "javascript:")
+            ):
+                link["href"] = urljoin(
+                    source_url,
+                    href
+                )
+
+        # Embed all images directly into this HTML file.
+        embed_html_images(
+            doc_soup,
+            source_url
+        )
+
+        if not doc_soup.head:
+            head = doc_soup.new_tag("head")
+            if doc_soup.html:
+                doc_soup.html.insert(0, head)
+            else:
+                doc_soup.insert(0, head)
+
+        style_soup = BeautifulSoup(
+            make_snapshot_style(),
+            "html.parser"
+        )
+        doc_soup.head.append(style_soup)
+
+        banner = doc_soup.new_tag(
+            "div",
+            attrs={"class": "archive-banner"}
+        )
+        banner.append(
+            f"Archived copy: {label} | Official source: "
+        )
+
+        source_link = doc_soup.new_tag(
+            "a",
+            href=source_url
+        )
+        source_link.string = source_url
+        banner.append(source_link)
+
+        if doc_soup.body:
+            doc_soup.body.insert(0, banner)
+        else:
+            doc_soup.insert(0, banner)
+
+        os.makedirs(
+            os.path.dirname(full_path),
+            exist_ok=True
+        )
+
+        with open(
+            full_path,
+            "w",
+            encoding="utf-8"
+        ) as f:
+            f.write(str(doc_soup))
+
+        print("Archived HTML snapshot:", full_path)
+        return True
+
+    except Exception as e:
+        print(
+            "Archive HTML error:",
+            source_url,
+            e
+        )
+        return False
+
+
+def archive_amendment(issue):
+    number = amendment_number(issue)
+
+    if not number:
+        return None
+
+    package_url = build_package_url(issue)
+    if not package_url:
+        return None
+
+    source_url = urljoin(
+        package_url,
+        "documents/PDF/AMDT.pdf"
+    )
+
+    relative_path = os.path.join(
+        ARCHIVE_ROOT,
+        "amdt",
+        archive_year(number),
+        archive_safe_number(number) + ".pdf"
+    )
+
+    if save_binary_archive(
+        source_url,
+        relative_path
+    ):
+        return github_pages_archive_url(
+            relative_path
+        )
+
+    return None
+
+
+def archive_html_publication(item, doc_type):
+    number = item.get("number")
+    source_url = item.get("url")
+
+    if not number or not source_url:
+        return None
+
+    relative_path = os.path.join(
+        ARCHIVE_ROOT,
+        doc_type.lower(),
+        archive_year(number),
+        archive_safe_number(number) + ".html"
+    )
+
+    if save_html_snapshot(
+        source_url,
+        relative_path,
+        f"{doc_type} {number}"
+    ):
+        return github_pages_archive_url(
+            relative_path
+        )
+
+    return None
+
+
+# ============================================================
 # Permanent Taiwan History
 #
 # This archive is append-only in practice:
 # - New items are added.
 # - Existing items are updated with last_seen/source_status.
-# - Items missing from the current official source are retained
-#   and marked REMOVED, never deleted.
+# - Items missing from the current official source are retained.
+# - Absence alone never marks an item removed.
 # ============================================================
 
 TAIWAN_HISTORY_FILE = "taiwan_history.json"
@@ -1270,7 +1595,7 @@ def update_history_collection(
     Merge the latest official-source snapshot into permanent history.
 
     IMPORTANT:
-    A missing item is marked REMOVED but is never deleted.
+    A missing item is retained unchanged and is never deleted.
     """
     by_key = {}
 
@@ -1365,7 +1690,8 @@ for issue in [
                 )
                 if build_package_url(issue)
                 else BASE_URL
-            )
+            ),
+            "archive_url": archive_amendment(issue)
         }
     )
 
@@ -1402,7 +1728,11 @@ for item in sup_documents:
             "effective_until": item.get(
                 "effective_until"
             ),
-            "source_url": item.get("url")
+            "source_url": item.get("url"),
+            "archive_url": archive_html_publication(
+                item,
+                "SUP"
+            )
         }
     )
 
@@ -1436,7 +1766,11 @@ for item in aic_documents:
             "effective_until": item.get(
                 "effective_until"
             ),
-            "source_url": item.get("url")
+            "source_url": item.get("url"),
+            "archive_url": archive_html_publication(
+                item,
+                "AIC"
+            )
         }
     )
 
