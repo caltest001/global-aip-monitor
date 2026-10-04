@@ -146,7 +146,66 @@ Aeronautical Information Publication Monitoring
 </div>
 
 </div>
+function parseAipDate(dateString) {
+  if (!dateString) return null;
 
+  const months = {
+    JAN: 0, FEB: 1, MAR: 2, APR: 3,
+    MAY: 4, JUN: 5, JUL: 6, AUG: 7,
+    SEP: 8, OCT: 9, NOV: 10, DEC: 11
+  };
+
+  const parts = dateString
+    .trim()
+    .toUpperCase()
+    .split(/\s+/);
+
+  if (parts.length !== 3) return null;
+
+  return new Date(
+    Number(parts[2]),
+    months[parts[1]],
+    Number(parts[0])
+  );
+}
+
+
+function isNewDocument(publicationDate, effectiveDate) {
+
+  const published = parseAipDate(publicationDate);
+  const effective = parseAipDate(effectiveDate);
+
+  if (!published || !effective) return false;
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  published.setHours(0, 0, 0, 0);
+  effective.setHours(0, 0, 0, 0);
+
+  const cutoff = new Date(effective);
+  cutoff.setDate(cutoff.getDate() - 20);
+
+  // 一般情況：
+  // 發布日至 Effective - 20 天
+  if (published <= cutoff) {
+    return today >= published && today <= cutoff;
+  }
+
+  // 例外：
+  // 發布時已不足 Effective 20 天
+  return today >= published && today <= effective;
+}
+
+
+function newBadge(publicationDate, effectiveDate) {
+
+  if (isNewDocument(publicationDate, effectiveDate)) {
+    return `<span class="new">NEW</span>`;
+  }
+
+  return "";
+}
 
 <script>
 
@@ -199,6 +258,10 @@ supTable.innerHTML += `
 <tr>
 
 <td class="type">
+${newBadge(
+  doc.publication_date,
+  doc.effective_from
+)}
 ${doc.number}
 </td>
 
@@ -237,6 +300,10 @@ aicTable.innerHTML += `
 <tr>
 
 <td class="type">
+${newBadge(
+  doc.publication_date,
+  doc.effective_from
+)}
 ${doc.number}
 </td>
 
