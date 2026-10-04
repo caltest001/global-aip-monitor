@@ -10,8 +10,9 @@
       "effective_date": "29 Oct 2026",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/documents/PDF/AMDT.pdf",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/amdt/2026/05-26.pdf"
     },
     {
       "number": "04/26",
@@ -21,8 +22,9 @@
       "effective_date": "01 Oct 2026",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/documents/PDF/AMDT.pdf",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/amdt/2026/04-26.pdf"
     },
     {
       "number": "03/26",
@@ -32,8 +34,9 @@
       "effective_date": "06 Aug 2026",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2003-26_2026_08_06/documents/PDF/AMDT.pdf",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/amdt/2026/03-26.pdf"
     }
   ],
   "sup": [
@@ -45,8 +48,9 @@
       "effective_until": "10 JAN 2028",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/25-26_2026_10_31/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2026/25-26.html"
     },
     {
       "number": "24/26",
@@ -56,8 +60,9 @@
       "effective_until": "30 JUL 2027",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/24-26_2026_10_21/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2026/24-26.html"
     },
     {
       "number": "23/26",
@@ -67,8 +72,9 @@
       "effective_until": "31 DEC 2026",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/23-26_2026_10_01/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2026/23-26.html"
     },
     {
       "number": "21/26",
@@ -78,8 +84,9 @@
       "effective_until": "01 JUL 2027",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/21-26_2026_08_30/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2026/21-26.html"
     },
     {
       "number": "20/26",
@@ -89,8 +96,9 @@
       "effective_until": null,
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/20-26_2026_10_01/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2026/20-26.html"
     },
     {
       "number": "19/26",
@@ -100,8 +108,9 @@
       "effective_until": "31 DEC 2027",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/19-26_2026_08_03/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2026/19-26.html"
     },
     {
       "number": "18/26",
@@ -111,8 +120,9 @@
       "effective_until": "01 JUL 2027",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/18-26_2026_08_15/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2026/18-26.html"
     },
     {
       "number": "17/26",
@@ -122,8 +132,9 @@
       "effective_until": "30 JUN 2028",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/17-26_2026_09_11/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2026/17-26.html"
     },
     {
       "number": "16/26",
@@ -133,8 +144,9 @@
       "effective_until": null,
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/16-26_2026_07_17/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2026/16-26.html"
     },
     {
       "number": "14/26",
@@ -144,8 +156,9 @@
       "effective_until": "21 DEC 2026",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/14-26_2026_06_30/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2026/14-26.html"
     },
     {
       "number": "13/26",
@@ -155,8 +168,9 @@
       "effective_until": "10 APR 2029",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/13-26_2026_07_08/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2026/13-26.html"
     },
     {
       "number": "12/26",
@@ -166,8 +180,9 @@
       "effective_until": "26 MAY 2027",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/12-26_2026_07_31/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2026/12-26.html"
     },
     {
       "number": "11/26",
@@ -177,8 +192,9 @@
       "effective_until": "29 SEP 2027",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/11-26_2026_07_01/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2026/11-26.html"
     },
     {
       "number": "10/26",
@@ -188,8 +204,9 @@
       "effective_until": "30 OCT 2028",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/10-26_2026_08_01/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2026/10-26.html"
     },
     {
       "number": "09/26",
@@ -199,8 +216,9 @@
       "effective_until": "31 DEC 2030",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/09-26_2026_06_19/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2026/09-26.html"
     },
     {
       "number": "08/26",
@@ -210,8 +228,9 @@
       "effective_until": "11 SEP 2028",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/08-26_2026_05_25/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2026/08-26.html"
     },
     {
       "number": "06/26",
@@ -221,8 +240,9 @@
       "effective_until": null,
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/06-26_2026_03_16/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2026/06-26.html"
     },
     {
       "number": "05/26",
@@ -232,8 +252,9 @@
       "effective_until": "19 APR 2027",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/05-26_2026_03_19/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2026/05-26.html"
     },
     {
       "number": "04/26",
@@ -243,8 +264,9 @@
       "effective_until": "08 NOV 2026",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/04-26_2026_04_11/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2026/04-26.html"
     },
     {
       "number": "02/26",
@@ -254,8 +276,9 @@
       "effective_until": "31 DEC 2027",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/02-26_2026_03_01/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2026/02-26.html"
     },
     {
       "number": "32/25",
@@ -265,8 +288,9 @@
       "effective_until": "31 DEC 2027",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/32-25_2025_12_31/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2025/32-25.html"
     },
     {
       "number": "28/25",
@@ -276,8 +300,9 @@
       "effective_until": "16 JUN 2027",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/28-25_2025_11_21/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2025/28-25.html"
     },
     {
       "number": "25/25",
@@ -287,8 +312,9 @@
       "effective_until": "25 MAR 2030",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/25-25_2025_10_31/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2025/25-25.html"
     },
     {
       "number": "19/25",
@@ -298,8 +324,9 @@
       "effective_until": "15 NOV 2026",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/19-25_2025_08_15/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2025/19-25.html"
     },
     {
       "number": "10/25",
@@ -309,8 +336,9 @@
       "effective_until": "31 DEC 2026",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/10-25_2025_06_01/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2025/10-25.html"
     },
     {
       "number": "09/25",
@@ -320,8 +348,9 @@
       "effective_until": "28 FEB 2026",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/09-25_2025_05_20/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2025/09-25.html"
     },
     {
       "number": "08/25",
@@ -331,8 +360,9 @@
       "effective_until": null,
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/08-25_2025_05_15/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2025/08-25.html"
     },
     {
       "number": "07/25",
@@ -342,8 +372,9 @@
       "effective_until": "10 MAR 2027",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/07-25_2025_04_16/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2025/07-25.html"
     },
     {
       "number": "05/25",
@@ -353,8 +384,9 @@
       "effective_until": null,
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/05-25_2025_03_12/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2025/05-25.html"
     },
     {
       "number": "03/25",
@@ -364,8 +396,9 @@
       "effective_until": "31 MAR 2027",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/03-25_2025_03_01/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2025/03-25.html"
     },
     {
       "number": "02/25",
@@ -375,8 +408,9 @@
       "effective_until": null,
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/02-25_2025_01_31/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2025/02-25.html"
     },
     {
       "number": "01/25",
@@ -386,8 +420,9 @@
       "effective_until": null,
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/01-25_2025_01_16/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2025/01-25.html"
     },
     {
       "number": "13/24",
@@ -397,8 +432,9 @@
       "effective_until": "31 MAY 2027",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/13-24_2024_04_30/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2024/13-24.html"
     },
     {
       "number": "10/24",
@@ -408,8 +444,9 @@
       "effective_until": "31 DEC 2026",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/10-24_2024_04_11/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2024/10-24.html"
     },
     {
       "number": "06/24",
@@ -419,8 +456,9 @@
       "effective_until": "28 FEB 2025",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/06-24_2024_02_20/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2024/06-24.html"
     },
     {
       "number": "02/24",
@@ -430,8 +468,9 @@
       "effective_until": "30 JUN 2025",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/02-24_2024_01_12/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2024/02-24.html"
     },
     {
       "number": "27/22",
@@ -441,8 +480,9 @@
       "effective_until": "13 MAY 2024",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/27-22_2022_12_31/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2022/27-22.html"
     },
     {
       "number": "25/22",
@@ -452,8 +492,9 @@
       "effective_until": "31 AUG 2024",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/25-22_2023_01_01/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2022/25-22.html"
     },
     {
       "number": "20/22",
@@ -463,8 +504,9 @@
       "effective_until": "07 AUG 2024",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/20-22_2022_10_06/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2022/20-22.html"
     },
     {
       "number": "19/22",
@@ -474,8 +516,9 @@
       "effective_until": "07 AUG 2024",
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/19-22_2022_10_06/SUP-en-GB.html#SUP",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/sup/2022/19-22.html"
     }
   ],
   "aic": [
@@ -487,8 +530,9 @@
       "effective_until": null,
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eAIC/05-26_2026_05_14/AIC Checklist-en-GB.html#AIC-Checklist",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/aic/2026/05-26.html"
     },
     {
       "number": "04/26",
@@ -498,8 +542,9 @@
       "effective_until": null,
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eAIC/04-26_2026_04_02/AIC-en-GB.html#AIC",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/aic/2026/04-26.html"
     },
     {
       "number": "02/24",
@@ -509,8 +554,9 @@
       "effective_until": null,
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eAIC/02-24_2024_06_26/AIC-en-GB.html#AIC",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/aic/2024/02-24.html"
     },
     {
       "number": "02/15",
@@ -520,9 +566,10 @@
       "effective_until": null,
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eAIC/02-15_2015_06_01/AIC-en-GB.html#AIC",
       "first_seen": "2026-10-04T10:36:58.327693+00:00",
-      "last_seen": "2026-10-04T11:34:10.889987+00:00",
-      "source_status": "ACTIVE"
+      "last_seen": "2026-10-04T11:51:24.285322+00:00",
+      "source_status": "ACTIVE",
+      "archive_url": "../archive/taiwan/aic/2015/02-15.html"
     }
   ],
-  "last_checked": "2026-10-04T11:34:10.889987+00:00"
+  "last_checked": "2026-10-04T11:51:24.285322+00:00"
 }
