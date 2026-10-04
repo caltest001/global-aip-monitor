@@ -11,11 +11,5464 @@
 <meta content="AIP for Specimen" name="description"/>
 <meta content="all" name="robots"/>
 <meta content="aip, eaip, sup, SUP, supplement, amdt, AMDT, amendment, aic, AIC, airac, AIRAC, GEN, General, ENR, En Route, Enroute, AD, Aerodromes, electronic AIP, eAIP, aeronautical information publication, aeronautical information service, AIM, AIS, AIP, aeronautical information management" name="keywords"/>
-<link href="../../eAIP_custom_default.css" rel="stylesheet" type="text/css"/>
-<link href="../../eAIP.css" rel="stylesheet" type="text/css"/>
-<link href="../../eAIP-tables.css" rel="stylesheet" type="text/css"/>
-<link href="../../eAIP-Amdt-hide.css" rel="stylesheet" title="Hide Amendments Changes" type="text/css"/>
-<link href="../../eAIP-Amdt-show.css" rel="alternate stylesheet" title="Show Amendments Changes" type="text/css"/>
+<style data-archived-from="https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eAIP_custom_default.css">/************************************************************************************************
+    @Copyright (c) IDS AIRNAV, all rights reserved.
+*************************************************************************************************/
+/******* CUSTOMIZZAZIONI **********/
+@import "eaip-fonts.css";
+
+.T1_default {
+	display: block;
+	text-align: center;
+	text-indent: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+	font-size: 13px;
+	font-weight: Bold;
+	font-style: normal;
+	color: #800000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: Arial;
+	white-space: normal;
+}
+.T2_default, .T3_default, .T4_default, .T5_default, .T6_default, .T7_default, .T8_default {
+	display: block;
+  color: #800000;
+  font-family: Arial;
+  font-style: normal;
+  font-size: 13px;
+  /*text-align: center;*/
+	/*text-indent: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+	font-size: 9px;
+	font-weight: Bold;
+	font-style: normal;
+	color: #800000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: Arial;
+	white-space: normal;*/
+}
+
+.P1_default {
+	display: block;
+	text-align: justify;
+	text-indent: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+	font-size: 13px;
+	font-style: normal;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: Arial;
+}
+/*Paragraph-text */
+.P2_default, .P3_default, .P4_default,.P5_default,.P6_default,.P7_default,.P8_default{
+	display: block;
+	text-align: justify;
+	text-indent: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+	font-size: 13px;
+	font-weight: normal;
+	font-style: normal;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: Arial;
+}
+
+div.added, div.addedAIRAC{ 
+	background-color: #ffcccc;
+}
+
+div.deleted, div.deletedAIRAC{
+	text-decoration: line-through;
+    background-color: #cc9999; 
+}
+				   		   
+div.changed, div.changedAIRAC{ 
+	background-color: #ffcccc; 
+}
+
+div.off, div.offAIRAC, div.offNon-AIRAC      {  }
+
+span.added, span.addedAIRAC{ 
+	background-color: #ffcccc;
+}
+
+span.deleted, span.deletedAIRAC {
+	text-decoration: line-through;
+    background-color: #cc9999; 
+}
+span.changed, span.changedAIRAC {
+	background-color: #ffcccc; 
+}
+
+span.off, span.offAIRAC, span.offNon-AIRAC     {  }
+
+
+div.addedNon-AIRAC{ 
+	background-color: #ccccff;
+}
+
+div.deletedNon-AIRAC{
+	text-decoration: line-through;
+    background-color: #9999cc; 
+}
+				   		   
+div.changedNon-AIRAC{ 
+	background-color: #ccccff; 
+}
+
+span.addedNon-AIRAC{ 
+	background-color: #ccccff;
+}
+
+span.deletedNon-AIRAC {
+	text-decoration: line-through;
+    background-color: #9999cc; 
+}
+span.changedNon-AIRAC{
+	background-color: #ccccff; 
+}
+
+</style>
+<style data-archived-from="https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eAIP.css">/************************************************************************************************
+    @Copyright (c) IDS AIRNAV, all rights reserved.
+*************************************************************************************************/
+@import "eaip-EC.css";
+body {
+    background-color: #ffffff;
+}
+table {
+    background-color: #ffffff;
+    border-color: #778899;
+    border-style: solid;
+    border-width: 1px;
+	padding:0;
+}
+
+/** Poiche e stato tolto nel foglio di trasformazione delle tabelle la conversione di div in breakspace
+ ** questi stili consentono all'html di distanziare i testi dai bordi delle celle, per le tabelle dinamiche di primo livello e non per le nested **/
+a[id] + table td{
+	padding: 5px;
+}
+/** Per le nested rimuovo il paddin, utile soprattutto per la nuova gestione delle frazioni **/
+a[id] + table table td{
+	padding: 0px;
+	
+}
+/* Questi stili di esempi permettono di settare configurazioni custom sulla singola tabella **/
+
+a[id="gen02_2_TABLE"] + table .col1{
+	width: 25%
+}
+
+a[id="gen02_2_TABLE"] + table .col2{
+	width: 25%
+}
+a[id="gen02_2_TABLE"] + table .col3{
+	width: 25%
+}
+a[id="gen02_2_TABLE"] + table .col4{
+	width: 25%
+}
+
+/********************/
+a[id="gen02_1_TABLE"] + table .col1{
+	width: 25%
+}
+
+a[id="gen02_1_TABLE"] + table .col2{
+	width: 25%
+}
+a[id="gen02_1_TABLE"] + table .col3{
+	width: 25%
+}
+a[id="gen02_1_TABLE"] + table .col4{
+	width: 25%
+}
+
+/********************/
+a[id="GEN21_2017_TABLE"] + table .col1{
+	width: 50%
+}
+a[id="GEN21_2017_TABLE"] + table .col2{
+	width: 50%
+}
+/********************/
+a[id="GEN_2_4_TABLE_L"] + table .col1{
+	width: 75%
+}
+a[id="GEN_2_4_TABLE_L"] + table .col2{
+	width: 25%
+}
+a[id="GEN_2_4_TABLE_R"] + table .col1{
+	width: 25%
+}
+a[id="GEN_2_4_TABLE_R"] + table .col2{
+	width: 75%
+}
+/********************/
+a[id="GEN_2_5_TABLE_L"] + table .col1{
+	width: 15%
+}
+a[id="GEN_2_5_TABLE_L"] + table .col2{
+	width: 37%
+}
+a[id="GEN_2_5_TABLE_L"] + table .col3{
+	width: 28%
+}
+a[id="GEN_2_5_TABLE_L"] + table .col4{
+	width: 20%
+}
+a[id="GEN_2_5_TABLE_R"] + table .col1{
+	width: 37%
+}
+a[id="GEN_2_5_TABLE_R"] + table .col2{
+	width: 28%
+}
+a[id="GEN_2_5_TABLE_R"] + table .col3{
+	width: 15%
+}
+a[id="GEN_2_5_TABLE_R"] + table .col4{
+	width: 20%
+}
+
+/********************/
+a[id="ENR_21_TABLE"] + table .col1{
+	width: 30%
+}
+
+a[id="ENR_21_TABLE"] + table .col2{
+	width: 15%
+}
+a[id="ENR_21_TABLE"] + table .col3{
+	width: 15%
+}
+a[id="ENR_21_TABLE"] + table .col4{
+	width: 15%
+}
+a[id="ENR_21_TABLE"] + table .col5{
+	width: 25%
+}
+/********************/
+a[id="ENR_22_TABLE"] + table .col1{
+	width: 30%
+}
+
+a[id="ENR_22_TABLE"] + table .col2{
+	width: 15%
+}
+a[id="ENR_22_TABLE"] + table .col3{
+	width: 15%
+}
+a[id="ENR_22_TABLE"] + table .col4{
+	width: 15%
+}
+a[id="ENR_22_TABLE"] + table .col5{
+	width: 25%
+}
+/********************/
+a[id="ENR_3_1_TABLE"] + table .col1{
+	width: 20%
+}
+
+a[id="ENR_3_1_TABLE"] + table .col2{
+	width: 15%
+}
+a[id="ENR_3_1_TABLE"] + table .col3{
+	width: 20%
+}
+a[id="ENR_3_1_TABLE"] + table .col4{
+	width: 10%
+}
+a[id="ENR_3_1_TABLE"] + table .col5{
+	width: 5%
+}
+a[id="ENR_3_1_TABLE"] + table .col6{
+	width: 5%
+}
+a[id="ENR_3_1_TABLE"] + table .col7{
+	width: 7%
+}
+a[id="ENR_3_1_TABLE"] + table .col8{
+	width: 20%
+}
+a[id="ENR_3_1_TABLE"] + table table .col1{
+	background-color: white;
+	width: 10%
+}
+a[id="ENR_3_1_TABLE"] + table table .col2{
+	background-color: white;
+	width: 80%
+}
+a[id="ENR_3_1_TABLE"] + table table .col3{
+	background-color: white;
+	width: 10%
+}
+
+/********************/
+a[id="ENR_3_2_TABLE"] + table .col1{
+	width: 20%
+}
+
+a[id="ENR_3_2_TABLE"] + table .col2{
+	width: 15%
+}
+a[id="ENR_3_2_TABLE"] + table .col3{
+	width: 20%
+}
+a[id="ENR_3_2_TABLE"] + table .col4{
+	width: 10%
+}
+a[id="ENR_3_2_TABLE"] + table .col5{
+	width: 5%
+}
+a[id="ENR_3_2_TABLE"] + table .col6{
+	width: 5%
+}
+a[id="ENR_3_2_TABLE"] + table .col7{
+	width: 7%
+}
+a[id="ENR_3_2_TABLE"] + table .col8{
+	width: 20%
+}
+a[id="ENR_3_2_TABLE"] + table table .col1{
+	background-color: white;
+	width: 10%
+}
+a[id="ENR_3_2_TABLE"] + table table .col2{
+	background-color: white;
+	width: 80%
+}
+a[id="ENR_3_2_TABLE"] + table table .col3{
+	background-color: white;
+	width: 10%
+}
+/********************/
+a[id="ENR_3_3_TABLE"] + table .col1{
+	width: 20%
+}
+
+a[id="ENR_3_3_TABLE"] + table .col2{
+	width: 15%
+}
+a[id="ENR_3_3_TABLE"] + table .col3{
+	width: 20%
+}
+a[id="ENR_3_3_TABLE"] + table .col4{
+	width: 10%
+}
+a[id="ENR_3_3_TABLE"] + table .col5{
+	width: 5%
+}
+a[id="ENR_3_3_TABLE"] + table .col6{
+	width: 5%
+}
+a[id="ENR_3_3_TABLE"] + table .col7{
+	width: 7%
+}
+a[id="ENR_3_3_TABLE"] + table .col8{
+	width: 20%
+}
+a[id="ENR_3_3_TABLE"] + table table .col1{
+	background-color: white;
+	width: 10%
+}
+a[id="ENR_3_3_TABLE"] + table table .col2{
+	background-color: white;
+	width: 80%
+}
+a[id="ENR_3_3_TABLE"] + table table .col3{
+	background-color: white;
+	width: 10%
+}
+
+/********************/
+a[id="ENR_4_1_TABLE"] + table .col1{
+	width: 15%
+}
+
+a[id="ENR_4_1_TABLE"] + table .col2{
+	width: 14%
+}
+a[id="ENR_4_1_TABLE"] + table .col3{
+	width: 14%
+}
+a[id="ENR_4_1_TABLE"] + table .col4{
+	width: 14%
+}
+a[id="ENR_4_1_TABLE"] + table .col5{
+	width: 14%
+}
+a[id="ENR_4_1_TABLE"] + table .col6{
+	width: 14%
+}
+a[id="ENR_4_1_TABLE"] + table .col7{
+	width: 15%
+}
+/********************/
+a[id="ENR4_3_TABLE"] + table .col1{
+	width: 20%
+}
+
+a[id="ENR4_3_TABLE"] + table .col2{
+	width: 15%
+}
+a[id="ENR4_3_TABLE"] + table .col3{
+	width: 30%
+}
+a[id="ENR4_3_TABLE"] + table .col4{
+	width: 35%
+}
+/********************/
+a[id="ENR4_4_TABLE"] + table .col1{
+	width: 25%
+}
+
+a[id="ENR4_4_TABLE"] + table .col2{
+	width: 25%
+}
+a[id="ENR4_4_TABLE"] + table .col3{
+	width: 25%
+}
+a[id="ENR4_4_TABLE"] + table .col4{
+	width: 25%
+}
+/********************/
+a[id="Enr45_TABLE"] + table .col1{
+	width: 19%
+}
+
+a[id="Enr45_TABLE"] + table .col2{
+	width: 19%
+}
+a[id="Enr45_TABLE"] + table .col3{
+	width: 24%
+}
+a[id="Enr45_TABLE"] + table .col4{
+	width: 19%
+}
+a[id="Enr45_TABLE"] + table .col5{
+	width: 19%
+}
+/********************/
+a[id="ENR5_1_P_TABLE"] + table .col1{
+	width: 40%
+}
+
+a[id="ENR5_1_P_TABLE"] + table .col2{
+	width: 20%
+}
+a[id="ENR5_1_P_TABLE"] + table .col3{
+	width: 40%
+}
+a[id*="enr_5_1_internal_table1"] + table .col1{
+	width: 10%
+}
+a[id*="enr_5_1_internal_table1"] + table .col2{
+	width: 80%
+}
+a[id*="enr_5_1_internal_table1"] + table .col3{
+	width: 10%
+}
+/********************/
+a[id="ENR5_1_R_TABLE"] + table .col1{
+	width: 40% 
+}
+a[id*="enr_5_1_internal_table2"] + table .col1{
+	width: 10%
+  
+}
+a[id="ENR5_1_R_TABLE"] + table .col2{
+	width: 20% 
+}
+a[id*="enr_5_1_internal_table2"]  + table .col2{
+	width: 80% 
+ 
+}
+a[id="ENR5_1_R_TABLE"] + table .col3{
+	width: 40% 
+}
+
+a[id*="enr_5_1_internal_table2"]  + table .col3{
+	width: 10% 
+
+}
+/********************/
+a[id="ENR5_1_D_TABLE"] + table .col1{
+	width: 40%
+}
+
+a[id="ENR5_1_D_TABLE"] + table .col2{
+	width: 20%
+}
+a[id="ENR5_1_D_TABLE"] + table .col3{
+	width: 40%
+}
+a[id*="enr_5_1_internal_table3"] + table .col1{
+	width: 10%
+}
+a[id*="enr_5_1_internal_table3"] + table .col2{
+	width: 80%
+}
+a[id*="enr_5_1_internal_table3"] + table .col3{
+	width: 10%
+}
+/********************/
+a[id="ENR5_2_TRG_TABLE"] + table .col1{
+	width: 40%
+}
+
+a[id="ENR5_2_TRG_TABLE"] + table .col2{
+	width: 20%
+}
+a[id="ENR5_2_TRG_TABLE"] + table .col3{
+	width: 40%
+}
+a[id*="enr_5_2_internal_table1"] + table .col1{
+	width: 10%
+}
+a[id*="enr_5_2_internal_table1"] + table .col2{
+	width: 80%
+}
+a[id*="enr_5_2_internal_table1"] + table .col3{
+	width: 10%
+}
+/********************/
+a[id="ENR5_2_EXE_TABLE"] + table .col1{
+	width: 40%
+}
+
+a[id="ENR5_2_EXE_TABLE"] + table .col2{
+	width: 20%
+}
+a[id="ENR5_2_EXE_TABLE"] + table .col3{
+	width: 40%
+}
+a[id*="enr_5_2_internal_table2"] + table .col1{
+	width: 10%
+}
+a[id*="enr_5_2_internal_table2"] + table .col2{
+	width: 80%
+}
+a[id*="enr_5_2_internal_table2"] + table .col3{
+	width: 10%
+}
+/********************/
+a[id="ENR5_2_ADIZ_TABLE"] + table .col1{
+	width: 40%
+}
+
+a[id="ENR5_2_ADIZ_TABLE"] + table .col2{
+	width: 20%
+}
+a[id="ENR5_2_ADIZ_TABLE"] + table .col3{
+	width: 40%
+}
+a[id*="enr_5_2_internal_table3"] + table .col1{
+	width: 10%
+}
+a[id*="enr_5_2_internal_table3"] + table .col2{
+	width: 80%
+}
+a[id*="enr_5_2_internal_table3"] + table .col3{
+	width: 10%
+}
+/********************/
+a[id="ENR5_3_TABLE"] + table .col1{
+	width: 30%
+}
+
+a[id="ENR5_3_TABLE"] + table .col2{
+	width: 20%
+}
+a[id="ENR5_3_TABLE"] + table .col3{
+	width: 15%
+}
+a[id="ENR5_3_TABLE"] + table .col4{
+	width: 15%
+}
+
+a[id="ENR5_3_TABLE"] + table .col5{
+	width: 20%
+}
+a[id*="enr_5_3_internal_table1"] + table .col1{
+	width: 10%
+}
+a[id*="enr_5_3_internal_table1"] + table .col2{
+	width: 80%
+}
+a[id*="enr_5_3_internal_table1"] + table .col3{
+	width: 10%
+}
+/********************/
+a[id="ENR_54_TABLE"] + table .col1{
+	width: 18%
+}
+
+a[id="ENR_54_TABLE"] + table .col2{
+	width: 18%
+}
+a[id="ENR_54_TABLE"] + table .col3{
+	width: 16%
+}
+a[id="ENR_54_TABLE"] + table .col4{
+	width: 16%
+}
+
+a[id="ENR_54_TABLE"] + table .col5{
+	width: 16%
+}
+a[id="ENR_54_TABLE"] + table .col6{
+	width: 16%
+}
+/********************/
+a[id="ENR5_5_1_TABLE"] + table .col1{
+	width: 35%
+}
+
+.Cover_Page_IndSubTable tr, .Cover_Page_IndSubTable td {
+  border: solid black 1px;
+}
+
+a[id="ENR5_5_1_TABLE"] + table .col2{
+	width: 15%
+}
+a[id="ENR5_5_1_TABLE"] + table .col3{
+	width: 18%
+}
+a[id="ENR5_5_1_TABLE"] + table .col4{
+	width: 32%
+}
+
+a[id*="enr_5_5_internal_table1"] + table .col1{
+	width: 10%
+}
+a[id*="enr_5_5_internal_table1"] + table .col2{
+	width: 80%
+}
+a[id*="enr_5_5_internal_table1"] + table .col3{
+	width: 10%
+}
+/********************/
+a[id="ENR5_5_2_TABLE"] + table .col1{
+	width: 35%
+}
+
+a[id="ENR5_5_2_TABLE"] + table .col2{
+	width: 15%
+}
+a[id="ENR5_5_2_TABLE"] + table .col3{
+	width: 18%
+}
+a[id="ENR5_5_2_TABLE"] + table .col4{
+	width: 32%
+}
+a[id="ENR5_5_2_TABLE"] + table td{
+	border:1px solid #778899 !important;
+}
+
+a[id*="enr_5_5_internal_table2"] + table .col1{
+	width: 10%
+}
+a[id*="enr_5_5_internal_table2"] + table .col2{
+	width: 80%
+}
+a[id*="enr_5_5_internal_table2"] + table .col3{
+	width: 10%
+}
+/********************/
+a[id="ENR5_5_3_TABLE"] + table .col1{
+	width: 35%
+}
+
+a[id="ENR5_5_3_TABLE"] + table .col2{
+	width: 15%
+}
+a[id="ENR5_5_3_TABLE"] + table .col3{
+	width: 18%
+}
+a[id="ENR5_5_3_TABLE"] + table .col4{
+	width: 32%
+}
+a[id="ENR5_5_3_TABLE"] + table td{
+	border:1px solid #778899 !important;
+}
+
+a[id*="enr_5_5_internal_table3"] + table .col1{
+	width: 10%
+}
+a[id*="enr_5_5_internal_table3"] + table .col2{
+	width: 80%
+}
+a[id*="enr_5_5_internal_table3"] + table .col3{
+	width: 10%
+}
+/********************/
+a[id="AD_1_3_TABLE"] + table .col1{
+	width: 26%
+}
+
+a[id="AD_1_3_TABLE"] + table .col2{
+	width: 20%
+}
+a[id="AD_1_3_TABLE"] + table .col3{
+	width: 14%
+}
+a[id="AD_1_3_TABLE"] + table .col4{
+	width: 22%
+}
+a[id="AD_1_3_TABLE"] + table .col5{
+	width: 18%
+}
+/********************/
+a[id="AD2.2_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD2.2_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD2.2_TABLE"] + table .col3{
+	width: 60%
+}
+
+a[id="AD2.2_TABLE"] + table .col1,
+a[id="AD2.2_TABLE"] + table .col2 {
+    background-color: #E6E6E6;
+}
+/********************/
+a[id="AD2.3_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD2.3_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD2.3_TABLE"] + table .col3{
+	width: 60%
+}
+
+a[id="AD2.3_TABLE"] + table .col1,
+a[id="AD2.3_TABLE"] + table .col2 {
+    background-color: #E6E6E6;
+}
+/********************/
+a[id="AD2.4_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD2.4_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD2.4_TABLE"] + table .col3{
+	width: 60%
+}
+
+a[id="AD2.4_TABLE"] + table .col1,
+a[id="AD2.4_TABLE"] + table .col2 {
+    background-color: #E6E6E6;
+}
+/********************/
+a[id="AD2.5_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD2.5_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD2.5_TABLE"] + table .col3{
+	width: 60%
+}
+
+a[id="AD2.5_TABLE"] + table .col1,
+a[id="AD2.5_TABLE"] + table .col2 {
+    background-color: #E6E6E6;
+}
+/********************/
+a[id="AD2.6_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD2.6_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD2.6_TABLE"] + table .col3{
+	width: 60%
+}
+
+a[id="AD2.6_TABLE"] + table .col1,
+a[id="AD2.6_TABLE"] + table .col2 {
+    background-color: #E6E6E6;
+}
+/********************/
+a[id="AD2.7_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD2.7_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD2.7_TABLE"] + table .col3{
+	width: 60%
+}
+
+a[id="AD2.7_TABLE"] + table .col1,
+a[id="AD2.7_TABLE"] + table .col2 {
+    background-color: #E6E6E6;
+}
+/********************/
+a[id="AD2_8_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD2_8_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD2_8_TABLE"] + table .col3{
+	width: 60%
+}
+
+/********************/
+
+a[id*="ad_2_8_internal_table2"] + table .col1{
+	width: 22.5%
+  
+}
+
+
+a[id*="ad_2_8_internal_table2"] + table .col2{
+	width: 17.5%
+}
+a[id*="ad_2_8_internal_table2"] + table .col3{
+	width: 30%
+}
+a[id*="ad_2_8_internal_table2"] + table .col4{
+	width: 30%
+}
+/********************/
+a[id*="AD_2_8_INTERNAL_TABLE"] + table .col1{
+	width: 30%
+}
+
+a[id*="AD_2_8_INTERNAL_TABLE"] + table .col2{
+	width: 35%
+}
+a[id*="AD_2_8_INTERNAL_TABLE"] + table .col3{
+	width: 35%
+}
+/********************/
+.AD_2_AD2_8_TABLE  tr:nth-child(n) td:nth-child(1), 
+.AD_2_AD2_8_TABLE  tr:nth-child(n) td:nth-child(2){
+	background-color: #E6E6E6;
+}
+.AD_2_AD_2_8_INTERNAL_TABLE tr:nth-child(n) td:nth-child(1),
+.AD_2_AD_2_8_INTERNAL_TABLE1 tr:nth-child(n) td:nth-child(1),
+.AD_2_AD_2_8_INTERNAL_TABLE tr:nth-child(n) td:nth-child(2),
+.AD_2_AD_2_8_INTERNAL_TABLE1 tr:nth-child(n) td:nth-child(2),
+.AD_2_AD_2_8_INTERNAL_TABLE_3 tr:nth-child(n) td:nth-child(1),
+.AD_2_AD_2_8_INTERNAL_TABLE_3 tr:nth-child(n) td:nth-child(2),
+.AD_2_AD_2_8_INTERNAL_TABLE3 tr:nth-child(n) td:nth-child(1),
+.AD_2_AD_2_8_INTERNAL_TABLE3 tr:nth-child(n) td:nth-child(2),
+.AD_2_AD_2_8_INTERNAL_TABLE4 tr:nth-child(n) td:nth-child(1),
+.AD_2_AD_2_8_INTERNAL_TABLE4 tr:nth-child(n) td:nth-child(2)
+ 
+{
+	background-color: white !important;
+}
+
+/********************/
+a[id="AD2.9_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD2.9_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD2.9_TABLE"] + table .col3{
+	width: 60%
+}
+
+a[id="AD2.9_TABLE"] + table .col1,
+a[id="AD2.9_TABLE"] + table .col2 {
+    background-color: #E6E6E6;
+}
+/********************/
+a[id="AD2.10_1_TABLE"] + table .col1{
+	width: 30%
+}
+
+a[id="AD2.10_1_TABLE"] + table .col2{
+	width: 20%
+}
+a[id="AD2.10_1_TABLE"] + table .col3{
+	width: 20%
+}
+a[id="AD2.10_1_TABLE"] + table .col4{
+	width: 10%
+}
+
+a[id="AD2.10_1_TABLE"] + table .col5{
+	width: 10%
+}
+a[id="AD2.10_1_TABLE"] + table .col6{
+	width: 10%
+}
+
+a[id="AD2.10_1_TABLE"] + table td{
+	border:1px solid #778899 !important;
+}
+
+/********************/
+a[id="AD2.10_2_TABLE_ANN14"] + table .col1{
+	width: 30%
+}
+
+a[id="AD2.10_2_TABLE_ANN14"] + table .col2{
+	width: 20%
+}
+a[id="AD2.10_2_TABLE_ANN14"] + table .col3{
+	width: 20%
+}
+a[id="AD2.10_2_TABLE_ANN14"] + table .col4{
+	width: 10%
+}
+
+a[id="AD2.10_2_TABLE_ANN14"] + table .col5{
+	width: 10%
+}
+a[id="AD2.10_2_TABLE_ANN14"] + table .col6{
+	width: 10%
+}
+
+a[id="AD2.10_2_TABLE_ANN14"] + table td{
+	border:1px solid #778899 !important;
+}
+/********************/
+a[id="AD2.10_2_TABLE"] + table .col1{
+	width: 30%
+}
+
+a[id="AD2.10_2_TABLE"] + table .col2{
+	width: 20%
+}
+a[id="AD2.10_2_TABLE"] + table .col3{
+	width: 20%
+}
+a[id="AD2.10_2_TABLE"] + table .col4{
+	width: 10%
+}
+
+a[id="AD2.10_2_TABLE"] + table .col5{
+	width: 10%
+}
+a[id="AD2.10_2_TABLE"] + table .col6{
+	width: 10%
+}
+
+a[id="AD2.10_2_TABLE"] + table td{
+	border:1px solid #778899 !important;
+}
+/********************/
+a[id="AD2.11_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD2.11_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD2.11_TABLE"] + table .col3{
+	width: 60%
+}
+
+a[id="AD2.11_TABLE"] + table .col1,
+a[id="AD2.11_TABLE"] + table .col2 {
+    background-color: #E6E6E6;
+}
+/********************/
+a[id="AD2.12_1_TABLE"] + table .col1{
+	width: 13%
+}
+
+a[id="AD2.12_1_TABLE"] + table .col2{
+	width: 15%
+}
+a[id="AD2.12_1_TABLE"] + table .col3{
+	width: 15%
+}
+a[id="AD2.12_1_TABLE"] + table .col4{
+	width: 21%
+}
+
+a[id="AD2.12_1_TABLE"] + table .col5{
+	width: 20%
+}
+a[id="AD2.12_1_TABLE"] + table .col6{
+	width: 16%
+}
+
+a[id="AD2.12_1_TABLE"] + table td{
+	border:1px solid #778899 !important;
+}
+/********************/
+a[id="AD2.12_2_TABLE"] + table .col1{
+	width: 13%
+}
+
+a[id="AD2.12_2_TABLE"] + table .col2,
+a[id="AD2.12_2_TABLE"] + table .col3,
+a[id="AD2.12_2_TABLE"] + table .col4,
+a[id="AD2.12_2_TABLE"] + table .col5,
+a[id="AD2.12_2_TABLE"] + table .col6,
+a[id="AD2.12_2_TABLE"] + table .col8{
+	width: 12%
+}
+a[id="AD2.12_2_TABLE"] + table .col7{
+	width: 15%
+}
+a[id="AD2.12_2_TABLE"] + table td{
+	border:1px solid #778899 !important;
+}
+/********************/
+a[id="AD2.12_3_TABLE"] + table .col1{
+	width: 13%
+}
+
+a[id="AD2.12_3_TABLE"] + table .col2{
+	width: 87%
+}
+
+a[id="AD2.12_3_TABLE"] + table td{
+	border:1px solid #778899 !important;
+}
+/********************/
+a[id="AD2.13_TABLE"] + table .col1{
+	width: 15%
+}
+
+a[id="AD2.13_TABLE"] + table .col2{
+	width: 17%
+}
+a[id="AD2.13_TABLE"] + table .col3{
+	width: 17%
+}
+a[id="AD2.13_TABLE"] + table .col4{
+	width: 17%
+}
+
+a[id="AD2.13_TABLE"] + table .col5{
+	width: 17%
+}
+a[id="AD2.13_TABLE"] + table .col6{
+	width: 17%
+}
+a[id="AD2.13_TABLE"] + table tr{
+	border-bottom: 0px !important;
+}
+.AD_2_AD2_13_TABLE tr:nth-child(odd) td:nth-child(6){
+	border-color: #778899 #778899 white #778899 !important;
+}
+/********************/
+a[id="AD2_14_A_TABLE"] + table .col1{
+	width: 13%
+}
+
+a[id="AD2_14_A_TABLE"] + table .col2{
+	width: 17%
+}
+a[id="AD2_14_A_TABLE"] + table .col3{
+	width: 18%
+}
+a[id="AD2_14_A_TABLE"] + table .col4{
+	width: 17%
+}
+a[id="AD2_14_A_TABLE"] + table .col5{
+	width: 17%
+}
+a[id="AD2_14_A_TABLE"] + table .col6{
+	width: 18%
+}
+a[id="AD2_14_A_TABLE"] + table td{
+	border:1px solid #778899 !important;
+}
+/********************/
+a[id="AD2_14_B_TABLE"] + table .col1{
+	width: 13%
+}
+a[id="AD2_14_B_TABLE"] + table .col2,
+a[id="AD2_14_B_TABLE"] + table .col3,
+a[id="AD2_14_B_TABLE"] + table .col4{
+	width: 22%
+}
+a[id="AD2_14_B_TABLE"] + table .col5{
+	width: 21%
+}
+a[id="AD2_14_B_TABLE"] + table td{
+	border:1px solid #778899 !important;
+}
+/********************/
+a[id="AD2.15_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD2.15_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD2.15_TABLE"] + table .col3{
+	width: 60%
+}
+.AD_2_AD2_15_TABLE tr:nth-child(n) td:nth-child(1), 
+.AD_2_AD2_15_TABLE  tr:nth-child(n) td:nth-child(2) {
+	background-color: #E6E6E6;
+}
+
+.AD_2_ad_2_15_internal_table tr:nth-child(n) td:nth-child(1) {
+	background-color:white;
+}
+
+
+/********************/
+a[id="AD2.16_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD2.16_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD2.16_TABLE"] + table .col3{
+	width: 60%
+}
+
+a[id="AD2.16_TABLE"] + table .col1,
+a[id="AD2.16_TABLE"] + table .col2 {
+    background-color: #E6E6E6;
+}
+/********************/
+a[id="AD2_17_TABLE"] + table .col1{
+	width: 19%
+}
+
+a[id="AD2_17_TABLE"] + table .col2,
+a[id="AD2_17_TABLE"] + table .col3{
+	width: 13%
+}
+a[id="AD2_17_TABLE"] + table .col4{
+	width: 15%
+}
+a[id="AD2_17_TABLE"] + table .col5{
+	width: 12%
+}
+a[id="AD2_17_TABLE"] + table .col6,
+a[id="AD2_17_TABLE"] + table .col7{
+	width: 14%
+}
+
+a[id="AD2_17_TABLE"] + table td{
+	border:1px solid #778899 !important;
+}
+
+a[id*="AD2_17_TABINT1_"] + table td{
+	border: none !important;
+}
+a[id*="AD2_17_TABINT1_"] + table .col1,
+a[id*="AD2_17_TABINT1_"] + table .col3{
+	width: 5%;
+}
+a[id*="AD2_17_TABINT1_"] + table .col2{
+	width: 90%;
+}
+
+a[id="AD2.17_TABLE"] + table .col1,
+a[id="AD2.17_TABLE"] + table .col2 {
+    background-color: #E6E6E6;
+}
+/********************/
+a[id="AD2.18_TABLE"] + table .col1{
+	width: 15%
+}
+
+a[id="AD2.18_TABLE"] + table .col2{
+	width: 15%
+}
+a[id="AD2.18_TABLE"] + table .col3{
+	width: 14%
+}
+a[id="AD2.18_TABLE"] + table .col4{
+	width: 14%
+}
+
+a[id="AD2.18_TABLE"] + table .col5{
+	width: 14%
+}
+a[id="AD2.18_TABLE"] + table .col6{
+	width: 14%
+}
+a[id="AD2.18_TABLE"] + table .col7{
+	width: 14%
+}
+a[id="AD2.18_TABLE"] + table td{
+	border:1px solid #778899 !important;
+}
+/********************/
+a[id="AD2.19_TABLE"] + table .col1{
+	width: 14%
+}
+
+a[id="AD2.19_TABLE"] + table .col2{
+	width: 12%
+}
+a[id="AD2.19_TABLE"] + table .col3{
+	width: 12%
+}
+a[id="AD2.19_TABLE"] + table .col4{
+	width: 12%
+}
+
+a[id="AD2.19_TABLE"] + table .col5{
+	width: 14%
+}
+a[id="AD2.19_TABLE"] + table .col6{
+	width: 12%
+}
+a[id="AD2.19_TABLE"] + table .col7{
+	width: 12%
+}
+a[id="AD2.19_TABLE"] + table .col8{
+	width: 12%
+}
+a[id="AD2.19_TABLE"] + table td{
+	border:1px solid #778899 !important;
+}
+/******************AD 3*/
+/********************/
+a[id="AD3.2_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD3.2_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD3.2_TABLE"] + table .col3{
+	width: 60%
+}
+/********************/
+a[id="AD3.3_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD3.3_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD3.3_TABLE"] + table .col3{
+	width: 60%
+}
+/********************/
+a[id="AD3.4_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD3.4_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD3.4_TABLE"] + table .col3{
+	width: 60%
+}
+/********************/
+a[id="AD3.5_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD3.5_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD3.5_TABLE"] + table .col3{
+	width: 60%
+}
+/********************/
+a[id="AD3.6_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD3.6_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD3.6_TABLE"] + table .col3{
+	width: 60%
+}
+/********************/
+a[id="AD3.7_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD3.7_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD3.7_TABLE"] + table .col3{
+	width: 60%
+}
+/********************/
+a[id="AD3_8_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD3_8_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD3_8_TABLE"] + table .col3{
+	width: 60%
+}
+/********************/
+a[id="AD3.9_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD3.9_TABLEE"] + table .col2{
+	width: 35%
+}
+a[id="AD3.9_TABLE"] + table .col3{
+	width: 60%
+}
+/********************/
+a[id="AD3.10_2_TABLE"] + table .col1{
+	width: 30%
+}
+
+a[id="AD3.10_2_TABLE"] + table .col2{
+	width: 20%
+}
+a[id="AD3.10_2_TABLE"] + table .col3{
+	width: 20%
+}
+a[id="AD3.10_2_TABLE"] + table .col4{
+	width: 10%
+}
+
+a[id="AD3.10_2_TABLE"] + table .col5{
+	width: 10%
+}
+a[id="AD3.10_2_TABLE"] + table .col6{
+	width: 10%
+}
+
+/********************/
+a[id="AD3.11_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD3.11_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD3.11_TABLE"] + table .col3{
+	width: 60%
+}
+/********************/
+a[id="AD3_12_1_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD3_12_1_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD3_12_1_TABLE"] + table .col3{
+	width: 60%
+}
+/********************/
+/********************/
+a[id="AD3.13_TABLE"] + table .col1{
+	width: 17%
+}
+
+a[id="AD3.13_TABLE"] + table .col2{
+	width: 17%
+}
+a[id="AD3.13_TABLE"] + table .col3{
+	width: 17%
+}
+a[id="AD3.13_TABLE"] + table .col4{
+	width: 17%
+}
+
+
+/********************/
+a[id="AD3.14_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD3.14_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD3.14_TABLE"] + table .col3{
+	width: 60%
+}
+
+/********************/
+a[id="AD3.15_TABLE"] + table .col1{
+	width: 5%
+}
+
+a[id="AD3.15_TABLE"] + table .col2{
+	width: 35%
+}
+a[id="AD3.15_TABLE"] + table .col3{
+	width: 60%
+}
+
+/********************/
+a[id="AD3_16_TABLE"] + table .col1{
+	width: 19%
+}
+
+a[id="AD3_16_TABLE"] + table .col2{
+	width: 13%
+}
+a[id="AD3_16_TABLE"] + table .col3{
+	width: 13%
+}
+a[id="AD3_16_TABLE"] + table .col4{
+	width: 15%
+}
+a[id="AD3_16_TABLE"] + table .col5{
+	width: 12%
+}
+a[id="AD3_16_TABLE"] + table .col6{
+	width: 14%
+}
+a[id="AD3_16_TABLE"] + table .col7{
+	width: 14%
+}
+/********************/
+a[id="AD3_17_TABLE"] + table .col1{
+	width: 12%
+}
+
+a[id="AD3_17_TABLE"] + table .col2{
+	width: 26%
+}
+a[id="AD3_17_TABLE"] + table .col3{
+	width: 14%
+}
+a[id="AD3_17_TABLE"] + table .col4{
+	width: 11%
+}
+a[id="AD3_17_TABLE"] + table .col5{
+	width: 9%
+}
+a[id="AD3_17_TABLE"] + table .col6{
+	width: 12%
+}
+a[id="AD3_17_TABLE"] + table .col7{
+	width: 16%
+}
+/********************/
+a[id="AD3.18_TABLE"] + table .col1{
+	width: 14%
+}
+
+a[id="AD3.18_TABLE"] + table .col2{
+	width: 10%
+}
+a[id="AD3.18_TABLE"] + table .col3{
+	width: 14%
+}
+a[id="AD3.18_TABLE"] + table .col4{
+	width: 12%
+}
+
+a[id="AD3.18_TABLE"] + table .col5{
+	width: 14%
+}
+a[id="AD3.18_TABLE"] + table .col6{
+	width: 12%
+}
+a[id="AD3.18_TABLE"] + table .col7{
+	width: 12%
+}
+a[id="AD3.18_TABLE"] + table .col8{
+	width: 12%
+}
+
+/********************/
+
+a[id="AD2.13R_TABLE"] + table .col1{
+	width: 15%
+}
+
+a[id="AD2.13R_TABLE"] + table .col2{
+	width: 21%
+}
+a[id="AD2.13R_TABLE"] + table .col3{
+	width: 21%
+}
+a[id="AD2.13R_TABLE"] + table .col4{
+	width: 21%
+}
+
+a[id="AD2.13R_TABLE"] + table .col5{
+	width: 22%
+}
+
+/********************/
+.CenteredTable {
+    margin-left: auto;
+    margin-right: auto;
+	border-spacing: 0;
+	padding:0;
+}
+
+.CenteredTableMist {
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+	border-style: none;
+}
+
+.CoverPage {
+    border: none ;
+	border-style: none;
+}
+
+abbr, acronym {
+    color: black;
+    cursor: help;
+}
+.nowrapp {
+    white-space: pre-wrap;
+}
+nowrapp {
+    white-space: pre-line;
+}
+.thAdNumber {
+    font-weight: normal;
+    text-align: center;
+}
+.thAdTitle {
+    font-style: italic;
+    font-weight: normal;
+    text-align: left;
+}
+.bck-white {
+    background-color: white;
+}
+td {
+    border-color: #778899;
+    border-right-style: solid;
+    border-width: 0px;
+    padding: 2px;
+}
+.center {
+    text-align: center;
+}
+.left {
+    text-align: left;
+}
+.colwidth1_7 {
+    width: 17mm;
+}
+.colwidth36 {
+    width: 8mm;
+}
+.colwidth37 {
+    width: 60mm;
+}
+.colwidth38 {
+    width: 102mm;
+}
+.colwidth39 {
+    width: 10mm;
+}
+.Sub-Title {
+    text-align: center;
+}
+
+.toc {
+    text-transform: uppercase;
+}
+
+.toc p{  
+	color: #800000;
+}
+
+.Cell-body-indent {
+    padding-left: 20pt;
+}
+.Cell-body-indent2 {
+    padding-left: 35pt;
+}
+.FrontPage {
+    background-color: #cfcfdf;
+    color: #000000;
+    padding: 15pt ;
+    text-align: center;
+}
+.FrontPage-ATC {
+    background-color: #ffff99;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    color: black;
+    padding: 15pt 5pt 15pt 3pt;
+    text-align: center;
+}
+.FrontPage-AIC {
+    background-color: #cfcfdf;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    color: black;
+    padding: 15pt 5pt 15pt 3pt;
+    text-align: center;
+}
+.H1 {
+    color: #000000;
+    margin-bottom: 10pt;
+}
+caption {
+    color: maroon;
+    text-align: center;
+}
+.TitleAD {
+    background-color: #bbbbbb;
+}
+.Title {
+    color: #800000;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: pre;
+}
+.Sub-Title {
+    color: maroon;
+    text-align: left;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+    font-size: 0.85em;
+}
+.Figure-Center {
+    color: maroon;
+    margin-bottom: 2pt;
+    margin-top: 15pt;
+    text-align: center;
+}
+.Figure-title {
+    color: maroon;
+    margin-bottom: 2pt;
+    margin-top: 2pt;
+    text-align: center;
+}
+.Graphic {
+    border: 2px solid black;
+    margin-bottom: 3pt;
+    margin-top: 3pt;
+    text-align: center;
+}
+th.Address, td.Address {
+    border: medium none;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 0 6px;
+    text-indent: 0;
+}
+.Address th {
+    text-align: left;
+    vertical-align: top;
+}
+tr.Address td {
+    padding-bottom: 3px;
+    text-align: left;
+    vertical-align: top;
+}
+.AddressTable {
+    background-color: white;
+    border: medium none;
+    margin-bottom: 0.2cm;
+    margin-left: 0.2cm;
+    margin-top: 0.2cm;
+    width: 90%;
+}
+.AddressTable-AIC {
+    background-color: #cfcfdf;
+    border: medium none;
+    margin-bottom: 0.2cm;
+    margin-top: 0.2cm;
+    width: 90%;
+}
+.AddressTable-SUP {
+    background-color: #ffff99;
+    border: medium none;
+    margin-bottom: 0.2cm;
+    margin-top: 0.2cm;
+    width: 90%;
+}
+.Address-post {
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-left: 10px;
+    white-space: pre;
+}
+.SupTable {
+    border: 1px solid black;
+}
+.SupTable td, .SupTable th {
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+.Updated {
+    color: red;
+}
+.Date-time {
+    color: black;
+}
+li {
+    margin-bottom: 5pt;
+    margin-top: 5pt;
+}
+.Itemised {
+    list-style: outside none disc;
+}
+.IndTable {
+    width: 90%;
+}
+.IndSubTable {
+    width: 100%;
+}
+.IndSubTable tfoot{
+    display:none;
+ }
+.defaultTable {
+    width: 100%;
+}
+.defaultTable tfoot{
+    display:none;
+ } 
+.IndSubTableMist {
+    width: 100%;
+}
+.ENR-table {
+    border-color: #999999;
+    margin: 5px auto;
+}
+.Table-row-type-1 {
+    background-color: #E6E6E6;
+    border-color: black;
+}
+.Table-row-type-2 {
+    background-color: #cccccc;
+    border-color: black;
+}
+.Table-row-type-3 {
+    background-color: #dddddd;
+    border-color: black;
+}
+.Table-row-type-3 th, .Table-row-type-3 td {
+    border-left: 1px solid #cccccc;
+}
+.hspace td {
+    border-top: 1px solid #999999;
+}
+tr.btop, td.btop, th.btop {
+    border-top: 1px solid #778899;
+}
+tr.bbottom, td.bbottom, th.bbottom {
+    border-bottom: 1px solid #778899;
+}
+tr.bleft, td.bleft, th.bleft {
+    border-left: 1px solid #778899;
+}
+tr.bright, td.bright, th.bright {
+    border-right: 1px solid #778899;
+}
+.HISTORY {
+    width: 90%;
+}
+.HISTORY-1 {
+    text-align: left;
+    width: 29%;
+}
+.HISTORY-2 {
+    text-align: center;
+    width: 5%;
+}
+.HISTORY-3 {
+    text-align: center;
+    width: 9%;
+}
+.HISTORY-4 {
+    text-align: center;
+    width: 9%;
+}
+.HISTORY-5 {
+    text-align: center;
+    width: 7%;
+}
+.HISTORY-6 {
+    text-align: center;
+    width: 41%;
+}
+.LOC {
+    width: 80%;
+}
+.LOC-1 {
+    text-align: center;
+    width: 15%;
+}
+.LOC-2 {
+    text-align: center;
+    width: 10%;
+}
+.LOC-3 {
+    text-align: center;
+    width: 50%;
+}
+.LOC-4 {
+    text-align: center;
+    width: 30%;
+}
+.Red {
+    color: Red;
+}
+.AIC-title {
+    background-color: #cfcfdf;
+    border: medium none;
+    text-transform: uppercase;
+}
+.AIC-SUP-contact-column {
+    width: 30%;
+}
+.AIC-SUP-country-column {
+    width: 40%;
+}
+.AIC-SUP-doc-column {
+    width: 30%;
+}
+.AIC-SUP-contact {
+    text-align: left;
+    text-transform: none;
+}
+.AIC-SUP-country {
+    text-align: center;
+}
+.AIC-SUP-doc p {
+    font-weight: bold;
+    text-align: right;
+}
+.Contact {
+}
+.eAIP-reference {
+    background-color: #eeeeee;
+    font-style: italic;
+    margin: 20px;
+    padding: 10px;
+}
+td.btop, th.btop {
+    border-top: 1px solid #778899;
+}
+td.bbottom, th.bbottom {
+    border-bottom: 1px solid #778899;
+}
+td.bleft, th.bleft {
+    border-left: 1px solid #778899;
+}
+td.bright, th.bright {
+    border-right: 1px solid #778899;
+}
+div[id="ENR-4.1"] table > tbody > tr > td:nth-of-type(7) {
+    text-align: left;
+}
+div[id="ENR-4.4"] table > tbody > tr > td:nth-of-type(2) {
+    text-align: center;
+}
+/**** COMMON DEFAULT *************************************************************/
+.GENERIC_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GENERIC_title tfoot{
+    display:none;
+}
+.GENERIC_table  {
+	border:1px solid #778899 !important;
+	white-space: normal;
+    width: 100%;   
+}
+.GENERIC_table tfoot{
+    display:none;
+}
+.GENERIC_table  tr:nth-child(n) td {
+	border:1px solid #778899;
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GENERIC_table  tr:nth-child(n) th {
+	/*background-color: #E6E6E6;*/   /*** KENYA ****/
+	/*background-color: #8DB3E1;*/		 /*** ADR ****/
+	color: #000000 ;
+   /*  text-align: center !important; */
+    vertical-align:middle;
+ 	border:1px solid #778899;
+}
+.literallayout{
+	margin-left: auto;
+	margin-right: auto;
+	height:3px;
+	white-space: normal;
+	width: 80px;
+}
+
+/*** GEN 0.3 *********************************************************************/
+.GEN_0_3  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_0_3_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_0_3_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_0_3_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+        text-align: center;
+}
+.GEN_0_3_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+    border:1px solid #778899 !important;
+	color: #000000 ;
+    text-align: center;
+    border:none;
+}
+.GEN_0_3_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_0_3_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.GEN_0_3_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+
+/*** GEN 0.1 *********************************************************************/
+.GEN_0_1  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_0_1_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_0_1_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_0_1_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+        text-align: center;
+}
+.GEN_0_1_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+    border:1px solid #778899 !important;
+	color: #000000 ;
+    text-align: center;
+    border:none;
+}
+
+.GEN_0_1_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+
+.GEN_0_1_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+
+.GEN_0_1_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+
+/*** GEN 0.2 *********************************************************************/
+.GEN_0_2  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_0_2_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_0_2_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_0_2_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+        text-align: center;
+}
+.GEN_0_2_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+    border:1px solid #778899 !important;
+	color: #000000 ;
+    text-align: center;
+    border:none;
+}
+.GEN_0_2_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_0_2_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.GEN_0_2_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/***********************************************************************************//*********************************************************************************/
+/*** GEN 1.1 *********************************************************************/
+.GEN_1_1  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_1_1_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_1_1_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_1_1_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+        text-align: center;
+}
+.GEN_1_1_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+    border:1px solid #778899 !important;
+	color: #000000 ;
+    text-align: center;
+    border:none;
+}
+.GEN_1_1_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_1_1_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.GEN_1_1_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/*** GEN 1.2 *********************************************************************/
+.GEN_1_2  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_1_2_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_1_2_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_1_2_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+        text-align: center;
+}
+.GEN_1_2_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+    border:1px solid #778899 !important;
+	color: #000000 ;
+    text-align: center;
+    border:none;
+}
+.GEN_1_2_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_1_2_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.GEN_1_2_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/*** GEN 1.3 *********************************************************************/
+.GEN_1_3  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_1_3_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_1_3_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_1_3_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+        text-align: center;
+}
+.GEN_1_3_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+    border:1px solid #778899 !important;
+	color: #000000 ;
+    text-align: center;
+    border:none;
+}
+.GEN_1_3_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_1_3_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.GEN_1_3_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+
+/*** GEN 1.4 *********************************************************************/
+.GEN_1_4  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_1_4_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_1_4_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_1_4_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+        text-align: center;
+}
+.GEN_1_4_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+    border:1px solid #778899 !important;
+	color: #000000 ;
+    text-align: center;
+    border:none;
+}
+.GEN_1_4_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_1_4_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.GEN_1_4_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/*** GEN 1.5 *********************************************************************/
+.GEN_1_5  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_1_5_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_1_5_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_1_5_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+        text-align: center;
+}
+.GEN_1_5_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+    border:1px solid #778899 !important;
+	color: #000000 ;
+    text-align: center;
+    border:none;
+}
+.GEN_1_5_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_1_5_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.GEN_1_5_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/***********************************************************************************/
+/*** GEN 1.6 *********************************************************************/
+.GEN_1_6  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_1_6_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_1_6_table  tr:nth-child(n) td {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_1_6_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_1_6_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    /*text-align: center;*/
+    border:none;
+}
+.GEN_1_6_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_1_6_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.GEN_1_6_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/***********************************************************************************//*** GEN 1.7 *********************************************************************/
+.GEN_1_7  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_1_7_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_1_7_table  tr:nth-child(n) td {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_1_7_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_1_7_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    /*text-align: center;*/
+    border:none;
+}
+.GEN_1_7_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_1_7_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.GEN_1_7_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/***********************************************************************************/
+/*** GEN 2.1 *********************************************************************/
+.GEN_2_1  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_2_1_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_2_1_table  tr:nth-child(n) td {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_2_1_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_2_1_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    /*text-align: center;*/
+    border:none;
+}
+.GEN_2_1_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_2_1_IndSubTable table tr:nth-child(n) td {
+	border: 1px solid #778899 !important;
+	white-space: normal;
+}
+.GEN_2_1_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/***********************************************************************************/
+/*** GEN 2.2 **************************************************************/
+.GEN_2_2  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_2_2_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_2_2_table  tr:nth-child(n) td {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_2_2_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_2_2_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    /*text-align: center;*/
+    border:none;
+}
+.GEN_2_2_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_2_2_IndSubTable table tr:nth-child(n) td {
+	border: 1px solid #778899 !important;
+	white-space: normal;
+}
+.GEN_2_2_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/***********************************************************************************/
+/*** GEN 2.3 *********************************************************************/
+.GEN_2_3  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_2_3_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_2_3_table  tr:nth-child(n) td {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_2_3_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_2_3_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    /*text-align: center;*/
+    border:none;
+}
+.GEN_2_3_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_2_3_IndSubTable table tr:nth-child(n) td {
+	border: 1px solid #778899 !important;
+	white-space: normal;
+}
+.GEN_2_3_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/***********************************************************************************/
+/*** GEN 2.4 without internal borders  *********************************************************************/
+
+/************* remove this line to make it working
+.GEN_2_4  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_2_4_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_2_4_table  tr:nth-child(n) td {
+	border:1px solid #778899; 
+	color: #000000 ;
+   
+}
+.GEN_2_4_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;
+	color: #000000 ;
+    
+}
+.GEN_2_4_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    
+    border:none;
+}
+.GEN_2_4_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_2_4_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.GEN_2_4_IndSubTable_title thead {   
+ 	color: #000000 ;
+      
+}
+*******************************remove this line to make it working /******
+
+/*********************************************************************************/
+/*** GEN 2.4 with internal borders *********************************************************************/
+.GEN_2_4  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_2_4_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_2_4_table  tr:nth-child(n) td {
+	border:1px solid #778899;
+	color: #000000 ;
+}
+.GEN_2_4_IndSubTable  tr:nth-child(n) td {
+	color: #000000 ;
+}
+.GEN_2_4_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    border:none;
+}
+.GEN_2_4_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_2_4_IndSubTable table tr:nth-child(n) td {
+	white-space: normal;
+  border: 1px solid #778899 !important;
+}
+.GEN_2_4_IndSubTable_title thead {   
+ 	color: #000000 ;
+}
+
+/*********************************************************************************/
+/*** GEN 2.5  without internal borders *********************************************************************/
+/************* remove this line to make it working
+.GEN_2_5  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_2_5_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_2_5_table  tr:nth-child(n) td {
+	border:1px solid #778899;
+	color: #000000 ;
+}
+.GEN_2_5_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;
+	color: #000000 ;
+}
+.GEN_2_5_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    border:none;
+}
+.GEN_2_5_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_2_5_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.GEN_2_5_IndSubTable_title thead {   
+ 	color: #000000 ;
+}
+*******************************remove this line to make it working /******
+
+/*** GEN 2.5  with internal borders *********************************************************************/
+
+.GEN_2_5  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_2_5_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_2_5_table  tr:nth-child(n) td {
+	border:1px solid #778899;
+	color: #000000 ;
+}
+.GEN_2_5_IndSubTable  tr:nth-child(n) td {
+	color: #000000 ;
+}
+.GEN_2_5_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    border:none;
+}
+.GEN_2_5_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_2_5_IndSubTable table tr:nth-child(n) td {
+	white-space: normal;
+  border: 1px solid #778899 !important;
+}
+.GEN_2_5_IndSubTable_title thead {   
+ 	color: #000000 ;
+}
+
+/*********************************************************************************/
+/*** GEN 2.6 *********************************************************************/
+
+.GEN_2_6  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_2_6_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_2_6_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_2_6_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+    text-align: center;
+}
+.GEN_2_6_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    text-align: center;
+    border:none;
+}
+.GEN_2_6_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_2_6_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.GEN_2_6_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/***********************************************************************************/
+/*** GEN 2.7 *********************************************************************/
+.GEN_2_7  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_2_7_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_2_7_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_2_7_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+    text-align: center;
+}
+.GEN_2_7_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    text-align: center;
+    border:none;
+}
+.GEN_2_7_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_2_7_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.GEN_2_7_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+
+/***********************************************************************************/
+/*** GEN 3.1 *********************************************************************/
+.GEN_3_1  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_3_1_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_3_1_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_3_1_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_3_1_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    /*text-align: center;*/
+    border:none;
+}
+.GEN_3_1_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_3_1_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.GEN_3_1_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/***********************************************************************************/
+/*** GEN 4.1 *********************************************************************/
+.GEN_4_1  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_4_1_title  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_4_1_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_4_1_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.GEN_4_1_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    /*text-align: center;*/
+    border:none;
+}
+.GEN_4_1_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_4_1_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.GEN_4_1_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/***********************************************************************************/
+/*** GEN 3.1  a GEN 3.6 , GEN_4_1, GEN 4_2*********************************************************************/
+.GEN_3_1,
+.GEN_3_2,
+.GEN_3_3, 
+.GEN_3_4, 
+.GEN_3_5,
+.GEN_4_1,
+.GEN_4_2,
+.GEN_3_6  {
+	border-style:none;
+	white-space: normal;
+}
+.GEN_3_1_title,
+.GEN_3_2_title,
+.GEN_3_3_title,
+.GEN_3_4_title,
+.GEN_3_5_title,
+.GEN_4_1_title,
+.GEN_4_2_title,
+.GEN_3_6_title  {
+	border-style:none;
+	white-space: normal;
+}
+
+.GEN_3_1_table  tr:nth-child(n) td, 
+.GEN_3_2_table  tr:nth-child(n) td,
+.GEN_3_3_table  tr:nth-child(n) td,
+.GEN_3_4_table  tr:nth-child(n) td,
+.GEN_3_5_table  tr:nth-child(n) td,
+.GEN_4_1_table  tr:nth-child(n) td,
+.GEN_4_2_table  tr:nth-child(n) td,
+.GEN_3_6_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+
+.GEN_3_1_IndSubTable  tr:nth-child(n) td,
+.GEN_3_2_IndSubTable  tr:nth-child(n) td,
+.GEN_3_3_IndSubTable  tr:nth-child(n) td,
+.GEN_3_4_IndSubTable  tr:nth-child(n) td,
+.GEN_3_5_IndSubTable  tr:nth-child(n) td,
+.GEN_4_1_IndSubTable  tr:nth-child(n) td,
+.GEN_4_2_IndSubTable  tr:nth-child(n) td,
+.GEN_3_6_IndSubTable  tr:nth-child(n) td  {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+    /*text-align: center;*/
+}
+
+.GEN_3_1_IndSubTable  tr:nth-child(n) th,
+.GEN_3_2_IndSubTable  tr:nth-child(n) th,
+.GEN_3_3_IndSubTable  tr:nth-child(n) th,
+.GEN_3_4_IndSubTable  tr:nth-child(n) th,
+.GEN_3_5_IndSubTable  tr:nth-child(n) th,
+.GEN_4_1_IndSubTable  tr:nth-child(n) th,
+.GEN_4_2_IndSubTable  tr:nth-child(n) th,
+.GEN_3_6_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    /*text-align: center;*/
+    border:none;
+}
+
+.GEN_3_1_IndSubTable .Table-row-type-1,
+.GEN_3_2_IndSubTable .Table-row-type-1,
+.GEN_3_3_IndSubTable .Table-row-type-1,
+.GEN_3_4_IndSubTable .Table-row-type-1,
+.GEN_3_5_IndSubTable .Table-row-type-1,
+.GEN_4_1_IndSubTable .Table-row-type-1,
+.GEN_4_2_IndSubTable .Table-row-type-1,
+.GEN_3_6_IndSubTable .Table-row-type-1  {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.GEN_3_1_IndSubTable table tr:nth-child(n) td, 
+.GEN_3_2_IndSubTable table tr:nth-child(n) td,
+.GEN_3_3_IndSubTable table tr:nth-child(n) td,
+.GEN_3_4_IndSubTable table tr:nth-child(n) td,
+.GEN_3_5_IndSubTable table tr:nth-child(n) td,
+.GEN_4_1_IndSubTable table tr:nth-child(n) td,
+.GEN_4_2_IndSubTable table tr:nth-child(n) td,
+.GEN_3_6_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.GEN_3_1_IndSubTable_title thead,
+.GEN_3_2_IndSubTable_title thead,
+.GEN_3_3_IndSubTable_title thead,
+.GEN_3_4_IndSubTable_title thead,
+.GEN_3_5_IndSubTable_title thead,
+.GEN_4_1_IndSubTable_title thead,
+.GEN_4_2_IndSubTable_title thead,
+.GEN_3_6_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/***********************************************************************************/
+/*** ENR 1.11 / 1.12 / 1.13 /1.14 **************************************************/
+.ENR_1_11,
+.ENR_1_12,
+.ENR_1_13,
+.ENR_1_14  {
+	border-style:none;
+	white-space: normal;
+}
+.ENR_1_11_title, 
+.ENR_1_12_title,
+.ENR_1_13_title,
+.ENR_1_14_title {
+	border-style:none;
+	white-space: normal;
+}
+.ENR_1_11_table  tr:nth-child(n) td ,
+.ENR_1_12_table  tr:nth-child(n) td ,
+.ENR_1_13_table  tr:nth-child(n) td ,
+.ENR_1_14_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_1_11_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    text-align: center !important;
+}
+.ENR_1_11_IndSubTable  tr:nth-child(n) td,
+.ENR_1_12_IndSubTable  tr:nth-child(n) td,
+.ENR_1_13_IndSubTable  tr:nth-child(n) td,
+.ENR_1_14_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_1_11_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    text-align: center !important;
+    border:none;
+}
+.ENR_1_12_IndSubTable  tr:nth-child(n) th, 
+.ENR_1_13_IndSubTable  tr:nth-child(n) th, 
+.ENR_1_14_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    /*text-align: center;*/
+    border:none;
+}
+.ENR_1_11_IndSubTable .Table-row-type-1, 
+.ENR_1_12_IndSubTable .Table-row-type-1,
+.ENR_1_13_IndSubTable .Table-row-type-1,
+.ENR_1_14_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.ENR_1_11_IndSubTable table tr:nth-child(n) td,
+.ENR_1_12_IndSubTable table tr:nth-child(n) td,
+.ENR_1_13_IndSubTable table tr:nth-child(n) td,
+.ENR_1_14_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.ENR_1_11_IndSubTable_title thead, 
+.ENR_1_12_IndSubTable_title thead, 
+.ENR_1_13_IndSubTable_title thead, 
+.ENR_1_14_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+.ENR_1_14 .mediaobject{
+      text-align:center;
+      width:100%!important;
+}
+.ENR_1_14 .mediaobject img{
+      width:100%;
+} 
+
+/***********************************************************************************/
+/*** ENR 1.1/ENR 1.2/ENR 1.3/ 1.4 / 1.5 / 1.6 / 1.7 / 1.8 / 1.9 / 1.10 / 2.1 / 2.2 ************************************/
+.ENR_1_1,
+.ENR_1_2, 
+.ENR_1_3,
+.ENR_1_4, 
+.ENR_1_5, 
+.ENR_1_6, 
+.ENR_1_7,
+.ENR_1_8,
+.ENR_1_9,
+.ENR_1_10,
+/* .ENR_1_11,
+.ENR_1_12,
+.ENR_1_13,
+.ENR_1_14,
+.ENR_4_1,
+.ENR_4_2,
+.ENR_4_4,
+.ENR_4_5,
+.ENR_5_1,
+.ENR_5_2,
+.ENR_5_3,
+.ENR_5_4,
+.ENR_5_5,
+.ENR_5_6, */
+.ENR_2_1,
+.ENR_2_2,
+.AD_1_1,
+.AD_1_2,
+.AD_1_3,
+.AD_1_4,
+.AD_1_5,
+.AD_2 {
+	border-style:none;
+	white-space: normal;
+}
+.ENR_1_1_title,
+.ENR_1_2_title,
+.ENR_1_3_title,
+.ENR_1_4_title,
+.ENR_1_5_title,
+.ENR_1_6_title,
+.ENR_1_7_title,
+.ENR_1_8_title,
+.ENR_1_9_title,
+.ENR_1_10_title,
+/* .ENR_1_11_title,
+.ENR_1_12_title,
+.ENR_1_13_title,
+.ENR_1_14_title,
+.ENR_4_1_title,
+.ENR_4_2_title,
+.ENR_4_4_title,
+.ENR_4_5_title,
+.ENR_5_1_title,
+.ENR_5_2_title,
+.ENR_5_3_title,
+.ENR_5_4_title,
+.ENR_5_5_title,
+.ENR_5_6_title, */
+.ENR_2_1_title,   
+.ENR_2_2_title,
+.AD_1_1_title,
+.AD_1_2_title,
+.AD_1_3_title,
+.AD_1_4_title,
+.AD_1_5_title,
+.AD_2_title    {
+	border-style:none !important;
+	white-space: normal;
+}
+.ENR_1_1_table  tr:nth-child(n) td,
+.ENR_1_2_table  tr:nth-child(n) td,
+.ENR_1_3_table  tr:nth-child(n) td,
+.ENR_1_4_table  tr:nth-child(n) td,
+.ENR_1_5_table  tr:nth-child(n) td,
+.ENR_1_6_table  tr:nth-child(n) td,
+.ENR_1_7_table  tr:nth-child(n) td,
+.ENR_1_8_table  tr:nth-child(n) td,
+.ENR_1_9_table  tr:nth-child(n) td,
+.ENR_1_10_table  tr:nth-child(n) td,
+/* .ENR_1_11_table  tr:nth-child(n) td,
+.ENR_1_12_table  tr:nth-child(n) td,
+.ENR_1_13_table  tr:nth-child(n) td,
+.ENR_1_14_table  tr:nth-child(n) td,
+.ENR_4_1_table  tr:nth-child(n) td,
+.ENR_4_2_table  tr:nth-child(n) td,
+.ENR_4_4_table  tr:nth-child(n) td,
+.ENR_4_5_table  tr:nth-child(n) td,
+.ENR_5_1_table  tr:nth-child(n) td,
+.ENR_5_2_table  tr:nth-child(n) td,
+.ENR_5_3_table  tr:nth-child(n) td,
+.ENR_5_4_table  tr:nth-child(n) td,
+.ENR_5_5_table  tr:nth-child(n) td,
+.ENR_5_6_table  tr:nth-child(n) td, */
+.ENR_2_1_table  tr:nth-child(n) td,
+.ENR_2_2_table  tr:nth-child(n) td,
+.AD_1_1_table  tr:nth-child(n) td,
+.AD_1_2_table  tr:nth-child(n) td,
+.AD_1_3_table  tr:nth-child(n) td,
+.AD_1_4_table  tr:nth-child(n) td,
+.AD_1_5_table  tr:nth-child(n) td,
+.AD_2_table  tr:nth-child(n) td  {
+	border:0px solid #778899; /* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_1_1_IndSubTable  tr:nth-child(n) td,
+.ENR_1_2_IndSubTable  tr:nth-child(n) td,
+.ENR_1_3_IndSubTable  tr:nth-child(n) td,
+.ENR_1_4_IndSubTable  tr:nth-child(n) td,
+.ENR_1_5_IndSubTable  tr:nth-child(n) td,
+.ENR_1_6_IndSubTable  tr:nth-child(n) td, 
+.ENR_1_7_IndSubTable  tr:nth-child(n) td,
+.ENR_1_8_IndSubTable  tr:nth-child(n) td,
+.ENR_1_9_IndSubTable  tr:nth-child(n) td,
+.ENR_1_10_IndSubTable  tr:nth-child(n) td,
+/* .ENR_1_11_IndSubTable  tr:nth-child(n) td,
+.ENR_1_12_IndSubTable  tr:nth-child(n) td,
+.ENR_1_13_IndSubTable  tr:nth-child(n) td,
+.ENR_1_14_IndSubTable  tr:nth-child(n) td,
+.ENR_4_1_IndSubTable  tr:nth-child(n) td,
+.ENR_4_2_IndSubTable  tr:nth-child(n) td,
+.ENR_4_4_IndSubTable  tr:nth-child(n) td,
+.ENR_4_5_IndSubTable  tr:nth-child(n) td,
+.ENR_5_1_IndSubTable  tr:nth-child(n) td,
+.ENR_5_2_IndSubTable  tr:nth-child(n) td,
+.ENR_5_3_IndSubTable  tr:nth-child(n) td,
+.ENR_5_4_IndSubTable  tr:nth-child(n) td,
+.ENR_5_5_IndSubTable  tr:nth-child(n) td,
+.ENR_5_6_IndSubTable  tr:nth-child(n) td, */
+.ENR_2_1_IndSubTable  tr:nth-child(n) td,
+.ENR_2_2_IndSubTable  tr:nth-child(n) td,
+.AD_1_1_IndSubTable  tr:nth-child(n) td,
+.AD_1_2_IndSubTable  tr:nth-child(n) td,
+.AD_1_3_IndSubTable  tr:nth-child(n) td,
+.AD_1_4_IndSubTable  tr:nth-child(n) td,
+.AD_1_5_IndSubTable  tr:nth-child(n) td,
+.AD_2_IndSubTable  tr:nth-child(n) td    {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+        text-align: center;
+}
+.ENR_1_1_IndSubTable  tr:nth-child(n) th,
+.ENR_1_2_IndSubTable  tr:nth-child(n) th,
+.ENR_1_3_IndSubTable  tr:nth-child(n) th,
+.ENR_1_4_IndSubTable  tr:nth-child(n) th,
+.ENR_1_5_IndSubTable  tr:nth-child(n) th,
+.ENR_1_6_IndSubTable  tr:nth-child(n) th,
+.ENR_1_7_IndSubTable  tr:nth-child(n) th,
+.ENR_1_8_IndSubTable  tr:nth-child(n) th,
+.ENR_1_9_IndSubTable  tr:nth-child(n) th,
+.ENR_1_10_IndSubTable  tr:nth-child(n) th,
+/* .ENR_1_11_IndSubTable  tr:nth-child(n) th,
+.ENR_1_12_IndSubTable  tr:nth-child(n) th,
+.ENR_1_13_IndSubTable  tr:nth-child(n) th,
+.ENR_1_14_IndSubTable  tr:nth-child(n) th,
+.ENR_4_1_IndSubTable  tr:nth-child(n) th,
+.ENR_4_2_IndSubTable  tr:nth-child(n) th,
+.ENR_4_4_IndSubTable  tr:nth-child(n) th,
+.ENR_4_5_IndSubTable  tr:nth-child(n) th,
+.ENR_5_1_IndSubTable  tr:nth-child(n) th,
+.ENR_5_2_IndSubTable  tr:nth-child(n) th,
+.ENR_5_3_IndSubTable  tr:nth-child(n) th,
+.ENR_5_4_IndSubTable  tr:nth-child(n) th,
+.ENR_5_5_IndSubTable  tr:nth-child(n) th,
+.ENR_5_6_IndSubTable  tr:nth-child(n) th, */
+.ENR_2_1_IndSubTable  tr:nth-child(n) th,
+.ENR_2_2_IndSubTable  tr:nth-child(n) th,
+.AD_1_1_IndSubTable  tr:nth-child(n) th,
+.AD_1_2_IndSubTable  tr:nth-child(n) th,
+.AD_1_3_IndSubTable  tr:nth-child(n) th,
+.AD_1_4_IndSubTable  tr:nth-child(n) th,
+.AD_1_5_IndSubTable  tr:nth-child(n) th,
+.AD_2_IndSubTable  tr:nth-child(n) th   {
+	background-color: #E6E6E6;
+    border:1px solid #778899 !important;
+	color: #000000 ;
+    text-align: center;
+    border:none;
+}
+.ENR_1_1_IndSubTable .Table-row-type-1,
+.ENR_1_2_IndSubTable .Table-row-type-1,
+.ENR_1_3_IndSubTable .Table-row-type-1,
+.ENR_1_4_IndSubTable .Table-row-type-1,
+.ENR_1_5_IndSubTable .Table-row-type-1,
+.ENR_1_6_IndSubTable .Table-row-type-1,
+.ENR_1_7_IndSubTable .Table-row-type-1, 
+.ENR_1_8_IndSubTable .Table-row-type-1,
+.ENR_1_9_IndSubTable .Table-row-type-1,
+.ENR_1_10_IndSubTable .Table-row-type-1,
+/* .ENR_1_11_IndSubTable .Table-row-type-1,
+.ENR_1_12_IndSubTable .Table-row-type-1,
+.ENR_1_13_IndSubTable .Table-row-type-1,
+.ENR_1_14_IndSubTable .Table-row-type-1,
+.ENR_4_1_IndSubTable .Table-row-type-1,
+.ENR_4_2_IndSubTable .Table-row-type-1,
+.ENR_4_4_IndSubTable .Table-row-type-1,
+.ENR_4_5_IndSubTable .Table-row-type-1,
+.ENR_5_1_IndSubTable .Table-row-type-1,
+.ENR_5_2_IndSubTable .Table-row-type-1,
+.ENR_5_3_IndSubTable .Table-row-type-1,
+.ENR_5_4_IndSubTable .Table-row-type-1,
+.ENR_5_5_IndSubTable .Table-row-type-1,
+.ENR_5_6_IndSubTable .Table-row-type-1, */
+.ENR_2_1_IndSubTable .Table-row-type-1,
+.ENR_2_2_IndSubTable .Table-row-type-1,
+.AD_1_1_IndSubTable .Table-row-type-1,
+.AD_1_2_IndSubTable .Table-row-type-1,
+.AD_1_3_IndSubTable .Table-row-type-1,
+.AD_1_4_IndSubTable .Table-row-type-1,
+.AD_1_5_IndSubTable .Table-row-type-1,
+.AD_2_IndSubTable .Table-row-type-1  {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.ENR_1_1_IndSubTable table tr:nth-child(n) td,
+.ENR_1_2_IndSubTable table tr:nth-child(n) td,
+.ENR_1_3_IndSubTable table tr:nth-child(n) td,
+.ENR_1_4_IndSubTable table tr:nth-child(n) td,
+.ENR_1_5_IndSubTable table tr:nth-child(n) td,
+.ENR_1_6_IndSubTable table tr:nth-child(n) td,
+.ENR_1_7_IndSubTable table tr:nth-child(n) td,
+.ENR_1_8_IndSubTable table tr:nth-child(n) td,
+.ENR_1_9_IndSubTable table tr:nth-child(n) td,
+.ENR_1_10_IndSubTable table tr:nth-child(n) td,
+/* .ENR_1_11_IndSubTable table tr:nth-child(n) td,
+.ENR_1_12_IndSubTable table tr:nth-child(n) td,
+.ENR_1_13_IndSubTable table tr:nth-child(n) td,
+.ENR_1_14_IndSubTable table tr:nth-child(n) td,
+.ENR_4_1_IndSubTable table tr:nth-child(n) td,
+.ENR_4_2_IndSubTable table tr:nth-child(n) td,
+.ENR_4_4_IndSubTable table tr:nth-child(n) td,
+.ENR_4_5_IndSubTable table tr:nth-child(n) td,
+.ENR_5_1_IndSubTable table tr:nth-child(n) td,
+.ENR_5_2_IndSubTable table tr:nth-child(n) td,
+.ENR_5_3_IndSubTable table tr:nth-child(n) td,
+.ENR_5_4_IndSubTable table tr:nth-child(n) td,
+.ENR_5_5_IndSubTable table tr:nth-child(n) td,
+.ENR_5_6_IndSubTable table tr:nth-child(n) td, */
+.ENR_2_1_IndSubTable table tr:nth-child(n) td,
+.ENR_2_2_IndSubTable table tr:nth-child(n) td,
+.AD_1_1_IndSubTable table tr:nth-child(n) td,
+.AD_1_2_IndSubTable table tr:nth-child(n) td,
+.AD_1_3_IndSubTable table tr:nth-child(n) td,
+.AD_1_4_IndSubTable table tr:nth-child(n) td,
+.AD_1_5_IndSubTable table tr:nth-child(n) td,
+.AD_2_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.ENR_1_1_IndSubTable thead,
+.ENR_1_2_IndSubTable thead,
+.ENR_1_3_IndSubTable thead,
+.ENR_1_4_IndSubTable thead,
+.ENR_1_5_IndSubTable thead,
+.ENR_1_6_IndSubTable thead,
+.ENR_1_7_IndSubTable thead,
+.ENR_1_8_IndSubTable thead,
+.ENR_1_9_IndSubTable thead,
+.ENR_1_10_IndSubTable thead,
+/* .ENR_1_11_IndSubTable thead,
+.ENR_1_12_IndSubTable thead,
+.ENR_1_13_IndSubTable thead,
+.ENR_1_14_IndSubTable thead,
+.ENR_4_1_IndSubTable thead,
+.ENR_4_2_IndSubTable thead,
+.ENR_4_4_IndSubTable thead,
+.ENR_4_5_IndSubTable thead,
+.ENR_5_1_IndSubTable thead,
+.ENR_5_2_IndSubTable thead,
+.ENR_5_3_IndSubTable thead,
+.ENR_5_4_IndSubTable thead,
+.ENR_5_5_IndSubTable thead, */
+.ENR_2_1_IndSubTable thead,
+.ENR_2_2_IndSubTable thead,
+.AD_1_1_IndSubTable thead,
+.AD_1_2_IndSubTable thead,
+.AD_1_3_IndSubTable thead,
+.AD_1_4_IndSubTable thead,
+.AD_1_5_IndSubTable thead,
+.AD_2_IndSubTable thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+
+
+.ENR_2_1_IndSubTable .Table-row-type-1 span,
+.ENR_2_2_IndSubTable .Table-row-type-1 span {
+	 background-color: #E6E6E6 !important;
+}
+/*********************************************************************************/
+/********* ENR 3.1 Generic *******************************************************/
+.ENR_3_1_Generic  {
+	border-style:none;
+	white-space: normal;
+}
+.ENR_3_1_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_3_1_table  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    /*text-align: center;*/
+   /* border: 1px solid #778899;*/
+    padding: 0;
+}
+.ENR_3_1_table table tr:nth-child(2) th:nth-child(2) {
+    border-left:1px solid #778899;
+}   
+/*
+.ENR_3_3_table tr:nth-child(n) td {
+    font-size: 90%; 
+}  */   
+.ENR_3_1_title {   
+ 	color: #800000 ;
+    /*text-align: center;*/
+   /* text-transform: uppercase;
+    font-weight: bold;*/
+    white-space: normal;
+    padding: 0;
+}
+.ENR_3_1_title td br {
+    display:none;
+}   
+.ENR_3_1_table .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.ENR_3_1_table table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.ENR_3_1_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/*********************************************************************************/
+/********* ENR 3.2  **************************************************************/
+.ENR_3_2_Generic  {
+	border-style:none;
+	white-space: normal;
+}
+.ENR_3_2_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_3_2_table  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    /*text-align: center;*/
+    /*border: 1px solid #778899;*/
+    padding: 0;
+}
+.ENR_3_2_table table tr:nth-child(2) th:nth-child(2) {
+    border-left:1px solid #778899;
+}  
+/* 
+.ENR_3_2_table tr:nth-child(n) td {
+    font-size: 90%; 
+}   */  
+.ENR_3_2_title {   
+ 	color: #800000 ;
+    /*text-align: center;*/
+    /*text-transform: uppercase;
+    font-weight: bold;*/
+    white-space: normal;
+    margin: 0px;
+}
+.ENR_3_2_title td br {
+    display:none;
+}   
+.ENR_3_2_table .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.ENR_3_2_table table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.ENR_3_2_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/*********************************************************************************/
+/********* ENR 3.3  **************************************************************/
+.ENR_3_3_Generic  {
+	border-style:none;
+	white-space: normal;
+}
+.ENR_3_3_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_3_3_table  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    /*text-align: center;*/
+  /*  border: 1px solid #778899;*/
+    padding: 0;
+}
+.ENR_3_3_table table tr:nth-child(2) th:nth-child(2) {
+    border-left:1px solid #778899;
+} 
+/*
+.ENR_3_3_table tr:nth-child(n) td {
+    font-size: 90%; 
+}  */
+   
+.ENR_3_3_title {   
+ 	color: #800000 ;
+    /*text-align: center;*/
+    /*text-transform: uppercase;
+    font-weight: bold;*/
+    white-space: normal;
+    margin: 0px;
+}
+.ENR_3_3_title td br {
+    display:none;
+}   
+.ENR_3_3_table .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.ENR_3_3_table table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.ENR_3_3_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/*********************************************************************************/
+/*** ENR 3 / 3.1 / 3.1a/ 3.2/ 3.3 / 3.4 / 3.5 / 3.6 ************************************/
+.ENR_3, 
+.ENR_3_1,
+.ENR_3_1a,
+.ENR_3_2,
+.ENR_3_3,
+.ENR_3_4,
+.ENR_3_5,
+.ENR_3_6 {
+	border-style:none;
+	white-space: normal;
+}
+.ENR_3_title,
+.ENR_3_1_title,
+.ENR_3_1a_title,
+.ENR_3_2_title,
+.ENR_3_3_title,
+.ENR_3_4_title,
+.ENR_3_5_title,
+.ENR_3_6_title  {
+	border-style:none;
+	white-space: normal;
+}
+.ENR_3_table  tr:nth-child(n) td,
+.ENR_3_1_table  tr:nth-child(n) td,
+.ENR_3_1a_table  tr:nth-child(n) td,
+.ENR_3_2_table  tr:nth-child(n) td,
+.ENR_3_3_table  tr:nth-child(n) td,
+.ENR_3_4_table  tr:nth-child(n) td,
+.ENR_3_5_table  tr:nth-child(n) td,
+.ENR_3_6_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_3_IndSubTable  tr:nth-child(n) td,
+.ENR_3_1_IndSubTable  tr:nth-child(n) td,
+.ENR_3_1a_IndSubTable  tr:nth-child(n) td,
+.ENR_3_3_IndSubTable  tr:nth-child(n) td,
+.ENR_3_2_IndSubTable  tr:nth-child(n) td,
+.ENR_3_4_IndSubTable  tr:nth-child(n) td,
+.ENR_3_5_IndSubTable  tr:nth-child(n) td,
+.ENR_3_6_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_3_IndSubTable  tr:nth-child(n) th,
+.ENR_3_1_IndSubTable  tr:nth-child(n) th,
+.ENR_3_1a_IndSubTable  tr:nth-child(n) th,
+.ENR_3_2_IndSubTable  tr:nth-child(n) th,
+.ENR_3_3_IndSubTable  tr:nth-child(n) th,
+.ENR_3_4_IndSubTable  tr:nth-child(n) th,
+.ENR_3_5_IndSubTable  tr:nth-child(n) th,
+.ENR_3_6_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000;
+    /*text-align: center;*/
+    border:none;
+}
+.ENR_3_IndSubTable .Table-row-type-1,
+.ENR_3_1_IndSubTable .Table-row-type-1,
+.ENR_3_1a_IndSubTable .Table-row-type-1,
+.ENR_3_2_IndSubTable .Table-row-type-1,
+.ENR_3_3_IndSubTable .Table-row-type-1,
+.ENR_3_4_IndSubTable .Table-row-type-1,
+.ENR_3_5_IndSubTable .Table-row-type-1,
+.ENR_3_6_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.ENR_3_IndSubTable table tr:nth-child(n) td,
+.ENR_3_1_IndSubTable table tr:nth-child(n) td,
+.ENR_3_1a_IndSubTable table tr:nth-child(n) td,
+.ENR_3_2_IndSubTable table tr:nth-child(n) td,
+.ENR_3_3_IndSubTable table tr:nth-child(n) td,
+.ENR_3_4_IndSubTable table tr:nth-child(n) td,
+.ENR_3_5_IndSubTable table tr:nth-child(n) td,
+.ENR_3_6_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.ENR_3_IndSubTable_title thead,
+.ENR_3_1_IndSubTable_title thead,
+.ENR_3_1a_IndSubTable_title thead,
+.ENR_3_2_IndSubTable_title thead,
+.ENR_3_3_IndSubTable_title thead,
+.ENR_3_4_IndSubTable_title thead,
+.ENR_3_5_IndSubTable_title thead,
+.ENR_3_6_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+
+/***********************************************************************************/
+/*** ENR 4.1 **********************************************************************/
+.ENR_4_1  {
+	border-style:none;
+	white-space: normal;
+}
+.ENR_4_1_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_4_1_title {   
+ 	color: #800000 ;
+    /*text-align: center;*/
+    text-transform: uppercase;
+    /*font-weight: bold;*/
+    white-space: normal;
+}
+.ENR_4_1_title tr:first-child td  {   
+   /* text-align: center !important;*/
+}
+.ENR_4_1_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_4_1_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.ENR_4_1_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.ENR_4_1_IndSubTable thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/*********************************************************************************/
+/*** ENR 4.3 **********************************************************************/
+.ENR_4_3  {
+	border-style:none;
+	white-space: normal;
+}
+.ENR_4_3_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_4_3_title {   
+ 	color: #800000 ;
+    /*text-align: center;*/
+    text-transform: uppercase;
+    /*font-weight: bold;*/
+    white-space: normal;
+}
+.ENR_4_3_title tr:first-child td  {   
+   /*  text-align: center !important; */
+}
+.ENR_4_3_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899 !important;
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_4_3_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.ENR_4_3_IndSubTable table tr:nth-child(n) td {
+	border: 1px solid #778899 !important;
+	white-space: normal;
+}
+.ENR_4_3_IndSubTable thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/*********************************************************************************/
+/*** ENR 4.4 **********************************************************************/
+.ENR_4_4_prv {
+	margin-left: 240px;
+}
+.ENR_4_4_IndSubTable_prv {
+	width:550px;
+}
+.ENR_4_4_IndSubTable_prv th:nth-child(2){
+  	width:150px;
+}
+ .ENR_4_4_IndSubTable_prv th:nth-child(3){
+  	width:150px;
+}
+.ENR_4_4  {
+	border-style:none;
+	white-space: normal;
+}
+.ENR_4_4_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_4_4_title {   
+ 	color: #800000 ;
+    /*text-align: center;*/
+    text-transform: uppercase;
+    /*font-weight: bold;*/
+    white-space: normal;
+}
+.ENR_4_4_title tr:first-child td  {   
+   /*  text-align: center !important; */
+}
+.ENR_4_4_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_4_4_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.ENR_4_4_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.ENR_4_4_IndSubTable thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/*********************************************************************************/
+/*** ENR 4.5 **********************************************************************/
+.ENR_4_5  {
+	border-style:none;
+	white-space: normal;
+}
+.ENR_4_5_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_4_5_title {   
+ 	color: #800000 ;
+    /*text-align: center;*/
+    text-transform: uppercase;
+    /*font-weight: bold;*/
+    white-space: normal;
+}
+
+.ENR_4_5_title tr:first-child td  {   
+   /*  text-align: center !important; */
+}
+.ENR_4_5_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_4_5_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.ENR_4_5_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.ENR_4_5_IndSubTable thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+
+/*********************************************************************************/
+/*** ENR 5.1 **********************************************************************/
+.ENR_5_1  {
+	border-style:none;
+	white-space: normal;
+}
+.ENR_5_1_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_5_1_title {   
+ 	color: #800000 ;
+    /*text-align: center;
+    text-transform: uppercase;*/
+    /*font-weight: bold;*/
+    white-space: normal;
+}
+.ENR_5_1_title td br {
+    display:none;
+}   
+.ENR_5_1_title tr:first-child td  {   
+   /*  text-align: center !important; */
+}
+/*
+.ENR_5_1_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;
+	color: #000000 ;
+    text-align: center;
+}
+*/
+.ENR_5_1_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+
+.ENR_5_1_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.ENR_5_1_IndSubTable thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+
+.ENR_5_1_IndSubTable .col1 {
+width: 40%;
+}
+
+.ENR_5_1_IndSubTable .col2 {
+width: 20%;
+}
+
+.ENR_5_1_IndSubTable .col3 {
+width: 40%;
+}
+
+a[id="ENR5_1_P_TABLE"] + table td {
+	        border:1px solid #778899 !important;
+}
+a[id="ENR5_1_P_TABLE"] + table .col1 {
+    width: 40%;
+}
+a[id="ENR5_1_P_TABLE"] + table .col2 {
+    width: 20%;
+}
+a[id="ENR5_1_P_TABLE"] + table .col3 {
+    width: 40%;
+}
+a[id="ENR5_1_R_TABLE"] + table td {
+	        border:1px solid #778899 !important;
+}
+a[id="ENR5_1_R_TABLE"] + table .col1 {
+    width: 40%;
+}
+a[id="ENR5_1_R_TABLE"] + table .col2 {
+    width: 20%;
+}
+a[id="ENR5_1_R_TABLE"] + table .col3 {
+    width: 40%;
+}
+a[id="ENR5_1_D_TABLE"] + table td {
+	        border:1px solid #778899 !important;
+}
+a[id="ENR5_1_D_TABLE"] + table .col1 {
+    width: 40%;
+}
+a[id="ENR5_1_D_TABLE"] + table .col2 {
+    width: 20%;
+}
+a[id="ENR5_1_D_TABLE"] + table .col3 {
+    width: 40%;
+}
+/*********************************************************************************/
+/*** ENR 5.2 **********************************************************************/
+.ENR_5_2  {
+	border-style:none;
+	white-space: normal;
+}
+.ENR_5_2_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_5_2_title {   
+ 	color: #800000 ;
+    /*text-align: center;*/
+    /*font-weight: bold;*/
+    white-space: normal;
+}
+.ENR_5_2_title td br {
+    display:none;
+}   
+.ENR_5_2_title tr:first-child td {   
+   /*  text-align: center !important; */
+}
+/*
+.ENR_5_2_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;
+	color: #000000 ;
+    text-align: center;
+}*/
+.ENR_5_2_IndSubTable table tr:nth-child(2) td:nth-child(2) {
+	border-bottom: 1px solid  #000000 ;
+    width: 40%;
+	white-space: normal;
+}
+.ENR_5_2_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.ENR_5_2_IndSubTable table tr:nth-child(n) td {
+	border-style:none ;
+	white-space: normal;
+}
+.ENR_5_2_IndSubTable thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/*********************************************************************************/
+/*** ENR 5.3 **********************************************************************/
+.ENR_5_3  {
+	border-style:none;
+	white-space: normal;
+}
+.ENR_5_3_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_5_3_title {   
+ 	color: #800000 ;
+    /*text-align: center;*/
+    /* text-transform: uppercase;
+    font-weight: bold;*/
+    white-space: normal;
+} 
+.ENR_5_3_title tr:first-child td {   
+   /*  text-align: center !important; */
+}
+/*
+.ENR_5_3_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;
+	color: #000000 ;
+    text-align: center;
+}*/
+.ENR_5_3_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.ENR_5_3_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.ENR_5_3_IndSubTable thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+.ENR_5_3_IndSubTable th:nth-child(1){     
+  width:150px;
+}   
+
+.ENR_5_3_IndSubTable th:nth-child(2){     
+  width:150px;
+}   
+.ENR_5_3_IndSubTable th:nth-child(5){  
+  width:100px;
+}
+.ENR_5_3_title  br {
+    display:none;
+}  
+/*********************************************************************************/
+/*** ENR 5.4 **********************************************************************/
+.ENR_5_4  {
+	border-style:none;
+	white-space: normal;
+}
+.ENR_5_4_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_5_4_title {   
+ 	color: #800000 ;
+    /*text-align: center;*/
+    text-transform: uppercase;
+    /*font-weight: bold;*/
+    white-space: normal;
+}
+.ENR_5_4_title td br {
+    display:none;
+}   
+.ENR_5_4_title tr:first-child td {   
+   /*  text-align: center !important; */
+}
+/*
+.ENR_5_4_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;
+	color: #000000 ;
+    text-align: center;
+}*/
+.ENR_5_4_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.ENR_5_4_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.ENR_5_4_IndSubTable thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/*********************************************************************************/
+/*** ENR 5.5, .ENR_5_6 **********************************************************************/
+.ENR_5_5,
+.ENR_5_6    {
+	border-style:none;
+	white-space: normal;
+}
+.ENR_5_5_table  tr:nth-child(n) td, 
+.ENR_5_6_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_5_5_title, 
+.ENR_5_6_title {   
+ 	color: #800000 ;
+    /*text-align: center;*/
+    /*text-transform: uppercase;*/
+    /*font-weight: bold;*/
+    white-space: normal;
+}
+.ENR_5_5_title td br,
+.ENR_5_6_title td br {
+    display:none;
+}   
+.ENR_5_5_title tr:first-child td,
+.ENR_5_6_title tr:first-child td {   
+   /*  text-align: center !important; */
+}
+/*
+.ENR_5_5_IndSubTable  tr:nth-child(n) td,
+.ENR_5_6_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;
+	color: #000000 ;
+    text-align: center;
+}*/
+.ENR_5_5_IndSubTable .Table-row-type-1,
+.ENR_5_6_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.ENR_5_5_IndSubTable table tr:nth-child(n) td,
+.ENR_5_6_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.ENR_5_5_IndSubTable thead,
+.ENR_5_6_IndSubTable thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/*** ENR 6 **********************************************************************/
+.ENR_6  {
+	border-style:none;
+	white-space: normal;
+}
+.ENR_6_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.ENR_6_title {   
+ 	color: #800000 ;
+    /*text-align: center;*/
+    text-transform: uppercase;
+    /*font-weight: bold;*/
+    white-space: normal;
+}
+.ENR_6_title td br {
+    display:none;
+}   
+.ENR_6_title tr:first-child td {   
+   /*  text-align: center !important; */
+}
+/*
+.ENR_6_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;
+	color: #000000 ;
+    text-align: center;
+}*/
+.ENR_6_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.ENR_6_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.ENR_6_IndSubTable thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/*********************************************************************************/
+/********* AD B  *****************************************************************/
+.AD_B {
+   border-style: none;
+}
+.AD_B table div p span {
+  display:none;
+}
+.AD_B tbody tr td {
+   vertical-align: middle;        
+}
+.AD_B .P1_default  strong:first-child {
+ 	white-space:pre;
+}
+.AD_B table tr td {
+	border:1px solid #999999;
+}
+.AD_B table tr th {
+	border:1px solid #999999;
+}
+.AD_B_Table-row-type-2  div p span {
+ 	display:none;
+}
+.AD_B  table tbody div p span {
+    display:none;
+}
+.AD_B_Table-row-type-2 {
+   border:1px solid #999999;
+}                                            
+/*********************************************************************************/
+/********* AD C  *****************************************************************/
+.AD_C {
+   border-style: none;
+}
+.AD_C table div p span {
+  display:none;
+}
+.AD_C tbody tr td {
+   vertical-align: middle;        
+}
+.AD_C .P1_default  strong:first-child {
+ 	white-space:pre;
+}
+.AD_C table tr td {
+	border:1px solid #999999;
+}
+.AD_C table tr th {
+	border:1px solid #999999;
+}
+.AD_C_Table-row-type-2  div p span {
+ 	display:none;
+}
+.AD_C  table tbody div p span {
+    display:none;
+}
+.AD_C_Table-row-type-2 {
+   border:1px solid #999999;
+}                             
+/*********************************************************************************/
+/********* AD D  *****************************************************************/
+.AD_D {
+   border-style: none;
+}
+.AD_D table div p span {
+  display:none;
+}
+.AD_D tbody tr td {
+   vertical-align: middle;        
+}
+.AD_D .P1_default  strong:first-child {
+ 	white-space:pre;
+}
+.AD_D table tr td {
+	border:1px solid #999999;
+}
+.AD_D table tr th {
+	border:1px solid #999999;
+}
+.AD_D_Table-row-type-2  div p span {
+ 	display:none;
+}
+.AD_D  table tbody div p span {
+    display:none;
+}
+.AD_D_Table-row-type-2 {
+   border:1px solid #999999;
+}                             
+/*********************************************************************************/
+/********* AD E  *****************************************************************/
+.AD_E {
+   border-style: none;
+}
+.AD_E table div p span {
+  display:none;
+}
+.AD_E tbody tr td {
+   vertical-align: middle;        
+}
+.AD_E .P1_default  strong:first-child {
+ 	white-space:pre;
+}
+.AD_E table tr td {
+	border:1px solid #999999;
+}
+.AD_E table tr th {
+	border:1px solid #999999;
+}
+.AD_E_Table-row-type-2  div p span {
+ 	display:none;
+}
+.AD_E  table tbody div p span {
+    display:none;
+}
+.AD_E_Table-row-type-2 {
+   border:1px solid #999999;
+}                             
+/*********************************************************************************/
+/*** AD 0 / 1 / 1.1 / 1.2 / 1.4 / 1.5 / ************************************/
+.AD_0,
+.AD_1,
+.AD_1_1,
+.AD_1_2,
+.AD_1_4,
+.AD_1_5 {
+	border-style:none;
+	white-space: normal;
+}
+.AD_0_title,
+.AD_1_title,
+.AD_1_1_title,
+.AD_1_2_title,
+.AD_1_4_title,
+.AD_1_5_title  {
+	border-style:none;
+	white-space: normal;
+}
+.AD_0_table  tr:nth-child(n) td,
+.AD_1_table  tr:nth-child(n) td,
+.AD_1_1_table  tr:nth-child(n) td,
+.AD_1_2_table  tr:nth-child(n) td,
+.AD_1_4_table  tr:nth-child(n) td,
+.AD_1_5_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.AD_0_IndSubTable  tr:nth-child(n) td,
+.AD_1_IndSubTable  tr:nth-child(n) td,
+.AD_1_1_IndSubTable  tr:nth-child(n) td,
+.AD_1_2_IndSubTable  tr:nth-child(n) td,
+.AD_1_4_IndSubTable  tr:nth-child(n) td,
+.AD_1_5_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.AD_0_IndSubTable  tr:nth-child(n) th,
+.AD_1_IndSubTable  tr:nth-child(n) th,
+.AD_1_1_IndSubTable  tr:nth-child(n) th,
+.AD_1_2_IndSubTable  tr:nth-child(n) th,
+.AD_1_4_IndSubTable  tr:nth-child(n) th,
+.AD_1_5_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    /*text-align: center;*/
+    border:none;
+}
+.AD_0_IndSubTable .Table-row-type-1,
+.AD_1_IndSubTable .Table-row-type-1,
+.AD_1_1_IndSubTable .Table-row-type-1,
+.AD_1_2_IndSubTable .Table-row-type-1,
+.AD_1_4_IndSubTable .Table-row-type-1,
+.AD_1_5_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.AD_0_IndSubTable table tr:nth-child(n) td,
+.AD_1_IndSubTable table tr:nth-child(n) td,
+.AD_1_1_IndSubTable table tr:nth-child(n) td,
+.AD_1_2_IndSubTable table tr:nth-child(n) td,
+.AD_1_4_IndSubTable table tr:nth-child(n) td,
+.AD_1_5_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.AD_0_IndSubTable_title thead,
+.AD_1_IndSubTable_title thead,
+.AD_1_1_IndSubTable_title thead,
+.AD_1_2_IndSubTable_title thead,
+.AD_1_4_IndSubTable_title thead,
+.AD_1_5_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+
+
+/***********************************************************************************/
+/*** AD 1.3 **********************************************************************/
+.AD_1_3  {
+	border-style:none;
+	white-space: normal;
+}
+.AD_1_3_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.AD_1_3_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.AD_1_3_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.AD_1_3_IndSubTable thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+
+/*********************************************************************************/
+/*** AD 2 **********************************************************************/
+.AD_2_Generic  {
+	border-style:none;
+	white-space: normal;
+}
+.AD_2_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000;
+	/*text-align: center;*/
+}
+.AD_2_table  tr:nth-child(n) th {+
+	color: #000000 ;
+    /*text-align: center;*/
+  /*  border: 1px solid #778899;*/
+    padding: 0;
+    border:1px solid #778899;
+}
+.AD_2_table table tr:nth-child(2) th:nth-child(2) {
+    border-left:1px solid #778899;
+} 
+/*
+.AD_2_table tr:nth-child(n) td {
+    font-size: 90%; 
+}  */
+   
+.AD_2_title {   
+ 	color: #800000 ;
+    /*text-align: center;*/
+    /*text-transform: uppercase;
+    font-weight: bold;*/
+    white-space: normal;
+    margin: 0px;
+}
+
+.AD_2_title #IDENT {
+    color: #000000;
+}
+a[id*="IDS_TABLE"] + table  {
+    border:1px solid #778899;/* !important;*/
+}
+
+
+.AD_2_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000;
+	/*text-align: center;*/
+	padding:0;
+	border-spacing: 0;
+}
+
+.AD_2_table table td:first-child,
+.AD_2_table table th:first-child {
+	border-left:none;
+}
+
+.AD_2_table table tr:first-child th,
+.AD_2_table table tr:first-child td  {
+	border-top:none;
+}
+	
+.AD_2_table table td:last-child, 
+.AD_2_table table th:last-child {
+	border-right:none;
+}
+
+.AD_2_table table tr:last-child td {
+	border-bottom:none;
+}
+
+
+/*.AD_2_title {   
+ 	color: #800000 ;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    white-space: normal;
+}*/
+
+.AD_2_table .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899;
+	padding:0;
+	border-spacing: 0;
+}
+
+.AD_2_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+.AD_2_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.AD_2_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    /*text-align: center;*/
+    border:none;
+}
+.AD_2_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.AD_2_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.AD_2_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+
+
+/*** AD 3 **********************************************************************/
+.AD_3_Generic  {
+	border-style:none;
+	white-space: normal;
+}
+.AD_3_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.AD_3_table  tr:nth-child(n) th {
+	color: #000000 ;
+    /*text-align: center;*/
+  /*  border: 1px solid #778899;*/
+    padding: 0;
+    border:1px solid #778899;
+}
+.AD_3_table table tr:nth-child(2) th:nth-child(2) {
+    border-left:1px solid #778899;
+} 
+/*
+.AD_2_table tr:nth-child(n) td {
+    font-size: 90%; 
+}  */
+   
+.AD_3_title {   
+ 	color: #800000 ;
+    /*text-align: center;*/
+    /*text-transform: uppercase;
+    font-weight: bold;*/
+    white-space: normal;
+    margin: 0px;
+    border: none;
+}
+
+.AD_3_title #IDENT {
+    color: #000000;
+}
+a[id*="IDS_TABLE"] + table  {
+    border:1px solid #778899;/* !important;*/
+}
+
+
+.AD_3_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+	padding:0;
+	border-spacing: 0;
+}
+
+.AD_3_table table td:first-child,
+.AD_3_table table th:first-child {
+	border-left:none;
+}
+
+.AD_3_table table tr:first-child th,
+.AD_3_table table tr:first-child td  {
+	border-top:none;
+}
+	
+.AD_3_table table td:last-child, 
+.AD_3_table table th:last-child {
+	border-right:none;
+}
+
+.AD_3_table table tr:last-child td {
+	border-bottom:none;
+}
+
+
+/*.AD_2_title {   
+ 	color: #800000 ;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    white-space: normal;
+}*/
+
+.AD_3_table .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899;
+	padding:0;
+	border-spacing: 0;
+}
+
+.AD_3_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+.AD_3_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.AD_3_IndSubTable  tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    /*text-align: center;*/
+    border:none;
+}
+.AD_3_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.AD_3_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.AD_3_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+.a[id*="_TITLE"] {
+   border:none !important;
+   border-style: none;
+}
+/*********************************************************************************/
+/*** AD 2.1 **********************************************************************/
+.AD_2_1_Generic  {
+	border-style:none;
+	white-space: normal;
+}
+.AD_2_1_table  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.AD_2_1_title {   
+ 	color: #800000 ;
+    /*text-align: center;*/
+    text-transform: uppercase;
+    /*font-weight: bold;*/
+    white-space: normal;
+}
+.AD_2_1_title td br {
+    display:none;
+}  
+.AD_2_1_table .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.AD_2_1_table table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.AD_2_1_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+/*********************************************************************************/
+/************************** TH NEL CASO DI CANCELLAZIONE INTERA TABELLA **********/
+.ENR_1_IndSubTable th, 
+.ENR_1_1_IndSubTable th, 
+.ENR_1_11_IndSubTable th, 
+.ENR_1_12_IndSubTable th,
+.ENR_1_13_IndSubTable th,
+.ENR_1_14_IndSubTable th,
+.ENR_1_2_IndSubTable th,
+.ENR_1_4_IndSubTable th,
+.ENR_1_5_IndSubTable th,
+.ENR_1_6_IndSubTable th,
+.ENR_1_7_IndSubTable th,
+.ENR_1_8_IndSubTable th,
+.ENR_1_9_IndSubTable th,
+.ENR_1_10_IndSubTable th,
+.ENR_2_IndSubTable th,
+.ENR_2_1_IndSubTable th,
+.ENR_2_2_IndSubTable th, 
+.ENR_3_IndSubTable th,
+.ENR_3_1_IndSubTable th,
+.ENR_3_1a_IndSubTable th,
+.ENR_3_2_IndSubTable th,
+.ENR_3_3_IndSubTable th,
+.ENR_3_4_IndSubTable th,
+.ENR_3_5_IndSubTable th,
+.ENR_3_6_IndSubTable th,
+.ENR_4_1_IndSubTable th,
+.ENR_4_2_IndSubTable th,
+.ENR_4_3_IndSubTable th,
+.ENR_4_4_IndSubTable th,
+.ENR_4_5_IndSubTable th,
+.ENR_5_1_IndSubTable th,
+.ENR_5_2_IndSubTable th,
+.ENR_5_3_IndSubTable th,
+.ENR_5_4_IndSubTable th,
+.ENR_5_5_IndSubTable th {   
+ 	background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+
+.GEN_1_2_IndSubTable th, 
+.GEN_1_7_IndSubTable th, 
+.GEN_2_1_IndSubTable th, 
+.GEN_2_2_IndSubTable th, 
+.GEN_2_3_IndSubTable th, 
+.GEN_2_4_IndSubTable th,
+.GEN_2_5_IndSubTable th,
+.GEN_2_6_IndSubTable th,
+.GEN_2_7_IndSubTable th,
+.GEN_3_1_IndSubTable th,
+.GEN_3_2_IndSubTable th,
+.GEN_3_3_IndSubTable th,
+.GEN_3_4_IndSubTable th,
+.GEN_3_5_IndSubTable th,
+.GEN_3_6_IndSubTable th {   
+ 	background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+
+.AD_0_IndSubTable  th,
+.AD_1_IndSubTable th,
+.AD_1_1_IndSubTable th,
+.AD_1_2_IndSubTable th,
+.AD_1_4_IndSubTable th,
+.AD_1_5_IndSubTable th,
+.AD_2_IndSubTable th,
+.AD_2_1_IndSubTable th {   
+ 	background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+/*********************************************************************************/
+
+.noborder td {
+    border-style:none !important;
+	white-space: normal;
+}
+
+/*
+.5_8_table  {
+	border:1px solid #778899;
+	white-space: normal;
+    width: 100%;   
+}
+.5_8_table tfoot{
+    display:none;
+}
+.5_8_table  tr:nth-child(n) td {
+	border:1px solid #778899;
+	color: #000000 ;
+    text-align: center;
+}
+*/
+
+
+
+
+/************************************ ADR *******************************/
+
+.PARTE_D,
+.ADR_5,
+.ADR_5_1,
+.ADR_5_2,
+.ADR_5_3,
+.ADR_5_4,
+.ADR_5_5,
+.ADR_5_6,
+.ADR_5_7,
+.ADR_5_8,
+.ADR_5_9,
+.ADR_5_10,
+.ADR_5_11,
+.ADR_6,
+.ADR_6_1,
+.ADR_6_2,
+.ADR_6_3 {
+	border-style:none;
+	white-space: normal;
+}
+.PARTE_D_table  tr:nth-child(n) td,
+.ADR_5_table  tr:nth-child(n) td,
+.ADR_5_1_table  tr:nth-child(n) td,
+.ADR_5_2_table  tr:nth-child(n) td,
+.ADR_5_3_table  tr:nth-child(n) td,
+.ADR_5_4_table  tr:nth-child(n) td,
+.ADR_5_5_table  tr:nth-child(n) td,
+.ADR_5_6_table  tr:nth-child(n) td,
+.ADR_5_7_table  tr:nth-child(n) td,
+.ADR_5_8_table  tr:nth-child(n) td,
+.ADR_5_9_table  tr:nth-child(n) td,
+.ADR_5_10_table  tr:nth-child(n) td,
+.ADR_5_11_table  tr:nth-child(n) td,
+.ADR_6_table  tr:nth-child(n) td,
+.ADR_6_1_table  tr:nth-child(n) td,
+.ADR_6_2_table  tr:nth-child(n) td,
+.ADR_6_3_table  tr:nth-child(n) td  {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.PARTE_D_title,
+.ADR_5_title,
+.ADR_5_1_title,
+.ADR_5_2_title,
+.ADR_5_3_title,
+.ADR_5_4_title,
+.ADR_5_5_title,
+.ADR_5_6_title,
+.ADR_5_7_title,
+.ADR_5_8_title,
+.ADR_5_9_title,
+.ADR_5_10_title,
+.ADR_5_11_title,
+.ADR_6_title,
+.ADR_6_1_title,
+.ADR_6_2_title,
+.ADR_6_3_title {   
+ 	color: #800000 ;
+    /*text-align: center;*/
+    text-transform: uppercase;
+    /*font-weight: bold;*/
+    white-space: normal;
+}
+.PARTE_D_title tr:first-child td,
+.ADR_5_title tr:first-child td,
+.ADR_5_1_title tr:first-child td,
+.ADR_5_2_title tr:first-child td,
+.ADR_5_3_title tr:first-child td,
+.ADR_5_4_title tr:first-child td,
+.ADR_5_5_title tr:first-child td,
+.ADR_5_6_title tr:first-child td,
+.ADR_5_7_title tr:first-child td,
+.ADR_5_8_title tr:first-child td,
+.ADR_5_9_title tr:first-child td,
+.ADR_5_10_title tr:first-child td,
+.ADR_5_11_title tr:first-child td,
+.ADR_6_title tr:first-child td,
+.ADR_6_1_title tr:first-child td,
+.ADR_6_2_title tr:first-child td,
+.ADR_6_3_title tr:first-child td {   
+     /*  text-align: center !important; */
+}
+.PARTE_D_IndSubTable  tr:nth-child(n) td,
+.ADR_5_IndSubTable  tr:nth-child(n) td,
+.ADR_5_1_IndSubTable  tr:nth-child(n) td,
+.ADR_5_2_IndSubTable  tr:nth-child(n) td,
+.ADR_5_3_IndSubTable  tr:nth-child(n) td,
+.ADR_5_4_IndSubTable  tr:nth-child(n) td,
+.ADR_5_5_IndSubTable  tr:nth-child(n) td,
+.ADR_5_6_IndSubTable  tr:nth-child(n) td,
+.ADR_5_7_IndSubTable  tr:nth-child(n) td,
+.ADR_5_8_IndSubTable  tr:nth-child(n) td,
+.ADR_5_9_IndSubTable  tr:nth-child(n) td,
+.ADR_5_10_IndSubTable  tr:nth-child(n) td,
+.ADR_5_11_IndSubTable  tr:nth-child(n) td,
+.ADR_6_IndSubTable  tr:nth-child(n) td,
+.ADR_6_1_IndSubTable  tr:nth-child(n) td,
+.ADR_6_2_IndSubTable  tr:nth-child(n) td,
+.ADR_6_3_IndSubTable  tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.PARTE_D_IndSubTable .Table-row-type-1,
+.ADR_5_IndSubTable .Table-row-type-1,
+.ADR_5_1_IndSubTable .Table-row-type-1,
+.ADR_5_2_IndSubTable .Table-row-type-1,
+.ADR_5_3_IndSubTable .Table-row-type-1,
+.ADR_5_4_IndSubTable .Table-row-type-1,
+.ADR_5_5_IndSubTable .Table-row-type-1,
+.ADR_5_6_IndSubTable .Table-row-type-1,
+.ADR_5_7_IndSubTable .Table-row-type-1,
+.ADR_5_8_IndSubTable .Table-row-type-1,
+.ADR_5_9_IndSubTable .Table-row-type-1,
+.ADR_5_10_IndSubTable .Table-row-type-1,
+.ADR_5_11_IndSubTable .Table-row-type-1,
+.ADR_6_IndSubTable .Table-row-type-1,
+.ADR_6_1_IndSubTable .Table-row-type-1,
+.ADR_6_2_IndSubTable .Table-row-type-1, 
+.ADR_6_3_IndSubTable .Table-row-type-1 {
+    background-color: #8DB3E1;
+    border: 1px solid #778899 !important;
+}
+.PARTE_D_IndSubTable table tr:nth-child(n) td,
+.ADR_5_IndSubTable table tr:nth-child(n) td,
+.ADR_5_1_IndSubTable table tr:nth-child(n) td,
+.ADR_5_2_IndSubTable table tr:nth-child(n) td,
+.ADR_5_3_IndSubTable table tr:nth-child(n) td,
+.ADR_5_4_IndSubTable table tr:nth-child(n) td,
+.ADR_5_5_IndSubTable table tr:nth-child(n) td,
+.ADR_5_6_IndSubTable table tr:nth-child(n) td,
+.ADR_5_7_IndSubTable table tr:nth-child(n) td,
+.ADR_5_8_IndSubTable table tr:nth-child(n) td,
+.ADR_5_9_IndSubTable table tr:nth-child(n) td,
+.ADR_5_10_IndSubTable table tr:nth-child(n) td,
+.ADR_5_11_IndSubTable table tr:nth-child(n) td,
+.ADR_6_IndSubTable table tr:nth-child(n) td,
+.ADR_6_1_IndSubTable table tr:nth-child(n) td,
+.ADR_6_2_IndSubTable table tr:nth-child(n) td,
+.ADR_6_3_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.PARTE_D_IndSubTable thead,
+.ADR_5_IndSubTable thead,
+.ADR_5_1_IndSubTable thead,
+.ADR_5_2_IndSubTable thead,
+.ADR_5_3_IndSubTable thead,
+.ADR_5_4_IndSubTable thead,
+.ADR_5_5_IndSubTable thead,
+.ADR_5_6_IndSubTable thead,
+.ADR_5_7_IndSubTable thead,
+.ADR_5_8_IndSubTable thead,
+.ADR_5_9_IndSubTable thead,
+.ADR_5_10_IndSubTable thead,
+.ADR_5_11_IndSubTable thead,
+.ADR_6_IndSubTable thead,
+.ADR_6_1_IndSubTable thead,
+.ADR_6_2_IndSubTable thead,
+.ADR_6_3_IndSubTable thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+
+.PARTE_D_IndSubTable th,
+.ADR_5_IndSubTable th,
+.ADR_5_1_IndSubTable th,
+.ADR_5_2_IndSubTable th,
+.ADR_5_3_IndSubTable th,
+.ADR_5_4_IndSubTable th,
+.ADR_5_5_IndSubTable th,
+.ADR_5_6_IndSubTable th,
+.ADR_5_7_IndSubTable th,
+.ADR_5_8_IndSubTable th,
+.ADR_5_9_IndSubTable th,
+.ADR_5_10_IndSubTable th,
+.ADR_5_11_IndSubTable th,
+.ADR_6_IndSubTable th,
+.ADR_6_1_IndSubTable th,
+.ADR_6_2_IndSubTable th,
+.ADR_6_3_IndSubTable th {   
+ 	  background-color:#8DB3E1 !important;
+	  border:1px solid #778899 !important;
+}
+
+ 
+.Table-row-type-1-ADR {
+   background-color: #8DB3E1;
+   border:1px solid #778899 !important;
+}
+
+.Table-row-type-ADR {
+    background-color: #8DB3E1;
+    border:1px solid #778899 !important;
+}
+
+.Table-row-type-2-ADR {
+    background-color: #8DB3E1;
+    border:1px solid #778899 !important;
+}
+
+.lineFraction span {
+	border-bottom: thin solid #000000 !important;
+	padding-left: 15px !important;
+	padding-right: 15px !important;
+}
+
+.bold {
+	 font-weight: 900;
+}
+.normal{
+	 font-weight: normal;
+	 font-style: normal;
+}
+
+.italic {
+	font-style: italic;
+}
+.underline { 
+	text-decoration: underline; 
+}
+
+/*********************** AD 3 SUBSECTIONS ***********************************************/
+/*** AD 3 SUBSECTIONS *********************************************************************/
+.AD_3_1,
+.AD_3_2,
+.AD_3_3,
+.AD_3_4,
+.AD_3_5,
+.AD_3_6,
+.AD_3_7,
+.AD_3_8,
+.AD_3_9,
+.AD_3_10,
+.AD_3_11,
+.AD_3_12,
+.AD_2_12,
+.AD_3_13,  
+.AD_3_14,
+.AD_3_15{
+	border-style:none;
+	white-space: normal;
+}
+.AD_3_1_title,
+.AD_3_2_title,
+.AD_3_3_title,
+.AD_3_4_title,
+.AD_3_5_title,
+.AD_3_6_title,
+.AD_3_7_title,
+.AD_3_8_title,
+.AD_3_9_title,
+.AD_3_10_title,
+.AD_3_11_title,
+.AD_3_12_title,
+.AD_2_12_title,
+.AD_3_13_title,
+.AD_3_14_title,
+.AD_3_15_title  {
+	border-style:none;
+	white-space: normal;
+}
+.AD_3_1_table tr:nth-child(n) td,
+.AD_3_2_table tr:nth-child(n) td,
+.AD_3_3_table tr:nth-child(n) td,
+.AD_3_4_table tr:nth-child(n) td,
+.AD_3_5_table tr:nth-child(n) td,
+.AD_3_6_table tr:nth-child(n) td,
+.AD_3_7_table tr:nth-child(n) td,
+.AD_3_8_table tr:nth-child(n) td,
+.AD_3_9_table tr:nth-child(n) td,
+.AD_3_10_table tr:nth-child(n) td,
+.AD_3_11_table tr:nth-child(n) td,
+.AD_3_12_table tr:nth-child(n) td,
+.AD_2_12_table tr:nth-child(n) td,
+.AD_3_13_table tr:nth-child(n) td,
+.AD_3_14_table tr:nth-child(n) td,
+.AD_3_15_table tr:nth-child(n) td {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.AD_3_1_IndSubTable tr:nth-child(n) td,
+.AD_3_2_IndSubTable tr:nth-child(n) td,
+.AD_3_3_IndSubTable tr:nth-child(n) td,
+.AD_3_4_IndSubTable tr:nth-child(n) td,
+.AD_3_5_IndSubTable tr:nth-child(n) td,
+.AD_3_6_IndSubTable tr:nth-child(n) td,
+.AD_3_7_IndSubTable tr:nth-child(n) td,
+.AD_3_8_IndSubTable tr:nth-child(n) td,
+.AD_3_9_IndSubTable tr:nth-child(n) td,
+.AD_3_10_IndSubTable tr:nth-child(n) td,
+.AD_3_11_IndSubTable tr:nth-child(n) td,
+.AD_3_12_IndSubTable tr:nth-child(n) td,
+.AD_2_12_IndSubTable tr:nth-child(n) td,
+.AD_3_13_IndSubTable tr:nth-child(n) td,
+.AD_3_14_IndSubTable tr:nth-child(n) td,
+.AD_3_15_IndSubTable tr:nth-child(n) td{
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.AD_3_1_IndSubTable tr:nth-child(n) th,
+.AD_3_2_IndSubTable tr:nth-child(n) th,
+.AD_3_3_IndSubTable tr:nth-child(n) th,
+.AD_3_4_IndSubTable tr:nth-child(n) th,
+.AD_3_5_IndSubTable tr:nth-child(n) th,
+.AD_3_6_IndSubTable tr:nth-child(n) th,
+.AD_3_7_IndSubTable tr:nth-child(n) th,
+.AD_3_8_IndSubTable tr:nth-child(n) th,
+.AD_3_9_IndSubTable tr:nth-child(n) th,
+.AD_3_10_IndSubTable tr:nth-child(n) th,
+.AD_3_11_IndSubTable tr:nth-child(n) th,
+.AD_3_12_IndSubTable tr:nth-child(n) th,
+.AD_2_12_IndSubTable tr:nth-child(n) th,
+.AD_3_13_IndSubTable tr:nth-child(n) th,
+.AD_3_14_IndSubTable tr:nth-child(n) th,
+.AD_3_15_IndSubTable tr:nth-child(n) th {
+	background-color: #E6E6E6;
+	color: #000000 ;
+    /*text-align: center;*/
+    border:none;
+}
+.AD_3_1_IndSubTable .Table-row-type-1,
+.AD_3_2_IndSubTable .Table-row-type-1,
+.AD_3_3_IndSubTable .Table-row-type-1,
+.AD_3_4_IndSubTable .Table-row-type-1,
+.AD_3_5_IndSubTable .Table-row-type-1,
+.AD_3_6_IndSubTable .Table-row-type-1,
+.AD_3_7_IndSubTable .Table-row-type-1,
+.AD_3_8_IndSubTable .Table-row-type-1,
+.AD_3_9_IndSubTable .Table-row-type-1,
+.AD_3_10_IndSubTable .Table-row-type-1,
+.AD_3_11_IndSubTable .Table-row-type-1,
+.AD_3_12_IndSubTable .Table-row-type-1,
+.AD_2_12_IndSubTable .Table-row-type-1,
+.AD_3_13_IndSubTable .Table-row-type-1,
+.AD_3_14_IndSubTable .Table-row-type-1,
+.AD_3_15_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.AD_3_1_IndSubTable table tr:nth-child(n) td,
+.AD_3_2_IndSubTable table tr:nth-child(n) td,
+.AD_3_3_IndSubTable table tr:nth-child(n) td,
+.AD_3_4_IndSubTable table tr:nth-child(n) td,
+.AD_3_5_IndSubTable table tr:nth-child(n) td,
+.AD_3_6_IndSubTable table tr:nth-child(n) td,
+.AD_3_7_IndSubTable table tr:nth-child(n) td,
+.AD_3_8_IndSubTable table tr:nth-child(n) td,
+.AD_3_9_IndSubTable table tr:nth-child(n) td,
+.AD_3_10_IndSubTable table tr:nth-child(n) td,
+.AD_3_11_IndSubTable table tr:nth-child(n) td,
+.AD_3_12_IndSubTable table tr:nth-child(n) td,
+.AD_2_12_IndSubTable table tr:nth-child(n) td,
+.AD_3_13_IndSubTable table tr:nth-child(n) td,
+.AD_3_14_IndSubTable table tr:nth-child(n) td,
+.AD_3_15_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.AD_3_1_IndSubTable_title thead,
+.AD_3_2_IndSubTable_title thead,
+.AD_3_3_IndSubTable_title thead,
+.AD_3_4_IndSubTable_title thead,
+.AD_3_5_IndSubTable_title thead,
+.AD_3_6_IndSubTable_title thead,
+.AD_3_7_IndSubTable_title thead,
+.AD_3_8_IndSubTable_title thead,
+.AD_3_9_IndSubTable_title thead,
+.AD_3_10_IndSubTable_title thead,
+.AD_3_11_IndSubTable_title thead,
+.AD_3_12_IndSubTable_title thead,
+.AD_2_12_IndSubTable_title thead,
+.AD_3_13_IndSubTable_title thead,
+.AD_3_14_IndSubTable_title thead,
+.AD_3_15_IndSubTable_title thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+
+.AD_3_1_IndSubTable th,
+.AD_3_2_IndSubTable th,
+.AD_3_3_IndSubTable th,
+.AD_3_4_IndSubTable th,
+.AD_3_5_IndSubTable th,
+.AD_3_6_IndSubTable th,
+.AD_3_7_IndSubTable th,
+.AD_3_8_IndSubTable th,
+.AD_3_9_IndSubTable th,
+.AD_3_10_IndSubTable th,
+.AD_3_11_IndSubTable th,
+.AD_3_12_IndSubTable th,
+.AD_2_12_IndSubTable th,
+.AD_3_13_IndSubTable th,
+.AD_3_14_IndSubTable th,
+.AD_3_15_IndSubTable th {   
+ 	background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+
+/*********************** SUP e AIC ***********************************************/
+
+.SUP .lineFraction span,
+.AIC .lineFraction span, 
+.SUP_Checklist .lineFraction span,
+.AIC_Checklist .lineFraction span {
+  border-bottom: none !important;
+}
+.SUP,
+.AIC  {
+	border:none;
+}
+.SUP_Checklist,
+.AIC_Checklist  {
+	border:none;
+}
+
+.SUP_table:nth-child(2),
+.AIC_table:nth-child(2)  {
+	border:1px solid #778899;
+}
+
+.SUP_Checklist_table:nth-child(2),
+.AIC_Checklist_table:nth-child(2)  {
+	border:1px solid #778899;
+}
+
+.SUP_Checklist table:nth-child(2) th,
+.AIC_Checklist table:nth-child(2) th {
+    border:1px solid ;
+}
+
+/** START  setting for AIC/AIC Checklist header: remove border in SUP header **/
+
+a[id="AIC_HEADER"] + table td {
+    border: none !important;
+    color: #FFFFFF !important;
+}
+a[id="AIC_HEADER"] + table {
+   color: #FFFFFF !important;
+}
+
+a[id="AIC_HEADER"] + table .col1 {
+    width: 33%;
+}
+
+a[id="AIC_HEADER"] + table .col2 {
+    width: 34%;
+}
+
+a[id="AIC_HEADER"] + table .col3 {
+    width: 33%;
+}
+
+a[id="AIC_HEADER"] + table tr:last-child {
+  border-bottom: 1px solid !important;
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
+  background-color: #6699FF;
+}
+
+a[id="AIC_HEADER"] + table tr:nth-child(1) {
+  background-color: #6699FF;
+  color: white;
+}
+
+a[id="AIC_HEADER"] + table tr:nth-child(2) {
+  background-color: #6699FF;
+  color: white;
+}
+
+a[id="AIC_HEADER"] + table tr:nth-child(3) {
+  background-color: #6699FF;
+  color: white;
+}
+
+a[id="AIC_HEADER"] + table table tr:last-child {
+	border: none !important;
+}
+
+/** END setting for AIC/AIC Checklist header: remove border in SUP header **/
+
+/** START  setting for AIC Checklist title**/
+a[id="AIC_Resp_TITLE"] + table td {
+    border: none !important;
+	font-size: 13px;
+	color: #800000 !important;
+}
+a[id="AIC_Resp_TITLE"] + tr:nth-child(n) td {
+    border: none !important;
+	font-size: 13px;
+	color: #800000 !important;
+}
+a[id="AIC_Resp_TITLE_RIGHT"] + table td {
+    border: none !important;
+	font-size: 13px;
+	color: #800000 !important;
+}
+a[id="AIC_Resp_TITLE_RIGHT"] + tr:nth-child(n) td {
+    border: none !important;
+	font-size: 13px;
+	color: #800000 !important;
+}
+a[id="INFORCEAIC_TITLE"] + table td {
+    display: block;
+	text-align: justify;
+	text-indent: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+	font-size: 13px;
+	font-style: normal;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: Microsoft JhengHei;
+}
+
+a[id="INFORCEAIC_TITLE_RIGHT"] + table td {
+    display: block;
+	text-align: justify;
+	text-indent: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+	font-size: 13px;
+	font-style: normal;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: Microsoft JhengHei;
+}
+
+/** START  setting for SUP/SUP Checklist header: remove border in SUP header **/
+a[id="SUP_HEADER"] + table td {
+    border: none !important;
+}
+
+a[id="SUP_HEADER"] + table .col1 {
+    width: 33%;
+}
+
+a[id="SUP_HEADER"] + table .col2 {
+    width: 34%;
+}
+
+a[id="SUP_HEADER"] + table .col3 {
+    width: 33%;
+}
+
+a[id="SUP_HEADER"] + table tr:last-child {
+	border-bottom: 1px solid !important;
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
+  background-color: #ffff99;
+}
+
+a[id="SUP_HEADER"] + table tr:nth-child(1) {
+  background-color: #ffff99;
+}
+
+a[id="SUP_HEADER"] + table tr:nth-child(2) {
+  background-color: #ffff99;
+}
+
+a[id="SUP_HEADER"] + table tr:nth-child(3) {
+  background-color: #ffff99;
+}
+
+a[id="SUP_HEADER"] + table table tr:last-child {
+	border: none !important;
+}
+
+/** END setting for SUP/SUP Checklist header: remove border in SUP header **/
+
+
+.SUP_table td,
+.AIC_table td{
+    border:1px solid #778899;
+}
+
+.SUP_Checklist_table td,
+.AIC_Checklist_table td {
+    border: 1px solid #778899  !important;
+}
+
+
+
+.titlepage .AIC_IndSubTable  tr:nth-child(n) td,
+.titlepage .SUP_IndSubTable  tr:nth-child(n) td  {
+	border:1px solid #778899;/* !important;*/
+	color: #000000 ;
+    /*text-align: center;*/
+}
+.titlepage .AIC_IndSubTable .Table-row-type-1,
+.titlepage .SUP_IndSubTable .Table-row-type-1 {
+    background-color: #E6E6E6;
+    border: 1px solid #778899 !important;
+}
+.titlepage .AIC_IndSubTable table tr:nth-child(n) td ,
+.titlepage .SUP_IndSubTable table tr:nth-child(n) td {
+	border-style:none !important;
+	white-space: normal;
+}
+.titlepage .AIC_IndSubTable thead,
+.titlepage .SUP_IndSubTable thead {   
+ 	color: #000000 ;
+    /*text-align: center;*/   
+}
+
+/** The following settings define header colour for AICs **/
+
+#AIC_ROW1_Administrative,
+#AIC_ROW2_Administrative,
+#AIC_ROW3_Administrative,
+#AIC_ROW4_Administrative,
+#AIC_ROW1_INT_Administrative,
+#AIC_ROW2_INT_Administrative {
+background-color: #FFFFFF !important;
+}
+
+#AIC_ROW1_ATC,
+#AIC_ROW2_ATC,
+#AIC_ROW3_ATC,
+#AIC_ROW4_ATC,
+#AIC_ROW1_INT_ATC,
+#AIC_ROW2_INT_ATC {
+background-color: #ffff99 !important;
+}
+
+#AIC_ROW1_Safety,
+#AIC_ROW2_Safety,
+#AIC_ROW3_Safety,
+#AIC_ROW4_Safety,
+#AIC_ROW1_INT_Safety,
+#AIC_ROW2_INT_Safety {
+background-color: #ffcccc !important;
+}
+
+#AIC_ROW1_Danger,
+#AIC_ROW2_Danger,
+#AIC_ROW3_Danger,
+#AIC_ROW4_Danger,
+#AIC_ROW1_INT_Danger,
+#AIC_ROW2_INT_Danger{
+background-color: #ccaaff !important;
+}
+
+#AIC_ROW1_Maps,
+#AIC_ROW2_Maps,
+#AIC_ROW3_Maps,
+#AIC_ROW4_Maps,
+#AIC_ROW1_INT_Maps,
+#AIC_ROW2_INT_Maps{
+background-color: #99cc99 !important;
+}
+
+/** The following settings define header colour for SUPs and SUP Checklists **/
+
+#SUP_ROW1,
+#SUP_ROW2,
+#SUP_ROW3,
+#SUP_ROW4,
+#SUP_ROW_INT1,
+#SUP_ROW_INT2,
+#SUP_ROW_INT3,
+#SUP_ROW_INT4 {
+background-color: #ffff99 !important;
+}
+/*********************************************************************************/
+/*** DYNAMIC TABLES SETTINGS **********************************************************************/
+a[id="AD2.12_1_TABLE"] + table td {
+	        border:1px solid #778899 !important;
+}
+a[id="AD2.12_1_TABLE"] + table .col1 {
+	width: 14%;
+}
+a[id="AD2.12_1_TABLE"] + table .col2 {
+	width: 15%;
+}
+a[id="AD2.12_1_TABLE"] + table .col3 {
+	width: 16%;
+}
+a[id="AD2.12_1_TABLE"] + table .col4 {
+	width: 20%;
+}
+a[id="AD2.12_1_TABLE"] + table .col5 {
+	width: 20%;
+}
+a[id="AD2.12_1_TABLE"] + table .col6 {
+	width: 15%;
+}
+
+a[id="AD2.12_2_TABLE"] + table td {
+	        border:1px solid #778899 !important;
+}
+a[id="AD2.12_2_TABLE"] + table .col1 {
+	width: 14%;
+}
+a[id="AD2.12_2_TABLE"] + table .col2 {
+	width: 17%;
+}
+a[id="AD2.12_2_TABLE"] + table .col3 {
+	width: 17%;
+}
+a[id="AD2.12_2_TABLE"] + table .col4 {
+	width: 17%;
+}
+a[id="AD2.12_2_TABLE"] + table .col5 {
+	width: 18%;
+}
+a[id="AD2.12_2_TABLE"] + table .col6 {
+	width: 17%;
+}
+
+a[id="AD2_12_C_TABLE"] + table td {
+	        border:1px solid #778899 !important;
+}
+a[id="AD2_12_C_TABLE"] + table .col1 {
+	width: 14%;
+}
+a[id="AD2_12_C_TABLE"] + table .col2 {
+	width: 20%;
+}
+a[id="AD2_12_C_TABLE"] + table .col3 {
+	width: 20%;
+}
+a[id="AD2_12_C_TABLE"] + table .col4 {
+	width: 46%;
+}
+
+a[id="AD2.13_TABLE_Red"] + table td {
+	        border:1px solid #778899 !important;
+}
+
+a[id="AD2.14_TABLE"] + table td {
+	        border:1px solid #778899 !important;
+}
+a[id="AD2.14_TABLE"] + table .col1 {
+	width: 11%;
+}
+a[id="AD2.14_TABLE"] + table .col2 {
+	width: 11%;
+}
+a[id="AD2.14_TABLE"] + table .col3 {
+	width: 11%;
+}
+a[id="AD2.14_TABLE"] + table .col4 {
+	width: 10%;
+}
+a[id="AD2.14_TABLE"] + table .col5 {
+	width: 10%;
+}
+a[id="AD2.14_TABLE"] + table .col6 {
+	width: 13%;
+}
+a[id="AD2.14_TABLE"] + table .col7 {
+	width: 14%;
+}
+a[id="AD2.14_TABLE"] + table .col8 {
+	width: 10%;
+}
+a[id="AD2.14_TABLE"] + table .col9 {
+	width: 10%;
+}
+
+a[id="AD2_14_B_TABLE"] + table td {
+	        border:1px solid #778899 !important;
+}
+a[id="AD2_14_B_TABLE"] + table .col1 {
+	width: 11%;
+}
+a[id="AD2_14_B_TABLE"] + table .col2 {
+	width: 89%;
+}
+
+a[id="AD2.18_TABLE"] + table td {
+	        border:1px solid #778899 !important;
+}
+a[id="AD2.18_TABLE"] + table .col1 {
+	width: 15%;
+}
+a[id="AD2.18_TABLE"] + table .col2 {
+	width: 25%;
+}
+a[id="AD2.18_TABLE"] + table .col3,
+a[id="AD2.18_TABLE"] + table .col4,
+a[id="AD2.18_TABLE"] + table .col5 {
+	width: 20%;
+}
+
+a[id="AD2.19_TABLE"] + table td {
+	        border:1px solid #778899 !important;
+}
+a[id="AD2.19_TABLE"] + table .col1 {
+	width: 18%;
+}
+a[id="AD2.19_TABLE"] + table .col2 {
+	width: 11%;
+}
+a[id="AD2.19_TABLE"] + table .col3 {
+	width: 14%;
+}
+a[id="AD2.19_TABLE"] + table .col4 {
+	width: 14%;
+}
+a[id="AD2.19_TABLE"] + table .col5 {
+	width: 14%;
+}
+a[id="AD2.19_TABLE"] + table .col6 {
+	width: 14%;
+}
+a[id="AD2.19_TABLE"] + table .col7 {
+	width: 15%;
+}			
+</style>
+<style data-archived-from="https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eAIP-tables.css">.AD-2TableDefaultC1 {
+	width: 40px;
+}
+.AD-2TableDefaultC2 {
+	width: 200px;
+}
+.AD-2TableDefaultC3 {
+	/* 3rd column width undefined: left to the browser */
+}
+
+col.colwidth1 { width: 22px;}
+col.colwidth2 { width: 44px;}
+col.colwidth3 { width: 66px;}
+col.colwidth4 { width: 88px;}
+col.colwidth5 { width: 110px;}
+col.colwidth6 { width: 132px;}
+col.colwidth7 { width: 154px;}
+col.colwidth8 { width: 176px;}
+col.colwidth9 { width: 198px;}
+col.colwidth10 { width: 220px;}
+col.colwidth11 { width: 242px;}
+col.colwidth12 { width: 264px;}
+col.colwidth13 { width: 286px;}
+col.colwidth14 { width: 308px;}
+col.colwidth15 { width: 330px;}
+col.colwidth16 { width: 352px;}
+col.colwidth17 { width: 374px;}
+col.colwidth18 { width: 396px;}
+col.colwidth19 { width: 418px;}
+col.colwidth20 { width: 440px;}
+col.colwidth21 { width: 462px;}
+col.colwidth22 { width: 484px;}
+col.colwidth23 { width: 506px;}
+col.colwidth24 { width: 528px;}
+col.colwidth25 { width: 550px;}
+col.colwidth26 { width: 572px;}
+col.colwidth27 { width: 594px;}
+col.colwidth28 { width: 616px;}
+col.colwidth29 { width: 638px;}
+col.colwidth30 { width: 660px;}
+col.colwidth31 { width: 682px;}
+col.colwidth32 { width: 704px;}
+col.colwidth33 { width: 726px;}
+col.colwidth34 { width: 748px;}
+col.colwidth35 { width: 770px;}
+
+
+/* Special width sizes - to assist editors to improve the look of tables ... */
+.w05pc { width: 05%;}
+.w10pc { width: 10%;}
+.w15pc { width: 15%;}
+.w20pc { width: 20%;}
+.w25pc { width: 25%;}
+.w30pc { width: 30%;}
+.w33pc { width: 33%;}
+.w35pc { width: 35%;}
+.w40pc { width: 40%;}
+.w45pc { width: 45%;}
+.w50pc { width: 50%;}
+.w55pc { width: 55%;}
+.w60pc { width: 60%;}
+.w65pc { width: 65%;}
+.w66pc { width: 66%;}
+.w70pc { width: 70%;}
+.w75pc { width: 75%;}
+.w80pc { width: 80%;}
+.w85pc { width: 85%;}
+.w90pc { width: 90%;}
+.w95pc { width: 95%;}
+/* Internet Explorer is well known for getting 100% wrong - so 99% is the best approximation */
+.w99pc { width: 99%;}</style>
+<style data-archived-from="https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eAIP-Amdt-hide.css">/************************************************************************************************
+    @Copyright (c) IDS AIRNAV, all rights reserved.
+*************************************************************************************************/
+.AmdtInsertedAIRAC, .AmdtInsertedNon-AIRAC {
+}
+ins.AmdtInsertedAIRAC, ins.AmdtInsertedNon-AIRAC {
+	text-decoration: none; 
+}
+.AmdtDeletedAIRAC, .AmdtDeletedNon-AIRAC {
+	display: none;
+}
+
+.deleted, .deletedAIRAC, .deletedNon-AIRAC{
+	display: none;
+}
+
+.added, .addedAIRAC, .addedNon-AIRAC, .changed, .changedAIRAC, .changedNon-AIRAC  {
+	text-decoration: none !important;
+	background:none !important;
+}
+
+</style>
+<style data-archived-from="https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eAIP-Amdt-show.css">
+.AmdtInserted, .AmdtInserted td, .AmdtInserted th, .deleted, .deleted td, .deleted th {
+}
+.AmdtInsertedAIRAC, .AmdtInsertedAIRAC td, .added th , .added, .added td, .addedAIRAC th ,.addedAIRAC, .addedAIRAC td, .addedAIRAC th {
+	background-color: #ffcccc !important;
+}
+.AmdtInsertedNon-AIRAC, .AmdtInsertedNon-AIRAC td, .AmdtInsertedNon-AIRAC th, .addedNon-AIRAC th ,.addedNon-AIRAC, .addedNon-AIRAC td, .addedNon-AIRAC th {
+	background-color: #ccccff !important;
+}
+.AmdtDeletedAIRAC, .AmdtDeletedAIRAC td, .AmdtDeletedAIRAC th ,.deleted, .deleted td, .deleted th,.deletedAIRAC, .deletedAIRAC td, .deletedAIRAC th {
+	background-color: #cc9999 !important;
+}
+.AmdtDeletedNon-AIRAC, .AmdtDeletedNon-AIRAC td, .AmdtDeletedNon-AIRAC th, .deletedNon-AIRAC, .deletedNon-AIRAC td, .deletedNon-AIRAC th  {
+	background-color: #9999cc !important;
+}
+ins.AmdtInsertedAIRAC, ins.AmdtInsertedNon-AIRAC ,ins.added, ins.addedAIRAC, ins.addedNon-AIRAC{
+	text-decoration: none; /* ins is underlined by default; value should be "inherit", but IE5.5 is broken */
+}
+.AmdtDeleted, .deleted, .deletedAIRAC, .deletedNon-AIRAC  {
+	text-decoration: line-through;
+}
+
+.selectedSection {
+    border: solid red 2px !important;
+}
+
+.deleted a:focus, .deletedAIRAC a:focus, .deletedNon-AIRAC a:focus { 
+    outline: none; 
+}
+.added a:focus, .addedAIRAC a:focus, .addedNon-AIRAC a:focus{ 
+    outline: none; 
+}</style>
 
 
 <style space="preserve" type="text/css">
@@ -34,45 +5487,8 @@ span.changed { background-color: #99ff99; }
 span.off     {  }
             </style>
 
-
-<style>
-      body {
-        margin: 0;
-        background: #f4f6f8;
-        color: #172033;
-        font-family: Arial, Helvetica, sans-serif;
-        line-height: 1.55;
-      }
-      .archive-banner {
-        box-sizing: border-box;
-        width: 100%;
-        padding: 12px 18px;
-        background: #0b2d4d;
-        color: white;
-        font-size: 14px;
-      }
-      .archive-banner a {
-        color: #d9ecff;
-      }
-      body > *:not(.archive-banner) {
-        max-width: 1100px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      img {
-        max-width: 100%;
-        height: auto;
-      }
-      table {
-        max-width: 100%;
-        border-collapse: collapse;
-      }
-      td, th {
-        vertical-align: top;
-      }
-    </style>
 </head>
-<body onload="init()"><div class="archive-banner">Archived copy: SUP 14/26 | Official source: <a href="https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/14-26_2026_06_30/SUP-en-GB.html#SUP">https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/14-26_2026_06_30/SUP-en-GB.html#SUP</a></div>
+<body onload="init()"><div style="box-sizing:border-box;width:100%;padding:10px 16px;background:#102a43;color:#fff;font:14px Arial,sans-serif;position:relative;z-index:99999;">Archived copy: SUP 14/26 | Official source: <a href="https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/14-26_2026_06_30/SUP-en-GB.html#SUP" style="color:#d9ecff;">https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/14-26_2026_06_30/SUP-en-GB.html#SUP</a></div>
 <div id="floatingMenu"><input id="checkBox" onclick="toggleStyleSheet()" title="Show or hide Amendments" type="checkbox"/></div>
 <iframe class="TChart" frameborder="0" id="IncludeFileTop" name="IncludeFile" scrolling="no" src="TChart.html" width="100%">
 </iframe>
