@@ -327,11 +327,9 @@ function parseAipDate(dateString) {
    NEW RULE
 
    Normal:
-   Publication → Effective - 20 days = NEW
+   Publication Date → day before Effective Date = NEW
+   Effective Date → NEW removed
 
-   Exception:
-   If publication occurs less than 20 days before effective,
-   Publication → Effective = NEW
    ========================================================== */
 
 function isNewDocument(
