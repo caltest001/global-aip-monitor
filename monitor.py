@@ -123,13 +123,19 @@ aip_data = {
     "state": "Taiwan",
     "icao": "RC",
     "source": URL,
+
     "checked_at":
         datetime.now(
             timezone.utc
         ).isoformat(),
+
     "status": "OK",
-    "current": current_issue,
-    "next": next_issue
+
+    "current":
+        current_issue,
+
+    "next":
+        next_issue
 }
 
 
@@ -236,7 +242,9 @@ with open(
 
 if is_new:
 
-    print("🔴 NEW AIP UPDATE")
+    print(
+        "🔴 NEW AIP UPDATE"
+    )
 
     print(
         f"Previous: {previous_issue}"
@@ -254,36 +262,143 @@ else:
 
 
 # ============================================================
-# SUP / AIC Source Discovery
+# Automatic eAIP Package Discovery
 #
 # IMPORTANT:
 #
 # SUP and AIC are independent publications.
 #
-# AIRAC package folders below are only technical locations
+# AIRAC package folders are only technical locations
 # used by the Taiwan CAA website.
 #
-# SUP and AIC each independently select the menu with the
-# newest "Published as of" date.
+# We discover the package folders automatically from
+# the CAA homepage.
+#
+# SUP and AIC will independently select the menu with
+# the newest "Published as of" date.
 # ============================================================
 
-PACKAGE_CANDIDATES = [
+def discover_package_urls(home_soup):
 
-    (
-        "https://ais.caa.gov.tw/eaip/"
-        "AIRAC%20AIP%20AMDT%2004-26_2026_10_01/"
-    ),
+    packages = []
 
-    (
-        "https://ais.caa.gov.tw/eaip/"
-        "AIRAC%20AIP%20AMDT%2003-26_2026_08_06/"
+
+    for link in home_soup.find_all(
+        "a",
+        href=True
+    ):
+
+        href = link.get(
+            "href",
+            ""
+        )
+
+
+        href_upper = href.upper()
+
+
+        # Accept encoded or unencoded package links
+        if (
+            "AIP%20AMDT%20"
+            not in href_upper
+            and
+            "AIP AMDT "
+            not in href_upper
+        ):
+            continue
+
+
+        full_url = urljoin(
+            URL,
+            href
+        )
+
+
+        # ----------------------------------------------------
+        # Keep package folder only
+        # ----------------------------------------------------
+
+        index_position = (
+            full_url
+            .lower()
+            .find("/index.html")
+        )
+
+
+        if index_position != -1:
+
+            package_url = (
+                full_url[
+                    :index_position + 1
+                ]
+            )
+
+        elif full_url.endswith("/"):
+
+            package_url = (
+                full_url
+            )
+
+        else:
+
+            package_url = urljoin(
+                full_url,
+                "./"
+            )
+
+
+        # ----------------------------------------------------
+        # Deduplicate
+        # ----------------------------------------------------
+
+        if (
+            package_url
+            not in packages
+        ):
+
+            packages.append(
+                package_url
+            )
+
+
+    return packages
+
+
+PACKAGE_CANDIDATES = (
+    discover_package_urls(
+        soup
+    )
+)
+
+
+print(
+    f"Discovered "
+    f"{len(PACKAGE_CANDIDATES)} "
+    f"eAIP packages."
+)
+
+
+for package_url in (
+    PACKAGE_CANDIDATES
+):
+
+    print(
+        "Package candidate:",
+        package_url
     )
 
-]
+
+if not PACKAGE_CANDIDATES:
+
+    raise RuntimeError(
+        "No eAIP package URLs "
+        "were discovered from "
+        "the Taiwan CAA homepage."
+    )
 
 
 # ============================================================
-# Read "Published as of" from menu
+# Read "Published as of" from SUP / AIC Menu
 # ============================================================
 
 def get_menu_date(menu_url):
@@ -298,10 +413,12 @@ def get_menu_date(menu_url):
 
         r.raise_for_status()
 
+
         menu_soup = BeautifulSoup(
             r.text,
             "html.parser"
         )
+
 
         menu_text = menu_soup.get_text(
             " ",
@@ -321,13 +438,10 @@ def get_menu_date(menu_url):
             return None
 
 
-        published_date = datetime.strptime(
+        return datetime.strptime(
             match.group(1).upper(),
             "%d %b %Y"
         )
-
-
-        return published_date
 
 
     except Exception as e:
@@ -342,7 +456,12 @@ def get_menu_date(menu_url):
 
 
 # ============================================================
-# Select latest SUP or AIC menu independently
+# Select Latest SUP / AIC Menu
+#
+# SUP and AIC are selected independently.
+#
+# AIRAC number is NOT used to determine which menu wins.
+# Only the menu's own "Published as of" date is compared.
 # ============================================================
 
 def find_latest_menu(
@@ -362,8 +481,10 @@ def find_latest_menu(
         )
 
 
-        published_date = get_menu_date(
-            menu_url
+        published_date = (
+            get_menu_date(
+                menu_url
+            )
         )
 
 
@@ -415,7 +536,7 @@ def find_latest_menu(
 
 
 # ============================================================
-# SUP and AIC source selection
+# SUP and AIC Source Selection
 # ============================================================
 
 SUP_MENU_URL = find_latest_menu(
@@ -436,7 +557,7 @@ if not SUP_MENU_URL:
 
     raise RuntimeError(
         "Could not find a valid SUP menu. "
-        "Existing data will not be overwritten."
+        "Existing SUP/AIC data will not be overwritten."
     )
 
 
@@ -444,7 +565,7 @@ if not AIC_MENU_URL:
 
     raise RuntimeError(
         "Could not find a valid AIC menu. "
-        "Existing data will not be overwritten."
+        "Existing SUP/AIC data will not be overwritten."
     )
 
 
@@ -498,7 +619,10 @@ def get_document_links(
                 strip=True
             )
 
-            href = link["href"]
+            href = link.get(
+                "href",
+                ""
+            )
 
 
             number_match = re.search(
@@ -514,32 +638,31 @@ def get_document_links(
             number = (
                 number_match
                 .group(1)
-                .zfill(5)
             )
 
 
-            # --------------------------------------------
-            # SUP English document
-            # --------------------------------------------
+            # ------------------------------------------------
+            # SUP English Document
+            # ------------------------------------------------
 
             if doc_type == "SUP":
 
                 if (
-                    "SUP-en-GB.html"
-                    not in href
+                    "sup-en-gb.html"
+                    not in href.lower()
                 ):
                     continue
 
 
-            # --------------------------------------------
-            # AIC English document
-            # --------------------------------------------
+            # ------------------------------------------------
+            # AIC English Document
+            # ------------------------------------------------
 
             elif doc_type == "AIC":
 
                 if (
-                    "en-GB.html"
-                    not in href
+                    "en-gb.html"
+                    not in href.lower()
                 ):
                     continue
 
@@ -636,7 +759,11 @@ def parse_document(
 
 
         headings = doc_soup.find_all(
-            ["h1", "h2", "h3"]
+            [
+                "h1",
+                "h2",
+                "h3"
+            ]
         )
 
 
@@ -686,8 +813,10 @@ def parse_document(
 
         if (
             doc_type == "AIC"
-            and title == "—"
-            and "CHECKLIST"
+            and
+            title == "—"
+            and
+            "CHECKLIST"
             in doc_text.upper()
         ):
 
@@ -794,15 +923,17 @@ if aic_links is None:
 sup_documents = []
 
 
-for number, document_url in (
-    sup_links.items()
-):
+for (
+    number,
+    document_url
+) in sup_links.items():
 
     document = parse_document(
         number,
         document_url,
         "SUP"
     )
+
 
     if document:
 
@@ -818,15 +949,17 @@ for number, document_url in (
 aic_documents = []
 
 
-for number, document_url in (
-    aic_links.items()
-):
+for (
+    number,
+    document_url
+) in aic_links.items():
 
     document = parse_document(
         number,
         document_url,
         "AIC"
     )
+
 
     if document:
 
@@ -848,10 +981,12 @@ def document_sort(item):
             .split("/")
         )
 
+
         return (
             int(year),
             int(number)
         )
+
 
     except Exception:
 
@@ -874,37 +1009,43 @@ aic_documents.sort(
 
 
 # ============================================================
-# Result
+# Results
 # ============================================================
 
 print(
-    f"Found {len(sup_documents)} "
-    "SUP documents."
+    f"Found "
+    f"{len(sup_documents)} "
+    f"SUP documents."
 )
 
 print(
-    f"Found {len(aic_documents)} "
-    "AIC documents."
+    f"Found "
+    f"{len(aic_documents)} "
+    f"AIC documents."
 )
 
 
 # ============================================================
 # Safety Check
 #
-# Never overwrite valid existing files when scraping fails.
+# Taiwan currently has both SUP and AIC documents.
+#
+# If either collection unexpectedly becomes empty,
+# do NOT overwrite the existing valid JSON.
 # ============================================================
 
-total_documents = (
-    len(sup_documents)
-    +
-    len(aic_documents)
-)
-
-
-if total_documents == 0:
+if not sup_documents:
 
     raise RuntimeError(
-        "SUP/AIC scrape returned 0 documents. "
+        "SUP scrape returned 0 documents. "
+        "Existing JSON files will not be overwritten."
+    )
+
+
+if not aic_documents:
+
+    raise RuntimeError(
+        "AIC scrape returned 0 documents. "
         "Existing JSON files will not be overwritten."
     )
 
@@ -929,6 +1070,7 @@ documents_data = {
         "RC",
 
     "source": {
+
         "sup":
             SUP_MENU_URL,
 
@@ -961,7 +1103,7 @@ with open(
 
 
 # ============================================================
-# Keep taiwan_sup.json for Compatibility
+# Keep taiwan_sup.json for Frontend Compatibility
 # ============================================================
 
 sup_data = {
@@ -1000,9 +1142,10 @@ with open(
 
 
 print(
-    f"Saved {total_documents} "
-    "documents to "
-    "taiwan_documents.json"
+    f"Saved "
+    f"{len(all_documents)} "
+    f"documents to "
+    f"taiwan_documents.json"
 )
 
 
