@@ -1,3 +1,4 @@
+```
 import requests
 from bs4 import BeautifulSoup
 import json
@@ -1195,3 +1196,318 @@ for item in aic_documents:
         "|",
         item["title"]
     )
+```
+
+# ============================================================
+# Permanent Taiwan History
+#
+# This archive is append-only in practice:
+# - New items are added.
+# - Existing items are updated with last_seen/source_status.
+# - Items missing from the current official source are retained
+#   and marked REMOVED, never deleted.
+# ============================================================
+
+TAIWAN_HISTORY_FILE = "taiwan_history.json"
+history_now = datetime.now(timezone.utc).isoformat()
+
+
+def load_taiwan_history():
+    try:
+        with open(
+            TAIWAN_HISTORY_FILE,
+            "r",
+            encoding="utf-8"
+        ) as f:
+            data = json.load(f)
+
+        if not isinstance(data, dict):
+            raise ValueError("History root must be an object.")
+
+    except (
+        FileNotFoundError,
+        json.JSONDecodeError,
+        ValueError
+    ):
+        data = {
+            "country": "Taiwan",
+            "fir": "Taipei FIR",
+            "amendments": [],
+            "sup": [],
+            "aic": []
+        }
+
+    data.setdefault("country", "Taiwan")
+    data.setdefault("fir", "Taipei FIR")
+    data.setdefault("amendments", [])
+    data.setdefault("sup", [])
+    data.setdefault("aic", [])
+
+    return data
+
+
+def amendment_number(issue):
+    if not issue:
+        return None
+
+    amendment = issue.get("amendment")
+
+    if not amendment:
+        return None
+
+    match = re.search(
+        r"(\d{1,2}/\d{2})",
+        amendment
+    )
+
+    return match.group(1) if match else amendment
+
+
+def update_history_collection(
+    existing_items,
+    current_items,
+    key_field
+):
+    """
+    Merge the latest official-source snapshot into permanent history.
+
+    IMPORTANT:
+    A missing item is marked REMOVED but is never deleted.
+    """
+    by_key = {}
+
+    for item in existing_items:
+        key = item.get(key_field)
+
+        if key:
+            by_key[key] = dict(item)
+
+    active_keys = set()
+
+    for current_item in current_items:
+        key = current_item.get(key_field)
+
+        if not key:
+            continue
+
+        active_keys.add(key)
+
+        if key in by_key:
+            saved = by_key[key]
+
+            # Preserve first_seen, but refresh official metadata.
+            first_seen = saved.get(
+                "first_seen",
+                history_now
+            )
+
+            saved.update(current_item)
+            saved["first_seen"] = first_seen
+            saved["last_seen"] = history_now
+            saved["source_status"] = "ACTIVE"
+
+        else:
+            saved = dict(current_item)
+            saved["first_seen"] = history_now
+            saved["last_seen"] = history_now
+            saved["source_status"] = "ACTIVE"
+            by_key[key] = saved
+
+            print(
+                "🔴 NEW HISTORY ITEM:",
+                key
+            )
+
+    # Never delete history. If it is no longer visible in the
+    # official source snapshot, retain it and mark it REMOVED.
+    for key, saved in by_key.items():
+        if key not in active_keys:
+            saved["source_status"] = "REMOVED"
+
+    return list(by_key.values())
+
+
+taiwan_history = load_taiwan_history()
+
+
+# ------------------------------------------------------------
+# AIRAC / AIP AMDT history
+#
+# Current + Next + Previous are all useful historical evidence.
+# ------------------------------------------------------------
+
+current_amendments = []
+
+for issue in [
+    previous_issue_data,
+    current_issue,
+    next_issue
+]:
+    if not issue:
+        continue
+
+    number = amendment_number(issue)
+
+    if not number:
+        continue
+
+    current_amendments.append(
+        {
+            "number": number,
+            "amendment": issue.get("amendment"),
+            "title": issue.get("amendment"),
+            "publication_date": issue.get(
+                "publication_date"
+            ),
+            "effective_date": issue.get(
+                "effective_date"
+            ),
+            "source_url": (
+                build_package_url(issue)
+                or BASE_URL
+            )
+        }
+    )
+
+
+taiwan_history["amendments"] = (
+    update_history_collection(
+        taiwan_history.get(
+            "amendments",
+            []
+        ),
+        current_amendments,
+        "number"
+    )
+)
+
+
+# ------------------------------------------------------------
+# SUP history
+# ------------------------------------------------------------
+
+current_sup_history = []
+
+for item in sup_documents:
+    current_sup_history.append(
+        {
+            "number": item.get("number"),
+            "title": item.get("title"),
+            "publication_date": item.get(
+                "publication_date"
+            ),
+            "effective_from": item.get(
+                "effective_from"
+            ),
+            "effective_until": item.get(
+                "effective_until"
+            ),
+            "source_url": item.get("url")
+        }
+    )
+
+
+taiwan_history["sup"] = (
+    update_history_collection(
+        taiwan_history.get("sup", []),
+        current_sup_history,
+        "number"
+    )
+)
+
+
+# ------------------------------------------------------------
+# AIC history
+# ------------------------------------------------------------
+
+current_aic_history = []
+
+for item in aic_documents:
+    current_aic_history.append(
+        {
+            "number": item.get("number"),
+            "title": item.get("title"),
+            "publication_date": item.get(
+                "publication_date"
+            ),
+            "effective_from": item.get(
+                "effective_from"
+            ),
+            "effective_until": item.get(
+                "effective_until"
+            ),
+            "source_url": item.get("url")
+        }
+    )
+
+
+taiwan_history["aic"] = (
+    update_history_collection(
+        taiwan_history.get("aic", []),
+        current_aic_history,
+        "number"
+    )
+)
+
+
+def history_sort(item):
+    value = (
+        item.get("number")
+        or ""
+    )
+
+    match = re.search(
+        r"(\d{1,2})/(\d{2})",
+        value
+    )
+
+    if not match:
+        return (0, 0)
+
+    return (
+        int(match.group(2)),
+        int(match.group(1))
+    )
+
+
+taiwan_history["amendments"].sort(
+    key=history_sort,
+    reverse=True
+)
+
+taiwan_history["sup"].sort(
+    key=history_sort,
+    reverse=True
+)
+
+taiwan_history["aic"].sort(
+    key=history_sort,
+    reverse=True
+)
+
+taiwan_history["last_checked"] = history_now
+
+
+with open(
+    TAIWAN_HISTORY_FILE,
+    "w",
+    encoding="utf-8"
+) as f:
+    json.dump(
+        taiwan_history,
+        f,
+        ensure_ascii=False,
+        indent=2
+    )
+
+
+print(
+    "Saved permanent Taiwan history:",
+    len(taiwan_history["amendments"]),
+    "AMDT,",
+    len(taiwan_history["sup"]),
+    "SUP,",
+    len(taiwan_history["aic"]),
+    "AIC"
+)
+
