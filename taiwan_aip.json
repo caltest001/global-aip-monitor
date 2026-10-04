@@ -2,8 +2,16 @@
   "state": "Taiwan",
   "icao": "RC",
   "source": "https://ais.caa.gov.tw/eaip/",
-  "checked_at": "2026-10-04T06:57:36.691340+00:00",
-  "page_title": "eAIP R.O.C. Taiwan CAA",
+  "checked_at": "2026-10-04T06:59:35.746680+00:00",
   "status": "OK",
-  "raw_text": "eAIP R.O.C. Taiwan CAA eAIP TAIPEI FIR 請參考飛航公告提供之即時資訊 Consult NOTAM for Latest Information R.O.C. Taiwan CAA Currently Effective Issue Effective date Publication date Reason for Change 01 Oct 2026 20 Aug 2026 AIRAC AIP AMDT 04/26 Next Issues Effective date Publication date Reason for Change 29 Oct 2026 17 Sep 2026 AIRAC AIP AMDT 05/26 Expired Issues (Archives) These past amendments are provided for information. They are not to be used in operations anymore. Effective date Publication date Reason for Change 06 Aug 2026 25 Jun 2026 AIRAC AIP AMDT 03/26 14 May 2026 02 Apr 2026 AIRAC AIP AMDT 02/26 19 Mar 2026 05 Feb 2026 AIRAC AIP AMDT 01/26 25 Dec 2025 13 Nov 2025 AIRAC AIP AMDT 06/25 04 Sep 2025 24 Jul 2025 AIRAC AIP AMDT 05/25 10 Jul 2025 29 May 2025 AIRAC AIP AMDT 04/25 15 May 2025 03 Apr 2025 AIRAC AIP AMDT 03/25 17 Apr 2025 06 Mar 2025 AIRAC AIP AMDT 02/25 23 Jan 2025 12 Dec 2024 AIRAC AIP AMDT 01/25 28 Nov 2024 17 Oct 2024 AIRAC AIP AMDT 06/24 03 Oct 2024 22 Aug 2024 AIRAC AIP AMDT 05/24 08 Aug 2024 27 Jun 2024 AIRAC AIP AMDT 04/24 16 May 2024 04 Apr 2024 AIRAC AIP AMDT 03/24 22 Mar 2024 22 Mar 2024 AIP AMDT 01/24"
+  "current": {
+    "amendment": "AIRAC AIP AMDT 04/26",
+    "effective_date": "01 Oct 2026",
+    "publication_date": "20 Aug 2026"
+  },
+  "next": {
+    "amendment": "AIRAC AIP AMDT 05/26",
+    "effective_date": "29 Oct 2026",
+    "publication_date": "17 Sep 2026"
+  }
 }
