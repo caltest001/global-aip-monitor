@@ -1359,8 +1359,12 @@ for issue in [
                 "effective_date"
             ),
             "source_url": (
-                build_package_url(issue)
-                or BASE_URL
+                urljoin(
+                    build_package_url(issue),
+                    "documents/PDF/AMDT.pdf"
+                )
+                if build_package_url(issue)
+                else BASE_URL
             )
         }
     )
