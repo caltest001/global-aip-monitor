@@ -2,47 +2,26 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import re
-import os
 from datetime import datetime, timezone
 from urllib.parse import urljoin
 
 
 # ============================================================
-# Basic settings
+# Basic Settings
 # ============================================================
 
 URL = "https://ais.caa.gov.tw/eaip/"
 
-headers = {
+HEADERS = {
     "User-Agent": "Mozilla/5.0"
 }
 
 
 # ============================================================
-# Taiwan AIP AMDT Monitor
+# Helper Functions
 # ============================================================
 
-response = requests.get(
-    URL,
-    headers=headers,
-    timeout=30
-)
-
-response.raise_for_status()
-
-soup = BeautifulSoup(
-    response.text,
-    "html.parser"
-)
-
-text = soup.get_text(
-    " ",
-    strip=True
-)
-
-
 def extract_section(text, start, end):
-
     try:
         return (
             text
@@ -50,16 +29,13 @@ def extract_section(text, start, end):
             .split(end, 1)[0]
             .strip()
         )
-
     except IndexError:
         return ""
 
 
 def parse_issue(section):
 
-    date_pattern = (
-        r"(\d{2} [A-Z][a-z]{2} \d{4})"
-    )
+    date_pattern = r"(\d{2} [A-Z][a-z]{2} \d{4})"
 
     issue_pattern = (
         r"(AIRAC AIP AMDT|AIP AMDT)"
@@ -95,9 +71,32 @@ def parse_issue(section):
     }
 
 
-# ------------------------------------------------------------
-# Current issue
-# ------------------------------------------------------------
+# ============================================================
+# Load Taiwan CAA eAIP Homepage
+# ============================================================
+
+response = requests.get(
+    URL,
+    headers=HEADERS,
+    timeout=30
+)
+
+response.raise_for_status()
+
+soup = BeautifulSoup(
+    response.text,
+    "html.parser"
+)
+
+text = soup.get_text(
+    " ",
+    strip=True
+)
+
+
+# ============================================================
+# AIP AMDT Monitor
+# ============================================================
 
 current_section = extract_section(
     text,
@@ -105,19 +104,14 @@ current_section = extract_section(
     "Next Issues"
 )
 
-current_issue = parse_issue(
-    current_section
-)
-
-
-# ------------------------------------------------------------
-# Next issue
-# ------------------------------------------------------------
-
 next_section = extract_section(
     text,
     "Next Issues",
     "Expired Issues"
+)
+
+current_issue = parse_issue(
+    current_section
 )
 
 next_issue = parse_issue(
@@ -125,27 +119,17 @@ next_issue = parse_issue(
 )
 
 
-# ------------------------------------------------------------
-# Save AIP AMDT data
-# ------------------------------------------------------------
-
-data = {
+aip_data = {
     "state": "Taiwan",
     "icao": "RC",
     "source": URL,
-
     "checked_at":
         datetime.now(
             timezone.utc
         ).isoformat(),
-
     "status": "OK",
-
-    "current":
-        current_issue,
-
-    "next":
-        next_issue
+    "current": current_issue,
+    "next": next_issue
 }
 
 
@@ -156,7 +140,7 @@ with open(
 ) as f:
 
     json.dump(
-        data,
+        aip_data,
         f,
         ensure_ascii=False,
         indent=2
@@ -165,7 +149,7 @@ with open(
 
 print(
     json.dumps(
-        data,
+        aip_data,
         ensure_ascii=False,
         indent=2
     )
@@ -173,7 +157,7 @@ print(
 
 
 # ============================================================
-# Detect new AIP amendment
+# AIP AMDT History
 # ============================================================
 
 HISTORY_FILE = "aip_history.json"
@@ -226,7 +210,6 @@ if (
 if latest_issue:
 
     history["Taiwan"] = {
-
         "last_seen":
             latest_issue,
 
@@ -254,9 +237,11 @@ with open(
 if is_new:
 
     print("🔴 NEW AIP UPDATE")
+
     print(
         f"Previous: {previous_issue}"
     )
+
     print(
         f"New: {latest_issue}"
     )
@@ -269,44 +254,213 @@ else:
 
 
 # ============================================================
-# Taiwan SUP + AIC Monitor
-# ============================================================
-
+# SUP / AIC Source Discovery
 #
 # IMPORTANT:
-# This package is temporarily fixed to the
-# currently verified Taiwan eAIP package.
 #
-# We will automate package detection separately
-# after the stable version is confirmed.
+# SUP and AIC are independent publications.
 #
+# AIRAC package folders below are only technical locations
+# used by the Taiwan CAA website.
+#
+# SUP and AIC each independently select the menu with the
+# newest "Published as of" date.
+# ============================================================
 
-PACKAGE_URL = (
-    "https://ais.caa.gov.tw/eaip/"
-    "AIRAC%20AIP%20AMDT%2004-26_2026_10_01/"
+PACKAGE_CANDIDATES = [
+
+    (
+        "https://ais.caa.gov.tw/eaip/"
+        "AIRAC%20AIP%20AMDT%2004-26_2026_10_01/"
+    ),
+
+    (
+        "https://ais.caa.gov.tw/eaip/"
+        "AIRAC%20AIP%20AMDT%2003-26_2026_08_06/"
+    )
+
+]
+
+
+# ============================================================
+# Read "Published as of" from menu
+# ============================================================
+
+def get_menu_date(menu_url):
+
+    try:
+
+        r = requests.get(
+            menu_url,
+            headers=HEADERS,
+            timeout=30
+        )
+
+        r.raise_for_status()
+
+        menu_soup = BeautifulSoup(
+            r.text,
+            "html.parser"
+        )
+
+        menu_text = menu_soup.get_text(
+            " ",
+            strip=True
+        )
+
+
+        match = re.search(
+            r"Published\s+as\s+of\s+"
+            r"(\d{1,2}\s+[A-Z]{3}\s+\d{4})",
+            menu_text,
+            re.IGNORECASE
+        )
+
+
+        if not match:
+            return None
+
+
+        published_date = datetime.strptime(
+            match.group(1).upper(),
+            "%d %b %Y"
+        )
+
+
+        return published_date
+
+
+    except Exception as e:
+
+        print(
+            "Menu check error:",
+            menu_url,
+            e
+        )
+
+        return None
+
+
+# ============================================================
+# Select latest SUP or AIC menu independently
+# ============================================================
+
+def find_latest_menu(
+    packages,
+    menu_path,
+    doc_type
+):
+
+    candidates = []
+
+
+    for package_url in packages:
+
+        menu_url = urljoin(
+            package_url,
+            menu_path
+        )
+
+
+        published_date = get_menu_date(
+            menu_url
+        )
+
+
+        if published_date:
+
+            candidates.append(
+                (
+                    published_date,
+                    menu_url
+                )
+            )
+
+
+            print(
+                f"{doc_type} candidate:",
+                published_date.strftime(
+                    "%d %b %Y"
+                ).upper(),
+                menu_url
+            )
+
+
+    if not candidates:
+
+        return None
+
+
+    candidates.sort(
+        key=lambda item: item[0],
+        reverse=True
+    )
+
+
+    latest_date, latest_url = (
+        candidates[0]
+    )
+
+
+    print(
+        f"Selected {doc_type} menu:",
+        latest_date.strftime(
+            "%d %b %Y"
+        ).upper(),
+        latest_url
+    )
+
+
+    return latest_url
+
+
+# ============================================================
+# SUP and AIC source selection
+# ============================================================
+
+SUP_MENU_URL = find_latest_menu(
+    PACKAGE_CANDIDATES,
+    "eSUP/menu.html",
+    "SUP"
 )
 
 
-SUP_MENU_URL = urljoin(
-    PACKAGE_URL,
-    "eSUP/menu.html"
+AIC_MENU_URL = find_latest_menu(
+    PACKAGE_CANDIDATES,
+    "eAIC/menu.html",
+    "AIC"
 )
 
 
-AIC_MENU_URL = urljoin(
-    PACKAGE_URL,
-    "eAIC/menu.html"
-)
+if not SUP_MENU_URL:
+
+    raise RuntimeError(
+        "Could not find a valid SUP menu. "
+        "Existing data will not be overwritten."
+    )
+
+
+if not AIC_MENU_URL:
+
+    raise RuntimeError(
+        "Could not find a valid AIC menu. "
+        "Existing data will not be overwritten."
+    )
 
 
 print(
-    "Current eAIP package:",
-    PACKAGE_URL
+    "SUP source:",
+    SUP_MENU_URL
+)
+
+print(
+    "AIC source:",
+    AIC_MENU_URL
 )
 
 
 # ============================================================
-# Get document links from SUP / AIC menu
+# Get SUP / AIC Document Links
 # ============================================================
 
 def get_document_links(
@@ -316,15 +470,17 @@ def get_document_links(
 
     documents = {}
 
+
     try:
 
         r = requests.get(
             menu_url,
-            headers=headers,
+            headers=HEADERS,
             timeout=30
         )
 
         r.raise_for_status()
+
 
         menu_soup = BeautifulSoup(
             r.text,
@@ -345,7 +501,6 @@ def get_document_links(
             href = link["href"]
 
 
-            # Find document number
             number_match = re.search(
                 r"\b(\d{1,2}/\d{2})\b",
                 label
@@ -363,7 +518,10 @@ def get_document_links(
             )
 
 
+            # --------------------------------------------
             # SUP English document
+            # --------------------------------------------
+
             if doc_type == "SUP":
 
                 if (
@@ -373,7 +531,10 @@ def get_document_links(
                     continue
 
 
+            # --------------------------------------------
             # AIC English document
+            # --------------------------------------------
+
             elif doc_type == "AIC":
 
                 if (
@@ -395,6 +556,9 @@ def get_document_links(
             )
 
 
+        return documents
+
+
     except Exception as e:
 
         print(
@@ -402,12 +566,11 @@ def get_document_links(
             e
         )
 
-
-    return documents
+        return None
 
 
 # ============================================================
-# Parse SUP / AIC document
+# Parse Individual SUP / AIC Document
 # ============================================================
 
 def parse_document(
@@ -420,7 +583,7 @@ def parse_document(
 
         r = requests.get(
             url,
-            headers=headers,
+            headers=HEADERS,
             timeout=30
         )
 
@@ -439,9 +602,9 @@ def parse_document(
         )
 
 
-        # ----------------------------------------------------
+        # ====================================================
         # Publication Date
-        # ----------------------------------------------------
+        # ====================================================
 
         pub_match = re.search(
             r"Published\s+on\s+"
@@ -451,9 +614,9 @@ def parse_document(
         )
 
 
-        # ----------------------------------------------------
+        # ====================================================
         # Effective From / Until
-        # ----------------------------------------------------
+        # ====================================================
 
         effective_match = re.search(
             r"Effective\s+from\s+"
@@ -465,9 +628,9 @@ def parse_document(
         )
 
 
-        # ----------------------------------------------------
+        # ====================================================
         # Title
-        # ----------------------------------------------------
+        # ====================================================
 
         title = "—"
 
@@ -517,9 +680,9 @@ def parse_document(
             break
 
 
-        # ----------------------------------------------------
-        # AIC checklist fallback
-        # ----------------------------------------------------
+        # ====================================================
+        # AIC Checklist Fallback
+        # ====================================================
 
         if (
             doc_type == "AIC"
@@ -589,7 +752,7 @@ def parse_document(
 
 
 # ============================================================
-# Collect SUP documents
+# Get SUP Links
 # ============================================================
 
 sup_links = get_document_links(
@@ -598,27 +761,16 @@ sup_links = get_document_links(
 )
 
 
-sup_documents = []
+if sup_links is None:
 
-
-for number, url in (
-    sup_links.items()
-):
-
-    document = parse_document(
-        number,
-        url,
-        "SUP"
+    raise RuntimeError(
+        "Failed to load SUP menu. "
+        "Existing data will not be overwritten."
     )
-
-    if document:
-        sup_documents.append(
-            document
-        )
 
 
 # ============================================================
-# Collect AIC documents
+# Get AIC Links
 # ============================================================
 
 aic_links = get_document_links(
@@ -627,27 +779,64 @@ aic_links = get_document_links(
 )
 
 
+if aic_links is None:
+
+    raise RuntimeError(
+        "Failed to load AIC menu. "
+        "Existing data will not be overwritten."
+    )
+
+
+# ============================================================
+# Collect SUP Documents
+# ============================================================
+
+sup_documents = []
+
+
+for number, document_url in (
+    sup_links.items()
+):
+
+    document = parse_document(
+        number,
+        document_url,
+        "SUP"
+    )
+
+    if document:
+
+        sup_documents.append(
+            document
+        )
+
+
+# ============================================================
+# Collect AIC Documents
+# ============================================================
+
 aic_documents = []
 
 
-for number, url in (
+for number, document_url in (
     aic_links.items()
 ):
 
     document = parse_document(
         number,
-        url,
+        document_url,
         "AIC"
     )
 
     if document:
+
         aic_documents.append(
             document
         )
 
 
 # ============================================================
-# Sort documents
+# Sort Documents
 # ============================================================
 
 def document_sort(item):
@@ -700,10 +889,9 @@ print(
 
 
 # ============================================================
-# SAFETY CHECK
+# Safety Check
 #
-# Do NOT overwrite good existing data when
-# the CAA website cannot be read correctly.
+# Never overwrite valid existing files when scraping fails.
 # ============================================================
 
 total_documents = (
@@ -715,113 +903,111 @@ total_documents = (
 
 if total_documents == 0:
 
-    print(
-        "⚠️ WARNING: No SUP/AIC "
-        "documents were found."
-    )
-
-    print(
-        "Existing document files "
-        "will NOT be overwritten."
-    )
-
-
-else:
-
-    # --------------------------------------------------------
-    # Combined SUP + AIC file
-    # --------------------------------------------------------
-
-    all_documents = (
-        sup_documents
-        +
-        aic_documents
-    )
-
-
-    documents_data = {
-
-        "state":
-            "Taiwan",
-
-        "icao":
-            "RC",
-
-        "source":
-            PACKAGE_URL,
-
-        "checked_at":
-            datetime.now(
-                timezone.utc
-            ).isoformat(),
-
-        "documents":
-            all_documents
-    }
-
-
-    with open(
-        "taiwan_documents.json",
-        "w",
-        encoding="utf-8"
-    ) as f:
-
-        json.dump(
-            documents_data,
-            f,
-            ensure_ascii=False,
-            indent=2
-        )
-
-
-    # --------------------------------------------------------
-    # Keep taiwan_sup.json for compatibility
-    # --------------------------------------------------------
-
-    sup_data = {
-
-        "state":
-            "Taiwan",
-
-        "icao":
-            "RC",
-
-        "source":
-            SUP_MENU_URL,
-
-        "checked_at":
-            datetime.now(
-                timezone.utc
-            ).isoformat(),
-
-        "documents":
-            sup_documents
-    }
-
-
-    with open(
-        "taiwan_sup.json",
-        "w",
-        encoding="utf-8"
-    ) as f:
-
-        json.dump(
-            sup_data,
-            f,
-            ensure_ascii=False,
-            indent=2
-        )
-
-
-    print(
-        f"Saved {total_documents} "
-        "documents to "
-        "taiwan_documents.json"
+    raise RuntimeError(
+        "SUP/AIC scrape returned 0 documents. "
+        "Existing JSON files will not be overwritten."
     )
 
 
 # ============================================================
-# Print document summary
+# Save Combined SUP + AIC File
+# ============================================================
+
+all_documents = (
+    sup_documents
+    +
+    aic_documents
+)
+
+
+documents_data = {
+
+    "state":
+        "Taiwan",
+
+    "icao":
+        "RC",
+
+    "source": {
+        "sup":
+            SUP_MENU_URL,
+
+        "aic":
+            AIC_MENU_URL
+    },
+
+    "checked_at":
+        datetime.now(
+            timezone.utc
+        ).isoformat(),
+
+    "documents":
+        all_documents
+}
+
+
+with open(
+    "taiwan_documents.json",
+    "w",
+    encoding="utf-8"
+) as f:
+
+    json.dump(
+        documents_data,
+        f,
+        ensure_ascii=False,
+        indent=2
+    )
+
+
+# ============================================================
+# Keep taiwan_sup.json for Compatibility
+# ============================================================
+
+sup_data = {
+
+    "state":
+        "Taiwan",
+
+    "icao":
+        "RC",
+
+    "source":
+        SUP_MENU_URL,
+
+    "checked_at":
+        datetime.now(
+            timezone.utc
+        ).isoformat(),
+
+    "documents":
+        sup_documents
+}
+
+
+with open(
+    "taiwan_sup.json",
+    "w",
+    encoding="utf-8"
+) as f:
+
+    json.dump(
+        sup_data,
+        f,
+        ensure_ascii=False,
+        indent=2
+    )
+
+
+print(
+    f"Saved {total_documents} "
+    "documents to "
+    "taiwan_documents.json"
+)
+
+
+# ============================================================
+# Print SUP Summary
 # ============================================================
 
 for item in sup_documents:
@@ -837,6 +1023,10 @@ for item in sup_documents:
         item["title"]
     )
 
+
+# ============================================================
+# Print AIC Summary
+# ============================================================
 
 for item in aic_documents:
 
