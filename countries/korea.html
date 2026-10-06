@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Republic of Korea AIP History | Global AIP Monitor</title>
+<style>
+:root{--navy:#102a43;--blue:#1677c8;--bg:#f4f7fa;--line:#d9e2ec;--muted:#66788a;--white:#fff;--chip:#eaf4fd}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:#243b53;font:14px/1.5 Arial,sans-serif}
+header{background:var(--navy);color:white;padding:22px 28px}.wrap{max-width:1280px;margin:auto}
+header a{color:#cfe8ff;text-decoration:none}.top{display:flex;justify-content:space-between;gap:20px;align-items:center}
+h1{margin:5px 0 0;font-size:26px}.sub{color:#cbd8e5;margin-top:4px}
+main{padding:24px 20px 50px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+.card,.section{background:white;border:1px solid var(--line);border-radius:10px;box-shadow:0 1px 2px #102a4310}
+.card{padding:17px}.label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}.value{font-size:25px;font-weight:700;color:var(--navy);margin-top:3px}
+.section{margin:18px 0;overflow:hidden}.section-head{padding:17px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:15px}
+.section h2{font-size:18px;margin:0;color:var(--navy)}.section-note{font-size:12px;color:var(--muted)}
+input{width:290px;max-width:45vw;padding:9px 11px;border:1px solid #bcccdc;border-radius:7px}
+.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:900px}th,td{padding:11px 13px;border-bottom:1px solid #e8edf2;text-align:left;vertical-align:top}
+th{background:#f8fafc;color:#52667a;font-size:12px;white-space:nowrap}tr:hover td{background:#fbfdff}
+.type{display:inline-block;background:var(--chip);color:#0b5c9e;padding:3px 7px;border-radius:5px;font-size:12px;font-weight:700}
+a.btn{color:var(--blue);text-decoration:none;font-weight:600}.empty{text-align:center;color:var(--muted);padding:22px}
+footer{color:var(--muted);font-size:12px;margin-top:20px}
+@media(max-width:800px){.cards{grid-template-columns:repeat(2,1fr)}.top{align-items:flex-start;flex-direction:column}input{max-width:100%;width:100%}.section-head{align-items:stretch;flex-direction:column}}
+</style>
+</head>
+<body>
+<header><div class="wrap top">
+  <div><a href="../index.html">← Global AIP Monitor</a><h1>Republic of Korea AIP History</h1><div class="sub">Incheon FIR · AMDT / SUP / AIC</div></div>
+  <div id="checked">Loading…</div>
+</div></header>
+
+<main class="wrap">
+<div class="cards">
+ <div class="card"><div class="label">AMDT History</div><div class="value" id="amdtCount">–</div></div>
+ <div class="card"><div class="label">Current SUP</div><div class="value" id="supCount">–</div></div>
+ <div class="card"><div class="label">Current AIC</div><div class="value" id="aicCount">–</div></div>
+ <div class="card"><div class="label">Latest AMDT</div><div class="value" id="latestAmendment">–</div></div>
+</div>
+
+<section class="section">
+ <div class="section-head"><div><h2>AIP Amendments</h2><div class="section-note">AIRAC AIP AMDT and regular AIP AMDT</div></div><input id="qAmend" placeholder="Search AMDT…"></div>
+ <div class="table-wrap"><table><thead><tr><th>Type</th><th>Number</th><th>Publication</th><th>Effective</th><th>Archive</th><th>Official Source</th></tr></thead><tbody id="amendRows"></tbody></table></div>
+</section>
+
+<section class="section">
+ <div class="section-head"><div><h2>Current Supplements</h2><div class="section-note">AIP SUP and AIRAC AIP SUP</div></div><input id="qSup" placeholder="Search SUP…"></div>
+ <div class="table-wrap"><table><thead><tr><th>Type</th><th>Number</th><th>Title</th><th>Effective</th><th>Archive</th><th>Official Source</th></tr></thead><tbody id="supRows"></tbody></table></div>
+</section>
+
+<section class="section">
+ <div class="section-head"><div><h2>Current AIC</h2><div class="section-note">Current AICs according to the Korea AIC checklist</div></div><input id="qAic" placeholder="Search AIC…"></div>
+ <div class="table-wrap"><table><thead><tr><th>Number</th><th>Title</th><th>Checklist</th><th>Archive</th><th>Official Source</th></tr></thead><tbody id="aicRows"></tbody></table></div>
+</section>
+<footer>Global AIP Monitor · Republic of Korea / Incheon FIR</footer>
+</main>
+
+<script>
+const DATA="../korea_history.json";
+let data={amendments:[],sup:[],aic:[]};
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const link=(u,t)=>u?`<a class="btn" href="${esc(u)}" target="_blank" rel="noopener">${t} ↗</a>`:"—";
+function archiveLink(u){return link(u,"View Archive")}
+function sourceLink(u){return link(u,"Official")}
+function text(x){return Object.values(x||{}).join(" ").toLowerCase()}
+function filter(items,q){q=q.trim().toLowerCase();return q?items.filter(x=>text(x).includes(q)):items}
+function dateValue(s){let d=new Date(s);return isNaN(d)?0:d.getTime()}
+function renderAmend(){
+ const a=filter(data.amendments||[],document.querySelector("#qAmend").value).slice().sort((x,y)=>dateValue(y.effective_from||y.effective_date)-dateValue(x.effective_from||x.effective_date));
+ document.querySelector("#amendRows").innerHTML=a.length?a.map(x=>`<tr><td><span class="type">${esc(x.amendment_type||"AIP AMDT")}</span></td><td>${esc(x.number||x.amendment)}</td><td>${esc(x.publication_date||"—")}</td><td>${esc(x.effective_from||x.effective_date||"—")}</td><td>${archiveLink(x.archive_url)}</td><td>${sourceLink(x.source_url||x.package_url)}</td></tr>`).join(""):`<tr><td colspan="6" class="empty">No amendments found</td></tr>`;
+}
+function renderSup(){
+ const a=filter(data.sup||[],document.querySelector("#qSup").value);
+ document.querySelector("#supRows").innerHTML=a.length?a.map(x=>`<tr><td><span class="type">${esc(x.sup_type||"AIP SUP")}</span></td><td>${esc(x.number)}</td><td>${esc(x.title||"—")}</td><td>${esc(x.effective_from||x.effective_date||"—")}</td><td>${archiveLink(x.archive_url)}</td><td>${sourceLink(x.source_url)}</td></tr>`).join(""):`<tr><td colspan="6" class="empty">No supplements found</td></tr>`;
+}
+function renderAic(){
+ const a=filter(data.aic||[],document.querySelector("#qAic").value);
+ document.querySelector("#aicRows").innerHTML=a.length?a.map(x=>`<tr><td>${esc(x.number)}</td><td>${esc(x.title||"—")}</td><td>${esc(x.current_checklist||"—")}</td><td>${archiveLink(x.archive_url)}</td><td>${sourceLink(x.source_url||x.checklist_url)}</td></tr>`).join(""):`<tr><td colspan="5" class="empty">No AIC found</td></tr>`;
+}
+async function init(){
+ try{
+  const r=await fetch(DATA+"?v="+Date.now()); if(!r.ok)throw new Error("HTTP "+r.status); data=await r.json();
+  document.querySelector("#amdtCount").textContent=(data.amendments||[]).length;
+  document.querySelector("#supCount").textContent=(data.sup||[]).length;
+  document.querySelector("#aicCount").textContent=(data.aic||[]).length;
+  const am=(data.amendments||[]).slice().sort((x,y)=>dateValue(y.effective_from||y.effective_date)-dateValue(x.effective_from||x.effective_date));
+  document.querySelector("#latestAmendment").textContent=am[0]?.number||"—";
+  document.querySelector("#checked").textContent=data.last_checked?"Last checked: "+new Date(data.last_checked).toLocaleString():"";
+  renderAmend();renderSup();renderAic();
+ }catch(e){document.querySelector("#checked").textContent="Unable to load Korea data";console.error(e)}
+}
+["qAmend","qSup","qAic"].forEach(id=>document.querySelector("#"+id).addEventListener("input",id==="qAmend"?renderAmend:id==="qSup"?renderSup:renderAic));
+init();
+</script>
+</body></html>
