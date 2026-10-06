@@ -1,0 +1,35 @@
+{
+  "country": "Republic of Korea",
+  "icao": "RK",
+  "fir": "Incheon FIR",
+  "source": "https://aim.koca.go.kr/eaipPub/Package/history-en-GB.html",
+  "checked_at": "2026-10-06T14:39:44.435860+00:00",
+  "status": "OK",
+  "current": {
+    "number": "9/26",
+    "amendment_type": "AIRAC AIP AMDT",
+    "title": "AIRAC AIP AMDT 9/26",
+    "publication_date": "20 AUG 2026",
+    "effective_date": "30 SEP 2026",
+    "effective_from": "30 SEP 2026",
+    "source_url": "https://aim.koca.go.kr/eaipPub/Package/2026-09-30-AIRAC/html/index-en-GB.html",
+    "package_url": "https://aim.koca.go.kr/eaipPub/Package/2026-09-30-AIRAC/html/index-en-GB.html",
+    "archive_url": null
+  },
+  "next": {
+    "number": "10/26",
+    "amendment_type": "AIRAC AIP AMDT",
+    "title": "AIRAC AIP AMDT 10/26",
+    "publication_date": "17 SEP 2026",
+    "effective_date": "28 OCT 2026",
+    "effective_from": "28 OCT 2026",
+    "source_url": "https://aim.koca.go.kr/eaipPub/Package/2026-10-28-AIRAC/html/index-en-GB.html",
+    "package_url": "https://aim.koca.go.kr/eaipPub/Package/2026-10-28-AIRAC/html/index-en-GB.html",
+    "archive_url": null
+  },
+  "counts": {
+    "amendments": 115,
+    "current_sup": 57,
+    "aic_history": 0
+  }
+}
