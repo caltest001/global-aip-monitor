@@ -209,8 +209,13 @@ def run_monitor():
     h=load(); h.update({"country":"Republic of Korea","fir":"Incheon FIR","source":HISTORY_URL})
     h["amendments"]=merge(h.get("amendments",[]),amdt,lambda x:(x.get("amendment_type"),x.get("number")))
     h["sup"]=merge(h.get("sup",[]),sup,lambda x:x.get("number"))
-    if aic:h["aic"]=merge(h.get("aic",[]),aic,lambda x:x.get("source_url") or x.get("number"))
-    else:h.setdefault("aic",[])
+    # AIC documents in the same annual checklist share the checklist URL.
+    # Their document number is the stable identity; using source_url here
+    # collapses all 7 current AICs into one record.
+    if aic:
+        h["aic"]=merge(h.get("aic",[]),aic,lambda x:x.get("number"))
+    else:
+        h.setdefault("aic",[])
     h["last_checked"]=NOW
     json.dump(h,open(HISTORY_FILE,"w",encoding="utf-8"),ensure_ascii=False,indent=2)
     status={"country":"Republic of Korea","icao":"RK","fir":"Incheon FIR","source":HISTORY_URL,"checked_at":NOW,"status":"OK",
