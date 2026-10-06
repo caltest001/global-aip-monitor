@@ -10,7 +10,7 @@ ARCHIVE_ROOT=os.path.join("archive","korea")
 HEADERS={"User-Agent":"Mozilla/5.0 Chrome/120.0"}
 NOW=datetime.now(timezone.utc).isoformat()
 
-def get(url,timeout=45):
+def get(url,timeout=15):
     r=requests.get(url,headers=HEADERS,timeout=timeout); r.raise_for_status(); return r
 def clean(s): return re.sub(r"\s+"," ",str(s or "")).strip()
 def dt(s):
@@ -81,13 +81,7 @@ for m in issue_pattern.finditer(page_text):
         idx=next((u for u in links if "AIRAC" not in u.upper()),links[0])
 
     root=idx.split("/html/",1)[0]+"/"
-    n,y=num.split("/")
-    names=([f"AIRAC AIP AMDT {n}_{y}.pdf"] if typ.startswith("AIRAC") else [f"AIP AMDT {n}_{y}.pdf"])
     src=idx; arc=None
-    rel=os.path.join(ARCHIVE_ROOT,"amdt",year(num),("AIRAC-" if typ.startswith("AIRAC") else "AIP-")+safe(num)+".pdf")
-    for name in names:
-        u=urljoin(root,"pdf/"+name)
-        if save_pdf(u,rel): src=u; arc=aurl(rel); break
     amdt.append({"number":num,"amendment_type":typ,"title":f"{typ} {num}","publication_date":pub,
                  "effective_date":eff,"effective_from":eff,"source_url":src,"package_url":idx,"archive_url":arc})
 if not amdt: raise RuntimeError("Could not parse Korea AMDT history.")
@@ -123,8 +117,8 @@ def sup_from_gen03(root):
             until=(dt(dates[-1]).strftime("%d %b %Y").upper() if len(dates)>=2 and dt(dates[-1]) else ("PERM" if "PERM" in period.upper() else None))
             yy="20"+num.split("/")[1]; nr=str(int(num.split("/")[0]))
             pdf=urljoin(root,f"html/eSUP/KR-eSUP-{yy}-{nr}-en-GB.pdf")
-            rel=os.path.join(ARCHIVE_ROOT,"sup",year(num),safe(num)+".pdf")
-            arc=aurl(rel) if save_pdf(pdf,rel) else None
+            # Fast monitor: do not download/archive PDFs during routine checks.
+            arc=None
             out.append({"number":num,"sup_type":typ,"title":re.sub(r"\s*\\(Effective\s*:.*?\\)\s*"," ",title,flags=re.I).strip(),
                         "publication_date":None,"effective_from":eff,"effective_until":until,"source_url":pdf,"archive_url":arc,"source_status":"CURRENT"})
     return list({x["number"]:x for x in out}.values())
@@ -148,12 +142,12 @@ def aics(root):
             m=re.search(r"/eAIC/AIC(?:%20|\s)(\d{1,2})-en-GB\.pdf",u,re.I)
             if not m:continue
             nr=int(m.group(1)); py=re.search(r"/Package/(\d{4})-",root); yy=(py.group(1)[2:] if py else str(today.year)[2:])
-            num=f"{nr}/{yy}"; rel=os.path.join(ARCHIVE_ROOT,"aic",year(num),safe(num)+".pdf")
+            num=f"{nr}/{yy}"
             found[u]={"number":num,"title":f"AIC {num}","publication_date":None,"effective_from":None,
-                      "effective_until":None,"source_url":u,"archive_url":aurl(rel) if save_pdf(u,rel) else None,"source_status":"DISCOVERED"}
+                      "effective_until":None,"source_url":u,"archive_url":None,"source_status":"DISCOVERED"}
     return list(found.values())
 aic=[]
-for x in sorted(amdt,key=lambda z:dt(z.get("effective_date")) or datetime.min,reverse=True)[:6]:
+for x in sorted(amdt,key=lambda z:dt(z.get("effective_date")) or datetime.min,reverse=True)[:2]:
     aic+=aics(rootof(x))
 aic=list({x["source_url"]:x for x in aic}.values())
 print("Korea AIC discovered:",len(aic))
