@@ -128,29 +128,77 @@ if not sup:
     for x in sorted(amdt,key=lambda z:dt(z.get("effective_date")) or datetime.min,reverse=True):
         sup=sup_from_gen03(rootof(x))
         if sup:break
+from collections import Counter
 print("Current Korea SUP:",len(sup))
+print("Korea SUP types:",dict(Counter(x.get("sup_type","UNKNOWN") for x in sup)))
+print("Korea SUP sample:")
+for x in sup[:5]:
+    print("  ",x.get("number"),"|",x.get("sup_type"),"|",x.get("title"))
 
-# AIC discovery: keep old history even if no links are found on a run.
-def aics(root):
-    if not root:return []
+# AIC discovery / diagnostics
+# Korea AIC PDFs use filenames such as "AIC%201-en-GB.pdf".
+# Scan every 2026 package (plus current/next) for any eAIC links and print
+# the raw hrefs when no documents are found. This is intentionally diagnostic:
+# it never erases existing AIC history.
+def aics_from_page(page_url):
     found={}
-    for p in ("html/index-en-GB.html","html/eAIC/menu-en-GB.html","html/eAIC/menu.html"):
-        try:ss=BeautifulSoup(get(urljoin(root,p)).text,"html.parser")
-        except Exception:continue
-        for a in ss.find_all("a",href=True):
-            u=urljoin(urljoin(root,p),a["href"])
-            m=re.search(r"/eAIC/AIC(?:%20|\s)(\d{1,2})-en-GB\.pdf",u,re.I)
-            if not m:continue
-            nr=int(m.group(1)); py=re.search(r"/Package/(\d{4})-",root); yy=(py.group(1)[2:] if py else str(today.year)[2:])
-            num=f"{nr}/{yy}"
-            found[u]={"number":num,"title":f"AIC {num}","publication_date":None,"effective_from":None,
-                      "effective_until":None,"source_url":u,"archive_url":None,"source_status":"DISCOVERED"}
-    return list(found.values())
+    raw=[]
+    try:
+        ss=BeautifulSoup(get(page_url).text,"html.parser")
+    except Exception:
+        return [],[]
+    for a in ss.find_all("a",href=True):
+        href=a.get("href","")
+        label=clean(a.get_text(" ",strip=True))
+        if "eaic" not in href.lower() and "aic" not in href.lower():
+            continue
+        raw.append((label,href))
+        u=urljoin(page_url,href)
+        decoded=u.replace("%20"," ")
+        m=re.search(r"/eAIC/AIC\s*(\d{1,2})-en-GB\.pdf",decoded,re.I)
+        if not m:
+            continue
+        nr=int(m.group(1))
+        py=re.search(r"/Package/(\d{4})-",u)
+        yy=(py.group(1)[2:] if py else str(today.year)[2:])
+        num=f"{nr}/{yy}"
+        found[u]={
+            "number":num,
+            "title":f"AIC {num}",
+            "publication_date":None,
+            "effective_from":None,
+            "effective_until":None,
+            "source_url":u,
+            "archive_url":None,
+            "source_status":"DISCOVERED"
+        }
+    return list(found.values()),raw
+
 aic=[]
-for x in sorted(amdt,key=lambda z:dt(z.get("effective_date")) or datetime.min,reverse=True)[:2]:
-    aic+=aics(rootof(x))
+raw_aic_links=[]
+roots=[]
+for x in amdt:
+    d=dt(x.get("effective_date"))
+    if d and d.year==today.year:
+        r=rootof(x)
+        if r and r not in roots: roots.append(r)
+for x in (current,next_issue):
+    r=rootof(x)
+    if r and r not in roots: roots.append(r)
+
+for root in roots:
+    for p in ("html/index-en-GB.html","html/eAIC/menu-en-GB.html","html/eAIC/menu.html","html/eAIC/index-en-GB.html"):
+        docs,raw=aics_from_page(urljoin(root,p))
+        aic.extend(docs)
+        raw_aic_links.extend((urljoin(root,p),label,href) for label,href in raw)
+
 aic=list({x["source_url"]:x for x in aic}.values())
 print("Korea AIC discovered:",len(aic))
+if not aic:
+    print("AIC diagnostic: no matching PDF links found.")
+    print("AIC-related href count:",len(raw_aic_links))
+    for page,label,href in raw_aic_links[:30]:
+        print("  AIC HREF:",page,"|",label,"|",href)
 
 h=load(); h.update({"country":"Republic of Korea","fir":"Incheon FIR","source":HISTORY_URL})
 h["amendments"]=merge(h.get("amendments",[]),amdt,lambda x:(x.get("amendment_type"),x.get("number")))
