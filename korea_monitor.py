@@ -12,7 +12,7 @@ NOW=datetime.now(timezone.utc).isoformat()
 
 def get(url,timeout=45):
     r=requests.get(url,headers=HEADERS,timeout=timeout); r.raise_for_status(); return r
-def clean(s): return re.sub(r"\\s+"," ",str(s or "")).strip()
+def clean(s): return re.sub(r"\s+"," ",str(s or "")).strip()
 def dt(s):
     for f in ("%d %b %Y","%d %b %y"):
         try:return datetime.strptime(clean(s).upper(),f)
@@ -20,7 +20,7 @@ def dt(s):
     return None
 def safe(n): return re.sub(r"[^A-Za-z0-9_-]+","-",str(n).replace("/","-")).strip("-")
 def year(n):
-    m=re.search(r"/(\\d{2})$",str(n or "")); return "20"+m.group(1) if m else "unknown"
+    m=re.search(r"/(\d{2})$",str(n or "")); return "20"+m.group(1) if m else "unknown"
 def aurl(p): return "../"+p.replace(os.sep,"/")
 def save_pdf(url,path):
     if os.path.exists(path): return True
@@ -54,16 +54,16 @@ s=BeautifulSoup(get(HISTORY_URL).text,"html.parser"); amdt=[]
 
 page_text=clean(s.get_text(" ",strip=True))
 issue_pattern=re.compile(
-    r"(\\d{1,2}\\s+[A-Z]{3}\\s+\\d{4})\\s+"
-    r"(\\d{1,2}\\s+[A-Z]{3}\\s+\\d{4})\\s+"
-    r"(AIRAC AIP AMDT|AIP AMDT)\\s+(\\d{1,2}/\\d{2})",
+    r"(\d{1,2}\s+[A-Z]{3}\s+\d{4})\s+"
+    r"(\d{1,2}\s+[A-Z]{3}\s+\d{4})\s+"
+    r"(AIRAC AIP AMDT|AIP AMDT)\s+(\d{1,2}/\d{2})",
     re.I
 )
 
 package_links={}
 for a in s.find_all("a",href=True):
     label=clean(a.get_text(" ",strip=True)).upper()
-    if re.fullmatch(r"\\d{1,2}\\s+[A-Z]{3}\\s+\\d{4}",label):
+    if re.fullmatch(r"\d{1,2}\s+[A-Z]{3}\s+\d{4}",label):
         package_links.setdefault(label,[]).append(urljoin(HISTORY_URL,a["href"]))
 
 for m in issue_pattern.finditer(page_text):
@@ -115,17 +115,17 @@ def sup_from_gen03(root):
         typ="AIRAC AIP SUP" if "Current AIRAC AIP Supplement" in prev else "AIP SUP"
         for tr in table.find_all("tr"):
             c=[clean(x.get_text(" ",strip=True)) for x in tr.find_all(["td","th"])]
-            if len(c)<2 or not re.fullmatch(r"\\d{1,3}/\\d{2}",c[0]):continue
+            if len(c)<2 or not re.fullmatch(r"\d{1,3}/\d{2}",c[0]):continue
             num,title=c[0],c[1]; period=c[3] if len(c)>3 else ""
-            em=re.search(r"Effective\\s*:\\s*(?:\\d{4}UTC\\s*)?(\\d{1,2}\\s+[A-Z]{3}\\s+\\d{4})",title,re.I)
+            em=re.search(r"Effective\s*:\s*(?:\d{4}UTC\s*)?(\d{1,2}\s+[A-Z]{3}\s+\d{4})",title,re.I)
             eff=em.group(1).upper() if em else None
-            dates=re.findall(r"\\d{1,2}\\s+[A-Z]{3}\\s+\\d{2}",period.upper())
+            dates=re.findall(r"\d{1,2}\s+[A-Z]{3}\s+\d{2}",period.upper())
             until=(dt(dates[-1]).strftime("%d %b %Y").upper() if len(dates)>=2 and dt(dates[-1]) else ("PERM" if "PERM" in period.upper() else None))
             yy="20"+num.split("/")[1]; nr=str(int(num.split("/")[0]))
             pdf=urljoin(root,f"html/eSUP/KR-eSUP-{yy}-{nr}-en-GB.pdf")
             rel=os.path.join(ARCHIVE_ROOT,"sup",year(num),safe(num)+".pdf")
             arc=aurl(rel) if save_pdf(pdf,rel) else None
-            out.append({"number":num,"sup_type":typ,"title":re.sub(r"\\s*\\(Effective\\s*:.*?\\)\\s*"," ",title,flags=re.I).strip(),
+            out.append({"number":num,"sup_type":typ,"title":re.sub(r"\s*\\(Effective\s*:.*?\\)\s*"," ",title,flags=re.I).strip(),
                         "publication_date":None,"effective_from":eff,"effective_until":until,"source_url":pdf,"archive_url":arc,"source_status":"CURRENT"})
     return list({x["number"]:x for x in out}.values())
 
@@ -145,9 +145,9 @@ def aics(root):
         except Exception:continue
         for a in ss.find_all("a",href=True):
             u=urljoin(urljoin(root,p),a["href"])
-            m=re.search(r"/eAIC/AIC(?:%20|\\s)(\\d{1,2})-en-GB\\.pdf",u,re.I)
+            m=re.search(r"/eAIC/AIC(?:%20|\s)(\d{1,2})-en-GB\.pdf",u,re.I)
             if not m:continue
-            nr=int(m.group(1)); py=re.search(r"/Package/(\\d{4})-",root); yy=(py.group(1)[2:] if py else str(today.year)[2:])
+            nr=int(m.group(1)); py=re.search(r"/Package/(\d{4})-",root); yy=(py.group(1)[2:] if py else str(today.year)[2:])
             num=f"{nr}/{yy}"; rel=os.path.join(ARCHIVE_ROOT,"aic",year(num),safe(num)+".pdf")
             found[u]={"number":num,"title":f"AIC {num}","publication_date":None,"effective_from":None,
                       "effective_until":None,"source_url":u,"archive_url":aurl(rel) if save_pdf(u,rel) else None,"source_status":"DISCOVERED"}
