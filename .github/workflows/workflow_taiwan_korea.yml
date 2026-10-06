@@ -2,7 +2,6 @@ name: Global AIP Monitor
 
 on:
   workflow_dispatch:
-
   schedule:
     - cron: "0 */6 * * *"
 
@@ -12,35 +11,25 @@ permissions:
 jobs:
   monitor:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
       - name: Install dependencies
         run: pip install -r requirements.txt
-
-      - name: Run AIP monitor
+      - name: Run Taiwan AIP monitor
         run: python monitor.py
-
+      - name: Run Korea AIP monitor
+        run: python korea_monitor.py
       - name: Save AIP data and archive
         run: |
           git config user.name "AIP Monitor Bot"
           git config user.email "aip-monitor@users.noreply.github.com"
-
-          git add taiwan_aip.json
-          git add taiwan_sup.json
-          git add taiwan_documents.json
-          git add aip_history.json
-          git add taiwan_history.json
-          git add alerts.json
-          git add .alerts_baseline_ready
+          git add taiwan_aip.json taiwan_sup.json taiwan_documents.json aip_history.json taiwan_history.json alerts.json .alerts_baseline_ready
+          git add korea_aip.json korea_history.json
           git add archive/
-
-          git diff --cached --quiet || git commit -m "Update Taiwan AIP data and archive"
+          git diff --cached --quiet || git commit -m "Update Taiwan and Korea AIP data and archive"
           git push
