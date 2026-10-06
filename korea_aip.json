@@ -3,7 +3,7 @@
   "icao": "RK",
   "fir": "Incheon FIR",
   "source": "https://aim.koca.go.kr/eaipPub/Package/history-en-GB.html",
-  "checked_at": "2026-10-06T14:49:11.835129+00:00",
+  "checked_at": "2026-10-06T14:59:21.944921+00:00",
   "status": "OK",
   "current": {
     "number": "9/26",
@@ -30,6 +30,6 @@
   "counts": {
     "amendments": 115,
     "current_sup": 57,
-    "aic_history": 0
+    "aic_history": 1
   }
 }
