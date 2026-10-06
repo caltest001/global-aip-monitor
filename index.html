@@ -1,300 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Global AIP Monitor</title>
 <style>
-:root{--navy:#17365d;--blue:#1769aa;--bg:#f4f7fb;--card:#fff;--line:#e2e8f0;--muted:#6b7280;--red:#c62828;--redbg:#ffe8e8;--green:#16794b;--greenbg:#e8f5e9;--gray:#f1f5f9}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:#1f2937;font-family:Arial,Helvetica,sans-serif}
-.container{max-width:1500px;margin:auto;padding:30px}
-.header{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:24px}
-h1{margin:0;color:var(--navy);font-size:30px}
-.subtitle,.last{color:var(--muted);font-size:13px}.subtitle{margin-top:6px}.last{text-align:right;padding-top:8px}
-.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
-.summary-card,.section,.monitor{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
-.summary-card{padding:18px 20px}.label{color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.4px}
-.value{margin-top:7px;font-size:28px;font-weight:700;color:var(--red)}.value.ok{color:var(--green)}
-.section{overflow:hidden;margin-bottom:20px}.section-head{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
-.section-title{margin:0;color:var(--navy);font-size:18px}.badge{background:var(--redbg);color:var(--red);border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700}.badge.zero{background:var(--greenbg);color:var(--green)}
-.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;table-layout:fixed}
-th{background:#f8fafc;color:#64748b;text-align:left;font-size:12px;padding:11px 14px;border-bottom:1px solid var(--line)}
-td{padding:13px 14px;border-bottom:1px solid #edf1f5;vertical-align:top;font-size:14px}
-tr:last-child td{border-bottom:0}tr:hover td{background:#fbfdff}
-.country{width:120px}.number{width:130px}.date{width:130px}.status{width:120px}.document{width:85px}.action{width:145px}
-.doc-title{font-weight:600;line-height:1.4;color:#25364d}
-.new{display:inline-block;background:var(--redbg);color:var(--red);border-radius:5px;padding:3px 6px;margin-right:7px;font-size:10px;font-weight:800}
-.pending{color:var(--red);font-weight:700}.done{color:var(--green);font-weight:700}
-.done-row td{background:#fafafa;color:#7b8490}.done-row .doc-title{color:#667085}
-button{border:0;border-radius:7px;padding:7px 10px;font-size:12px;font-weight:700;cursor:pointer}
-.done-btn{background:var(--greenbg);color:var(--green)}.undo-btn{background:var(--gray);color:#4b5563}
-button:disabled{opacity:.55;cursor:wait}
-a{color:var(--blue);font-weight:700;text-decoration:none}a:hover{text-decoration:underline}
-.country-link{color:var(--navy)}
-.empty,.error,.loading{text-align:center;padding:24px!important}.empty{color:var(--green);font-weight:600}.error{color:var(--red)}.loading{color:#888}
-.monitor{padding:16px 20px;margin-top:22px;display:flex;justify-content:space-between;color:#475569;font-size:13px}
-.monitor-ok{color:var(--green);font-weight:700}
+:root{--navy:#17365d;--blue:#1769aa;--bg:#f4f7fb;--line:#e2e8f0;--muted:#6b7280;--red:#c62828;--redbg:#ffe8e8;--green:#16794b;--greenbg:#e8f5e9;--gray:#f1f5f9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#1f2937;font-family:Arial,Helvetica,sans-serif}.container{max-width:1500px;margin:auto;padding:30px}
+.header{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:24px}h1{margin:0;color:var(--navy);font-size:30px}.subtitle,.last{color:var(--muted);font-size:13px}.subtitle{margin-top:6px}.last{text-align:right;padding-top:8px}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}.summary-card,.section,.monitor{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.summary-card{padding:18px 20px}.label{color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.4px}.value{margin-top:7px;font-size:28px;font-weight:700;color:var(--red)}.value.ok{color:var(--green)}
+.section{overflow:hidden;margin-bottom:20px}.section-head{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.section-title{margin:0;color:var(--navy);font-size:18px}.badge{background:var(--redbg);color:var(--red);border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700}.badge.zero{background:var(--greenbg);color:var(--green)}
+.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;table-layout:fixed}th{background:#f8fafc;color:#64748b;text-align:left;font-size:12px;padding:11px 14px;border-bottom:1px solid var(--line)}td{padding:13px 14px;border-bottom:1px solid #edf1f5;vertical-align:top;font-size:14px}tr:last-child td{border-bottom:0}tr:hover td{background:#fbfdff}
+.country{width:145px}.number{width:130px}.date{width:130px}.status{width:120px}.document{width:85px}.action{width:145px}.doc-title{font-weight:600;line-height:1.4;color:#25364d}.new{display:inline-block;background:var(--redbg);color:var(--red);border-radius:5px;padding:3px 6px;margin-right:7px;font-size:10px;font-weight:800}.pending{color:var(--red);font-weight:700}.done{color:var(--green);font-weight:700}.done-row td{background:#fafafa;color:#7b8490}.done-row .doc-title{color:#667085}
+button{border:0;border-radius:7px;padding:7px 10px;font-size:12px;font-weight:700;cursor:pointer}.done-btn{background:var(--greenbg);color:var(--green)}.undo-btn{background:var(--gray);color:#4b5563}button:disabled{opacity:.55;cursor:wait}a{color:var(--blue);font-weight:700;text-decoration:none}a:hover{text-decoration:underline}.country-link{color:var(--navy)}.empty,.error,.loading{text-align:center;padding:24px!important}.empty{color:var(--green);font-weight:600}.error{color:var(--red)}.loading{color:#888}.monitor{padding:16px 20px;margin-top:22px;display:flex;justify-content:space-between;color:#475569;font-size:13px}.monitor-ok{color:var(--green);font-weight:700}.country-list a{margin-right:14px}
 @media(max-width:900px){.container{padding:16px}.header{flex-direction:column}.last{text-align:left}.summary{grid-template-columns:repeat(2,1fr)}table{min-width:1100px}}
-</style>
-</head>
-<body>
-<div class="container">
-<div class="header">
-  <div><h1>Global AIP Monitor</h1><div class="subtitle">Aeronautical Information Publication Monitoring</div></div>
-  <div class="last" id="last-update">Loading data...</div>
-</div>
-
+</style></head><body><div class="container">
+<div class="header"><div><h1>Global AIP Monitor</h1><div class="subtitle">Aeronautical Information Publication Monitoring</div></div><div class="last" id="last-update">Loading data...</div></div>
 <div class="summary">
-  <div class="summary-card"><div class="label">AIRAC AIP AMDT — PENDING</div><div class="value" id="amdt-count">—</div></div>
-  <div class="summary-card"><div class="label">AIP SUP — PENDING</div><div class="value" id="sup-count">—</div></div>
-  <div class="summary-card"><div class="label">AIC — PENDING</div><div class="value" id="aic-count">—</div></div>
-  <div class="summary-card"><div class="label">COUNTRIES CHECKED</div><div class="value ok">1 / 50</div></div>
-</div>
-
-<section class="section">
-  <div class="section-head"><h2 class="section-title">AIRAC AIP AMDT</h2><span class="badge" id="amdt-badge">Loading...</span></div>
-  <div class="table-wrap"><table><thead><tr>
-    <th class="country">Country</th><th class="number">Amendment</th><th>Title</th><th class="date">Published</th><th class="date">Effective</th><th class="status">Status</th><th class="document">Document</th><th class="action">Action</th>
-  </tr></thead><tbody id="amdt-table"><tr><td colspan="8" class="loading">Loading...</td></tr></tbody></table></div>
-</section>
-
-<section class="section">
-  <div class="section-head"><h2 class="section-title">AIP SUP</h2><span class="badge" id="sup-badge">Loading...</span></div>
-  <div class="table-wrap"><table><thead><tr>
-    <th class="country">Country</th><th class="number">No.</th><th>Title</th><th class="date">Published</th><th class="date">Effective</th><th class="status">Status</th><th class="document">Document</th><th class="action">Action</th>
-  </tr></thead><tbody id="sup-table"><tr><td colspan="8" class="loading">Loading...</td></tr></tbody></table></div>
-</section>
-
-<section class="section">
-  <div class="section-head"><h2 class="section-title">AIC</h2><span class="badge" id="aic-badge">Loading...</span></div>
-  <div class="table-wrap"><table><thead><tr>
-    <th class="country">Country</th><th class="number">No.</th><th>Title</th><th class="date">Published</th><th class="date">Effective</th><th class="status">Status</th><th class="document">Document</th><th class="action">Action</th>
-  </tr></thead><tbody id="aic-table"><tr><td colspan="8" class="loading">Loading...</td></tr></tbody></table></div>
-</section>
-
-<div class="monitor">
-  <div><strong>Monitoring Status</strong> &nbsp; <a class="country-link" href="countries/taiwan.html">Taiwan / Taipei FIR</a></div>
-  <div class="monitor-ok">● 1 / 50 countries connected</div>
-</div>
-</div>
-
-<script>
+<div class="summary-card"><div class="label">AIP AMDT — PENDING</div><div class="value" id="amdt-count">—</div></div>
+<div class="summary-card"><div class="label">AIP SUP — PENDING</div><div class="value" id="sup-count">—</div></div>
+<div class="summary-card"><div class="label">AIC — PENDING</div><div class="value" id="aic-count">—</div></div>
+<div class="summary-card"><div class="label">COUNTRIES CHECKED</div><div class="value ok">2 / 50</div></div></div>
+<section class="section"><div class="section-head"><h2 class="section-title">AIP AMDT</h2><span class="badge" id="amdt-badge">Loading...</span></div><div class="table-wrap"><table><thead><tr><th class="country">Country</th><th class="number">Amendment</th><th>Title</th><th class="date">Published</th><th class="date">Effective</th><th class="status">Status</th><th class="document">Document</th><th class="action">Action</th></tr></thead><tbody id="amdt-table"><tr><td colspan="8" class="loading">Loading...</td></tr></tbody></table></div></section>
+<section class="section"><div class="section-head"><h2 class="section-title">AIP SUP</h2><span class="badge" id="sup-badge">Loading...</span></div><div class="table-wrap"><table><thead><tr><th class="country">Country</th><th class="number">No.</th><th>Title</th><th class="date">Published</th><th class="date">Effective</th><th class="status">Status</th><th class="document">Document</th><th class="action">Action</th></tr></thead><tbody id="sup-table"><tr><td colspan="8" class="loading">Loading...</td></tr></tbody></table></div></section>
+<section class="section"><div class="section-head"><h2 class="section-title">AIC</h2><span class="badge" id="aic-badge">Loading...</span></div><div class="table-wrap"><table><thead><tr><th class="country">Country</th><th class="number">No.</th><th>Title</th><th class="date">Published</th><th class="date">Effective</th><th class="status">Status</th><th class="document">Document</th><th class="action">Action</th></tr></thead><tbody id="aic-table"><tr><td colspan="8" class="loading">Loading...</td></tr></tbody></table></div></section>
+<div class="monitor"><div class="country-list"><strong>Monitoring Status</strong> &nbsp; <a class="country-link" href="countries/taiwan.html">Taiwan / Taipei FIR</a><a class="country-link" href="countries/korea.html">Republic of Korea / Incheon FIR</a></div><div class="monitor-ok">● 2 / 50 countries connected</div></div>
+</div><script>
 const API="https://aip-monitor-api.pei2273.workers.dev";
-const ALERTS_URL="alerts.json";
-const HISTORY_DATA_URL="taiwan_history.json";
-const TAIWAN_HISTORY="countries/taiwan.html";
-
-let processed=new Set();
-let alerts=[];
-let historyData={amendments:[],sup:[],aic:[]};
-
-function esc(v){
-  return String(v??"")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
-
-function setCount(type,n){
-  const v=document.getElementById(type+"-count");
-  const b=document.getElementById(type+"-badge");
-  v.textContent=n;
-  v.classList.toggle("ok",n===0);
-  b.textContent=n?`PENDING ${n}`:"ALL PROCESSED";
-  b.classList.toggle("zero",n===0);
-}
-
-function status(done){
-  return done?'<span class="done">✓ Processed</span>':'<span class="pending">● Pending</span>';
-}
-
-function link(u){
-  return u?`<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">Open</a>`:"—";
-}
-
-function country(){
-  return `<a class="country-link" href="${TAIWAN_HISTORY}">Taiwan</a>`;
-}
-
-function action(d,done){
-  const x=encodeURIComponent(JSON.stringify({
-    document_id:d.document_id,
-    country:d.country||"Taiwan",
-    document_type:d.document_type||"",
-    document_number:d.document_number||"",
-    title:d.title||""
-  }));
-  return done
-    ? `<button class="undo-btn" data-doc="${x}" onclick="undo(this)">↩ Pending</button>`
-    : `<button class="done-btn" data-doc="${x}" onclick="finish(this)">✓ Mark processed</button>`;
-}
-
-async function loadProcessed(){
-  const r=await fetch(API+"/processed?v="+Date.now(),{cache:"no-store"});
-  if(!r.ok)throw new Error("Cloudflare status load failed");
-  const j=await r.json();
-  processed=new Set((j.documents||[]).map(x=>x.document_id));
-}
-
-async function finish(btn){
-  btn.disabled=true;
-  const d=JSON.parse(decodeURIComponent(btn.dataset.doc));
-  try{
-    const r=await fetch(API+"/processed",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify(d)
-    });
-    if(!r.ok)throw new Error();
-    processed.add(d.document_id);
-    render();
-  }catch(e){
-    alert("Unable to mark as processed.");
-    btn.disabled=false;
-  }
-}
-
-async function undo(btn){
-  btn.disabled=true;
-  const d=JSON.parse(decodeURIComponent(btn.dataset.doc));
-  try{
-    const r=await fetch(API+"/processed/"+encodeURIComponent(d.document_id),{method:"DELETE"});
-    if(!r.ok)throw new Error();
-    processed.delete(d.document_id);
-    render();
-  }catch(e){
-    alert("Unable to restore pending status.");
-    btn.disabled=false;
-  }
-}
-
-function parseAipDate(value){
-  if(!value || value==="—")return null;
-  const raw=String(value).trim();
-  const d=new Date(raw);
-  if(!Number.isNaN(d.getTime()))return d;
-  const m=raw.match(/^(\d{1,2})\s+([A-Za-z]{3})\s+(\d{4})$/);
-  if(!m)return null;
-  const months={JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11};
-  const mon=months[m[2].toUpperCase()];
-  if(mon===undefined)return null;
-  return new Date(+m[3],mon,+m[1],12);
-}
-
-function effectiveDate(x){
-  return x.effective_from||x.effective_date||null;
-}
-
-function keepOnDashboard(x){
-  const d=parseAipDate(effectiveDate(x));
-  if(!d)return true;
-  const limit=new Date(d);
-  limit.setDate(limit.getDate()+7);
-  limit.setHours(23,59,59,999);
-  return new Date()<=limit;
-}
-
-function normalizeHistory(type,x){
-  const num=String(x.document_number||x.amendment||x.number||"").trim();
-  return {
-    ...x,
-    document_id:num?`TW-${type}-${num.replace(/\//g,"-")}`:"",
-    country:"Taiwan",
-    document_type:type,
-    document_number:num,
-    effective_from:effectiveDate(x),
-    source_url:x.source_url||x.url||""
-  };
-}
-
-function dashboardItems(type){
-  const source=type==="AMDT"?historyData.amendments:type==="SUP"?historyData.sup:historyData.aic;
-  return (source||[]).map(x=>normalizeHistory(type,x)).filter(x=>x.document_id&&keepOnDashboard(x));
-}
-
-function renderType(type){
-  const key=type==="AMDT"?"amdt":type==="SUP"?"sup":"aic";
-  const table=document.getElementById(key+"-table");
-  const list=dashboardItems(type);
-
-  if(!list.length){
-    table.innerHTML=`<tr><td colspan="8" class="empty">No ${type==="AMDT"?"AIRAC AIP AMDT":type} items within the dashboard window.</td></tr>`;
-    setCount(key,0);
-    return;
-  }
-
-  let pending=0;
-
-  table.innerHTML=list.map(x=>{
-    const done=processed.has(x.document_id);
-    if(!done)pending++;
-
-    const effective=effectiveDate(x)||"—";
-    const number=x.document_number||"—";
-    const title=x.title||"—";
-
-    return `<tr class="${done?"done-row":""}">
-      <td>${done?"":'<span class="new">NEW</span>'}${country()}</td>
-      <td><strong>${esc(number)}</strong></td>
-      <td class="doc-title">${esc(title)}</td>
-      <td>${esc(x.publication_date||"—")}</td>
-      <td>${esc(effective)}</td>
-      <td>${status(done)}</td>
-      <td>${link(x.source_url)}</td>
-      <td>${action(x,done)}</td>
-    </tr>`;
-  }).join("");
-
-  setCount(key,pending);
-}
-
-function render(){
-  renderType("AMDT");
-  renderType("SUP");
-  renderType("AIC");
-}
-
-async function start(){
-  try{
-    const [,hr,ar]=await Promise.all([
-      loadProcessed(),
-      fetch(HISTORY_DATA_URL+"?v="+Date.now(),{cache:"no-store"}),
-      fetch(ALERTS_URL+"?v="+Date.now(),{cache:"no-store"})
-    ]);
-
-    if(!hr.ok)throw new Error("taiwan_history.json load failed");
-
-    const h=await hr.json();
-    historyData={
-      amendments:Array.isArray(h.amendments)?h.amendments:[],
-      sup:Array.isArray(h.sup)?h.sup:[],
-      aic:Array.isArray(h.aic)?h.aic:[]
-    };
-
-    let alertData={};
-    if(ar.ok){
-      alertData=await ar.json();
-      alerts=Array.isArray(alertData.alerts)?alertData.alerts:[];
-    }
-
-    const checked=h.last_checked||alertData.last_checked;
-    document.getElementById("last-update").textContent=
-      checked?"Last checked: "+new Date(checked).toLocaleString():"Monitoring active";
-
-    render();
-  }catch(e){
-    console.error(e);
-    document.getElementById("amdt-table").innerHTML='<tr><td colspan="8" class="error">Unable to load dashboard data.</td></tr>';
-    document.getElementById("sup-table").innerHTML='<tr><td colspan="8" class="error">Unable to load dashboard data.</td></tr>';
-    document.getElementById("aic-table").innerHTML='<tr><td colspan="8" class="error">Unable to load dashboard data.</td></tr>';
-    document.getElementById("last-update").textContent="Unable to load dashboard data.";
-  }
-}
-
+const TAIWAN_DATA="taiwan_history.json",KOREA_DATA="korea_history.json",ALERTS_URL="alerts.json";
+let processed=new Set(),tw={amendments:[],sup:[],aic:[]},kr={amendments:[],sup:[],aic:[]},lastChecked=null;
+function esc(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
+function setCount(type,n){const v=document.getElementById(type+"-count"),b=document.getElementById(type+"-badge");v.textContent=n;v.classList.toggle("ok",n===0);b.textContent=n?`PENDING ${n}`:"ALL PROCESSED";b.classList.toggle("zero",n===0)}
+function status(done){return done?'<span class="done">✓ Processed</span>':'<span class="pending">● Pending</span>'}
+function link(u){return u?`<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">Open</a>`:"—"}
+function parseDate(s){if(!s)return null;let d=new Date(s);if(!isNaN(d))return d;const m=String(s).trim().match(/^(\d{1,2})\s+([A-Za-z]{3})\s+(\d{4})$/);if(!m)return null;d=new Date(`${m[2]} ${m[1]}, ${m[3]} 12:00:00`);return isNaN(d)?null:d}
+function keep(x){const d=parseDate(x.effective_from||x.effective_date);if(!d)return true;d.setDate(d.getDate()+7);d.setHours(23,59,59,999);return new Date()<=d}
+function num(x){return String(x.document_number||x.amendment||x.number||"").trim()}
+function countryLink(code){return code==="KR"?'<a class="country-link" href="countries/korea.html">Korea</a>':'<a class="country-link" href="countries/taiwan.html">Taiwan</a>'}
+function normTW(type,x){const n=num(x);return {...x,country:"Taiwan",code:"TW",document_type:type,document_number:n,document_id:n?`TW-${type}-${n.replaceAll("/","-")}`:"",source_url:x.source_url||x.url||"",effective_from:x.effective_from||x.effective_date||null}}
+function normKR(type,x){const n=num(x);let id="";if(type==="AMDT"){const sub=/AIRAC/i.test(x.amendment_type||x.title||"")?"AIRAC":"AIP";id=n?`KR-AMDT-${sub}-${n.replaceAll("/","-")}`:""}else if(type==="SUP"){const sub=/AIRAC/i.test(x.sup_type||x.title||"")?"AIRAC":"AIP";id=n?`KR-SUP-${sub}-${n.replaceAll("/","-")}`:""}else{id=n?`KR-AIC-${n.replaceAll("/","-")}`:""}return {...x,country:"Republic of Korea",code:"KR",document_type:type,document_number:n,document_id:id,source_url:x.source_url||x.package_url||x.checklist_url||"",effective_from:x.effective_from||x.effective_date||null}}
+function items(type){const a=(type==="AMDT"?tw.amendments:type==="SUP"?tw.sup:tw.aic).map(x=>normTW(type,x));const b=(type==="AMDT"?kr.amendments:type==="SUP"?kr.sup:kr.aic).map(x=>normKR(type,x));return [...a,...b].filter(x=>x.document_id&&keep(x)).sort((x,y)=>(parseDate(y.effective_from)||0)-(parseDate(x.effective_from)||0))}
+function action(d,done){const x=encodeURIComponent(JSON.stringify({document_id:d.document_id,country:d.country,document_type:d.document_type,document_number:d.document_number,title:d.title||""}));return done?`<button class="undo-btn" data-doc="${x}" onclick="undo(this)">↩ Pending</button>`:`<button class="done-btn" data-doc="${x}" onclick="finish(this)">✓ Mark processed</button>`}
+async function loadProcessed(){const r=await fetch(API+"/processed?v="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error("Cloudflare status load failed");const j=await r.json();processed=new Set((j.documents||[]).map(x=>x.document_id))}
+async function finish(btn){btn.disabled=true;const d=JSON.parse(decodeURIComponent(btn.dataset.doc));try{const r=await fetch(API+"/processed",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(d)});if(!r.ok)throw new Error();processed.add(d.document_id);render()}catch(e){alert("Unable to mark as processed.");btn.disabled=false}}
+async function undo(btn){btn.disabled=true;const d=JSON.parse(decodeURIComponent(btn.dataset.doc));try{const r=await fetch(API+"/processed/"+encodeURIComponent(d.document_id),{method:"DELETE"});if(!r.ok)throw new Error();processed.delete(d.document_id);render()}catch(e){alert("Unable to restore pending status.");btn.disabled=false}}
+function renderType(type){const key=type==="AMDT"?"amdt":type==="SUP"?"sup":"aic",table=document.getElementById(key+"-table"),list=items(type);if(!list.length){table.innerHTML=`<tr><td colspan="8" class="empty">No ${type} documents in the active dashboard window.</td></tr>`;setCount(key,0);return}let pending=0;table.innerHTML=list.map(x=>{const done=processed.has(x.document_id);if(!done)pending++;let subtype="";if(x.code==="KR"&&type==="AMDT")subtype=x.amendment_type||"";if(x.code==="KR"&&type==="SUP")subtype=x.sup_type||"";const title=x.title||subtype||`${type} ${x.document_number}`;return `<tr class="${done?"done-row":""}"><td>${done?"":'<span class="new">NEW</span>'}${countryLink(x.code)}</td><td><strong>${esc(x.document_number||"—")}</strong></td><td class="doc-title">${esc(title)}</td><td>${esc(x.publication_date||"—")}</td><td>${esc(x.effective_from||"—")}</td><td>${status(done)}</td><td>${link(x.source_url)}</td><td>${action(x,done)}</td></tr>`}).join("");setCount(key,pending)}
+function render(){renderType("AMDT");renderType("SUP");renderType("AIC")}
+async function start(){try{const [,tr,krR,ar]=await Promise.all([loadProcessed(),fetch(TAIWAN_DATA+"?v="+Date.now(),{cache:"no-store"}),fetch(KOREA_DATA+"?v="+Date.now(),{cache:"no-store"}),fetch(ALERTS_URL+"?v="+Date.now(),{cache:"no-store"})]);if(!tr.ok||!krR.ok)throw new Error("History data load failed");tw=await tr.json();kr=await krR.json();if(ar.ok){const a=await ar.json();lastChecked=a.last_checked||null}lastChecked=kr.last_checked||tw.last_checked||lastChecked;if(lastChecked)document.getElementById("last-update").textContent="Last checked: "+new Date(lastChecked).toLocaleString();else document.getElementById("last-update").textContent="Monitoring active";render()}catch(e){console.error(e);["amdt","sup","aic"].forEach(k=>document.getElementById(k+"-table").innerHTML='<tr><td colspan="8" class="error">Unable to load dashboard data.</td></tr>');document.getElementById("last-update").textContent="Unable to load dashboard data."}}
 start();
-</script>
-</body>
-</html>
+</script></body></html>
