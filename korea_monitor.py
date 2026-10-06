@@ -46,16 +46,41 @@ def merge(old,new,key):
     return list(d.values())
 
 # AMDT: official Korea history page
+# Korea renders each issue as a link whose label is the EFFECTIVE DATE,
+# while the publication date and AMDT name are adjacent text. Therefore
+# parse the page's visible text for issue metadata and match package links
+# by their effective-date label instead of assuming a <tr> structure.
 s=BeautifulSoup(get(HISTORY_URL).text,"html.parser"); amdt=[]
-for tr in s.find_all("tr"):
-    t=clean(tr.get_text(" ",strip=True))
-    m=re.search(r"(AIRAC AIP AMDT|AIP AMDT)\\s+(\\d{1,2}/\\d{2})",t,re.I)
-    a=tr.find("a",href=True)
-    if not m or not a: continue
-    typ,num=m.group(1).upper(),m.group(2)
-    dates=re.findall(r"\\b\\d{1,2}\\s+[A-Z]{3}\\s+\\d{4}\\b",t.upper())
-    eff=dates[0] if dates else None; pub=dates[1] if len(dates)>1 else None
-    idx=urljoin(HISTORY_URL,a["href"]); root=idx.split("/html/",1)[0]+"/"
+
+page_text=clean(s.get_text(" ",strip=True))
+issue_pattern=re.compile(
+    r"(\\d{1,2}\\s+[A-Z]{3}\\s+\\d{4})\\s+"
+    r"(\\d{1,2}\\s+[A-Z]{3}\\s+\\d{4})\\s+"
+    r"(AIRAC AIP AMDT|AIP AMDT)\\s+(\\d{1,2}/\\d{2})",
+    re.I
+)
+
+package_links={}
+for a in s.find_all("a",href=True):
+    label=clean(a.get_text(" ",strip=True)).upper()
+    if re.fullmatch(r"\\d{1,2}\\s+[A-Z]{3}\\s+\\d{4}",label):
+        package_links.setdefault(label,[]).append(urljoin(HISTORY_URL,a["href"]))
+
+for m in issue_pattern.finditer(page_text):
+    eff,pub,typ,num=m.group(1).upper(),m.group(2).upper(),m.group(3).upper(),m.group(4)
+    links=package_links.get(eff,[])
+    if not links:
+        print("No package link for:",typ,num,eff)
+        continue
+
+    # If multiple issues share an effective date, AIRAC package URLs normally
+    # contain '-AIRAC'; prefer the matching package type.
+    if typ.startswith("AIRAC"):
+        idx=next((u for u in links if "AIRAC" in u.upper()),links[0])
+    else:
+        idx=next((u for u in links if "AIRAC" not in u.upper()),links[0])
+
+    root=idx.split("/html/",1)[0]+"/"
     n,y=num.split("/")
     names=([f"AIRAC AIP AMDT {n}_{y}.pdf"] if typ.startswith("AIRAC") else [f"AIP AMDT {n}_{y}.pdf"])
     src=idx; arc=None
