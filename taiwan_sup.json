@@ -2,8 +2,17 @@
   "state": "Taiwan",
   "icao": "RC",
   "source": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/menu.html",
-  "checked_at": "2026-10-13T22:15:19.910941+00:00",
+  "checked_at": "2026-10-14T03:20:44.511647+00:00",
   "documents": [
+    {
+      "type": "SUP",
+      "number": "27/26",
+      "title": "A CRANE IN THE VICINITY OF TAIPEI/SONGSHAN AIRPORT",
+      "publication_date": "14 OCT 2026",
+      "effective_from": "26 NOV 2026",
+      "effective_until": "30 JUN 2028",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/27-26_2026_11_26/SUP-en-GB.html#SUP"
+    },
     {
       "type": "SUP",
       "number": "26/26",
