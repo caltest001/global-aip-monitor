@@ -2,8 +2,17 @@
   "state": "Taiwan",
   "icao": "RC",
   "source": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/menu.html",
-  "checked_at": "2026-10-15T20:53:34.842093+00:00",
+  "checked_at": "2026-10-16T02:56:54.079218+00:00",
   "documents": [
+    {
+      "type": "SUP",
+      "number": "28/26",
+      "title": "CRANES IN THE VICINITY OF TAIPEI/TAIWAN TAOYUAN INTERNATIONAL AIRPORT",
+      "publication_date": "16 OCT 2026",
+      "effective_from": "17 NOV 2026",
+      "effective_until": "30 JUN 2029",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/28-26_2026_11_17/SUP-en-GB.html#SUP"
+    },
     {
       "type": "SUP",
       "number": "27/26",
