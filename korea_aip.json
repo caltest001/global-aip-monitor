@@ -3,20 +3,9 @@
   "icao": "RK",
   "fir": "Incheon FIR",
   "source": "https://aim.koca.go.kr/eaipPub/Package/history-en-GB.html",
-  "checked_at": "2026-10-27T21:46:31.233229+00:00",
+  "checked_at": "2026-10-28T03:46:34.008813+00:00",
   "status": "OK",
   "current": {
-    "number": "11/26",
-    "amendment_type": "AIP AMDT",
-    "title": "AIP AMDT 11/26",
-    "publication_date": "15 OCT 2026",
-    "effective_date": "15 OCT 2026",
-    "effective_from": "15 OCT 2026",
-    "source_url": "https://aim.koca.go.kr/eaipPub/Package/2026-10-15/html/index-en-GB.html",
-    "package_url": "https://aim.koca.go.kr/eaipPub/Package/2026-10-15/html/index-en-GB.html",
-    "archive_url": null
-  },
-  "next": {
     "number": "10/26",
     "amendment_type": "AIRAC AIP AMDT",
     "title": "AIRAC AIP AMDT 10/26",
@@ -25,6 +14,17 @@
     "effective_from": "28 OCT 2026",
     "source_url": "https://aim.koca.go.kr/eaipPub/Package/2026-10-28-AIRAC/html/index-en-GB.html",
     "package_url": "https://aim.koca.go.kr/eaipPub/Package/2026-10-28-AIRAC/html/index-en-GB.html",
+    "archive_url": null
+  },
+  "next": {
+    "number": "11/26",
+    "amendment_type": "AIRAC AIP AMDT",
+    "title": "AIRAC AIP AMDT 11/26",
+    "publication_date": "15 OCT 2026",
+    "effective_date": "25 NOV 2026",
+    "effective_from": "25 NOV 2026",
+    "source_url": "https://aim.koca.go.kr/eaipPub/Package/2026-11-25-AIRAC/html/index-en-GB.html",
+    "package_url": "https://aim.koca.go.kr/eaipPub/Package/2026-11-25-AIRAC/html/index-en-GB.html",
     "archive_url": null
   },
   "counts": {
