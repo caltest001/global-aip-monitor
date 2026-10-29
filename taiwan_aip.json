@@ -2,16 +2,12 @@
   "state": "Taiwan",
   "icao": "RC",
   "source": "https://ais.caa.gov.tw/eaip/",
-  "checked_at": "2026-10-28T22:07:27.539415+00:00",
+  "checked_at": "2026-10-29T04:08:34.435854+00:00",
   "status": "OK",
   "current": {
-    "amendment": "AIRAC AIP AMDT 04/26",
-    "effective_date": "01 Oct 2026",
-    "publication_date": "20 Aug 2026"
-  },
-  "next": {
     "amendment": "AIRAC AIP AMDT 05/26",
     "effective_date": "29 Oct 2026",
     "publication_date": "17 Sep 2026"
-  }
+  },
+  "next": null
 }

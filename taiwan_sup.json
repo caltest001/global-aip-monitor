@@ -1,8 +1,8 @@
 {
   "state": "Taiwan",
   "icao": "RC",
-  "source": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/menu.html",
-  "checked_at": "2026-10-28T22:08:04.240954+00:00",
+  "source": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/menu.html",
+  "checked_at": "2026-10-29T04:09:28.387013+00:00",
   "documents": [
     {
       "type": "SUP",
@@ -11,7 +11,7 @@
       "publication_date": "16 OCT 2026",
       "effective_from": "17 NOV 2026",
       "effective_until": "30 JUN 2029",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/28-26_2026_11_17/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/28-26_2026_11_17/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -20,7 +20,7 @@
       "publication_date": "14 OCT 2026",
       "effective_from": "26 NOV 2026",
       "effective_until": "30 JUN 2028",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/27-26_2026_11_26/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/27-26_2026_11_26/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -29,7 +29,7 @@
       "publication_date": "13 OCT 2026",
       "effective_from": "31 OCT 2026",
       "effective_until": "30 APR 2028",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/26-26_2026_10_31/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/26-26_2026_10_31/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -38,7 +38,7 @@
       "publication_date": "22 SEP 2026",
       "effective_from": "31 OCT 2026",
       "effective_until": "10 JAN 2028",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/25-26_2026_10_31/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/25-26_2026_10_31/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -47,7 +47,7 @@
       "publication_date": "17 SEP 2026",
       "effective_from": "21 OCT 2026",
       "effective_until": "30 JUL 2027",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/24-26_2026_10_21/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/24-26_2026_10_21/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -56,7 +56,7 @@
       "publication_date": "15 SEP 2026",
       "effective_from": "01 OCT 2026",
       "effective_until": "31 DEC 2026",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/23-26_2026_10_01/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/23-26_2026_10_01/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -65,7 +65,7 @@
       "publication_date": "25 AUG 2026",
       "effective_from": "30 AUG 2026",
       "effective_until": "01 JUL 2027",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/21-26_2026_08_30/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/21-26_2026_08_30/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -74,7 +74,7 @@
       "publication_date": "20 AUG 2026",
       "effective_from": "01 OCT 2026",
       "effective_until": null,
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/20-26_2026_10_01/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/20-26_2026_10_01/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -83,7 +83,7 @@
       "publication_date": "03 AUG 2026",
       "effective_from": "03 AUG 2026",
       "effective_until": "31 DEC 2027",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/19-26_2026_08_03/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/19-26_2026_08_03/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -92,7 +92,7 @@
       "publication_date": "30 JUL 2026",
       "effective_from": "15 AUG 2026",
       "effective_until": "01 JUL 2027",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/18-26_2026_08_15/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/18-26_2026_08_15/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -101,7 +101,7 @@
       "publication_date": "30 JUL 2026",
       "effective_from": "11 SEP 2026",
       "effective_until": "30 JUN 2028",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/17-26_2026_09_11/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/17-26_2026_09_11/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -110,7 +110,7 @@
       "publication_date": "17 JUL 2026",
       "effective_from": "17 JUL 2026",
       "effective_until": null,
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/16-26_2026_07_17/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/16-26_2026_07_17/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -119,7 +119,7 @@
       "publication_date": "09 JUN 2026",
       "effective_from": "30 JUN 2026",
       "effective_until": "21 DEC 2026",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/14-26_2026_06_30/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/14-26_2026_06_30/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -128,7 +128,7 @@
       "publication_date": "03 JUN 2026",
       "effective_from": "08 JUL 2026",
       "effective_until": "10 APR 2029",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/13-26_2026_07_08/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/13-26_2026_07_08/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -137,7 +137,7 @@
       "publication_date": "29 MAY 2026",
       "effective_from": "31 JUL 2026",
       "effective_until": "26 MAY 2027",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/12-26_2026_07_31/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/12-26_2026_07_31/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -146,7 +146,7 @@
       "publication_date": "27 MAY 2026",
       "effective_from": "01 JUL 2026",
       "effective_until": "29 SEP 2027",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/11-26_2026_07_01/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/11-26_2026_07_01/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -155,7 +155,7 @@
       "publication_date": "25 MAY 2026",
       "effective_from": "01 AUG 2026",
       "effective_until": "30 OCT 2028",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/10-26_2026_08_01/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/10-26_2026_08_01/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -164,7 +164,7 @@
       "publication_date": "06 MAY 2026",
       "effective_from": "19 JUN 2026",
       "effective_until": "31 DEC 2030",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/09-26_2026_06_19/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/09-26_2026_06_19/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -173,7 +173,7 @@
       "publication_date": "28 APR 2026",
       "effective_from": "25 MAY 2026",
       "effective_until": "11 SEP 2028",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/08-26_2026_05_25/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/08-26_2026_05_25/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -182,7 +182,7 @@
       "publication_date": "09 MAR 2026",
       "effective_from": "16 MAR 2026",
       "effective_until": null,
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/06-26_2026_03_16/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/06-26_2026_03_16/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -191,7 +191,7 @@
       "publication_date": "25 FEB 2026",
       "effective_from": "19 MAR 2026",
       "effective_until": "19 APR 2027",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/05-26_2026_03_19/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/05-26_2026_03_19/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -200,7 +200,7 @@
       "publication_date": "12 FEB 2026",
       "effective_from": "11 APR 2026",
       "effective_until": "08 NOV 2026",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/04-26_2026_04_11/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/04-26_2026_04_11/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -209,7 +209,7 @@
       "publication_date": "09 FEB 2026",
       "effective_from": "01 MAR 2026",
       "effective_until": "31 DEC 2027",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/02-26_2026_03_01/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/02-26_2026_03_01/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -218,7 +218,7 @@
       "publication_date": "02 DEC 2025",
       "effective_from": "31 DEC 2025",
       "effective_until": "31 DEC 2027",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/32-25_2025_12_31/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/32-25_2025_12_31/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -227,7 +227,7 @@
       "publication_date": "23 OCT 2025",
       "effective_from": "21 NOV 2025",
       "effective_until": "16 JUN 2027",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/28-25_2025_11_21/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/28-25_2025_11_21/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -236,7 +236,7 @@
       "publication_date": "02 OCT 2025",
       "effective_from": "31 OCT 2025",
       "effective_until": "25 MAR 2030",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/25-25_2025_10_31/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/25-25_2025_10_31/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -245,7 +245,7 @@
       "publication_date": "10 JUL 2025",
       "effective_from": "15 AUG 2025",
       "effective_until": "15 NOV 2026",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/19-25_2025_08_15/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/19-25_2025_08_15/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -254,7 +254,7 @@
       "publication_date": "22 APR 2025",
       "effective_from": "01 JUN 2025",
       "effective_until": "31 DEC 2026",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/10-25_2025_06_01/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/10-25_2025_06_01/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -263,7 +263,7 @@
       "publication_date": "22 APR 2025",
       "effective_from": "20 MAY 2025",
       "effective_until": "28 FEB 2026",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/09-25_2025_05_20/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/09-25_2025_05_20/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -272,7 +272,7 @@
       "publication_date": "03 APR 2025",
       "effective_from": "15 MAY 2025",
       "effective_until": null,
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/08-25_2025_05_15/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/08-25_2025_05_15/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -281,7 +281,7 @@
       "publication_date": "21 MAR 2025",
       "effective_from": "16 APR 2025",
       "effective_until": "10 MAR 2027",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/07-25_2025_04_16/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/07-25_2025_04_16/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -290,7 +290,7 @@
       "publication_date": "12 MAR 2025",
       "effective_from": "12 MAR 2025",
       "effective_until": null,
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/05-25_2025_03_12/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/05-25_2025_03_12/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -299,7 +299,7 @@
       "publication_date": "12 FEB 2025",
       "effective_from": "01 MAR 2025",
       "effective_until": "31 MAR 2027",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/03-25_2025_03_01/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/03-25_2025_03_01/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -308,7 +308,7 @@
       "publication_date": "23 JAN 2025",
       "effective_from": "31 JAN 2025",
       "effective_until": null,
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/02-25_2025_01_31/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/02-25_2025_01_31/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -317,7 +317,7 @@
       "publication_date": "16 JAN 2025",
       "effective_from": "16 JAN 2025",
       "effective_until": null,
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/01-25_2025_01_16/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/01-25_2025_01_16/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -326,7 +326,7 @@
       "publication_date": "02 APR 2024",
       "effective_from": "30 APR 2024",
       "effective_until": "31 MAY 2027",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/13-24_2024_04_30/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/13-24_2024_04_30/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -335,7 +335,7 @@
       "publication_date": "13 MAR 2024",
       "effective_from": "11 APR 2024",
       "effective_until": "31 DEC 2026",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/10-24_2024_04_11/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/10-24_2024_04_11/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -344,7 +344,7 @@
       "publication_date": "20 FEB 2024",
       "effective_from": "20 FEB 2024",
       "effective_until": "28 FEB 2025",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/06-24_2024_02_20/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/06-24_2024_02_20/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -353,7 +353,7 @@
       "publication_date": "12 JAN 2024",
       "effective_from": "12 JAN 2024",
       "effective_until": "30 JUN 2025",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/02-24_2024_01_12/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/02-24_2024_01_12/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -362,7 +362,7 @@
       "publication_date": "16 DEC 2022",
       "effective_from": "31 DEC 2022",
       "effective_until": "13 MAY 2024",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/27-22_2022_12_31/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/27-22_2022_12_31/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -371,7 +371,7 @@
       "publication_date": "09 DEC 2022",
       "effective_from": "01 JAN 2023",
       "effective_until": "31 AUG 2024",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/25-22_2023_01_01/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/25-22_2023_01_01/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -380,7 +380,7 @@
       "publication_date": "06 OCT 2022",
       "effective_from": "06 OCT 2022",
       "effective_until": "07 AUG 2024",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/20-22_2022_10_06/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/20-22_2022_10_06/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
@@ -389,7 +389,7 @@
       "publication_date": "06 OCT 2022",
       "effective_from": "06 OCT 2022",
       "effective_until": "07 AUG 2024",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2004-26_2026_10_01/eSUP/19-22_2022_10_06/SUP-en-GB.html#SUP"
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/19-22_2022_10_06/SUP-en-GB.html#SUP"
     }
   ]
 }
