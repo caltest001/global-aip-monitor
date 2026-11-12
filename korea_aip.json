@@ -3,17 +3,17 @@
   "icao": "RK",
   "fir": "Incheon FIR",
   "source": "https://aim.koca.go.kr/eaipPub/Package/history-en-GB.html",
-  "checked_at": "2026-11-12T06:43:58.736763+00:00",
+  "checked_at": "2026-11-12T19:29:42.671462+00:00",
   "status": "OK",
   "current": {
-    "number": "10/26",
-    "amendment_type": "AIRAC AIP AMDT",
-    "title": "AIRAC AIP AMDT 10/26",
-    "publication_date": "17 SEP 2026",
-    "effective_date": "28 OCT 2026",
-    "effective_from": "28 OCT 2026",
-    "source_url": "https://aim.koca.go.kr/eaipPub/Package/2026-10-28-AIRAC/html/index-en-GB.html",
-    "package_url": "https://aim.koca.go.kr/eaipPub/Package/2026-10-28-AIRAC/html/index-en-GB.html",
+    "number": "12/26",
+    "amendment_type": "AIP AMDT",
+    "title": "AIP AMDT 12/26",
+    "publication_date": "12 NOV 2026",
+    "effective_date": "12 NOV 2026",
+    "effective_from": "12 NOV 2026",
+    "source_url": "https://aim.koca.go.kr/eaipPub/Package/2026-11-12/html/index-en-GB.html",
+    "package_url": "https://aim.koca.go.kr/eaipPub/Package/2026-11-12/html/index-en-GB.html",
     "archive_url": null
   },
   "next": {
@@ -28,8 +28,8 @@
     "archive_url": null
   },
   "counts": {
-    "amendments": 117,
-    "current_sup": 55,
+    "amendments": 119,
+    "current_sup": 61,
     "aic_history": 7
   }
 }
