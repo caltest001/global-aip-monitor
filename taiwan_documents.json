@@ -5,7 +5,7 @@
     "sup": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/menu.html",
     "aic": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eAIC/menu.html"
   },
-  "checked_at": "2026-11-12T19:29:42.490982+00:00",
+  "checked_at": "2026-11-13T04:51:36.444587+00:00",
   "documents": [
     {
       "type": "SUP",
@@ -105,15 +105,6 @@
       "effective_from": "11 SEP 2026",
       "effective_until": "30 JUN 2028",
       "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/17-26_2026_09_11/SUP-en-GB.html#SUP"
-    },
-    {
-      "type": "SUP",
-      "number": "16/26",
-      "title": "CONSTRUCTION WORK AT KAOHSIUNG INTL AIRPORT",
-      "publication_date": "17 JUL 2026",
-      "effective_from": "17 JUL 2026",
-      "effective_until": null,
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/16-26_2026_07_17/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
