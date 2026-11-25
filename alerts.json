@@ -52,7 +52,20 @@
       "effective_until": null,
       "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2006-26_2026_12_24/documents/PDF/AMDT.pdf",
       "first_seen": "2026-11-11T23:59:13.757367+00:00"
+    },
+    {
+      "document_id": "TW-SUP-29-26",
+      "country": "Taiwan",
+      "fir": "Taipei FIR",
+      "document_type": "SUP",
+      "document_number": "29/26",
+      "title": "CRANES IN THE VICINITY OF TAIPEI/SONGSHAN AIRPORT",
+      "publication_date": "25 NOV 2026",
+      "effective_from": "01 JAN 2027",
+      "effective_until": "31 DEC 2031",
+      "source_url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/29-26_2027_01_01/SUP-en-GB.html#SUP",
+      "first_seen": "2026-11-25T01:52:34.104053+00:00"
     }
   ],
-  "last_checked": "2026-11-24T16:54:56.399113+00:00"
+  "last_checked": "2026-11-25T01:52:34.104053+00:00"
 }

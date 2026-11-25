@@ -5,8 +5,17 @@
     "sup": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/menu.html",
     "aic": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eAIC/menu.html"
   },
-  "checked_at": "2026-11-24T16:54:56.398112+00:00",
+  "checked_at": "2026-11-25T01:52:34.102718+00:00",
   "documents": [
+    {
+      "type": "SUP",
+      "number": "29/26",
+      "title": "CRANES IN THE VICINITY OF TAIPEI/SONGSHAN AIRPORT",
+      "publication_date": "25 NOV 2026",
+      "effective_from": "01 JAN 2027",
+      "effective_until": "31 DEC 2031",
+      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/29-26_2027_01_01/SUP-en-GB.html#SUP"
+    },
     {
       "type": "SUP",
       "number": "28/26",
@@ -222,15 +231,6 @@
       "effective_from": "31 OCT 2025",
       "effective_until": "25 MAR 2030",
       "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/25-25_2025_10_31/SUP-en-GB.html#SUP"
-    },
-    {
-      "type": "SUP",
-      "number": "19/25",
-      "title": "CRANES IN THE VICINITY OF TAIPEI / SONGSHAN AIRPORT",
-      "publication_date": "10 JUL 2025",
-      "effective_from": "15 AUG 2025",
-      "effective_until": "15 NOV 2026",
-      "url": "https://ais.caa.gov.tw/eaip/AIRAC%20AIP%20AMDT%2005-26_2026_10_29/eSUP/19-25_2025_08_15/SUP-en-GB.html#SUP"
     },
     {
       "type": "SUP",
